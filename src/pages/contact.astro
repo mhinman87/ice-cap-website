@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCard from '../components/ContactCard.astro';
+---
+<BaseLayout title="Contact — Ice Cap Labs" description="Get in touch with Ice Cap Labs. Let's build something together.">
+
+  <!-- PAGE HEADER -->
+  <section id="page-header" style="background: var(--bg-void); padding-top: calc(64px + clamp(4rem, 8vw, 7rem));">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Contact Us</p>
+        <h1 class="section-title word-reveal" data-delay="0.05">Let's Build Something Together</h1>
+        <p class="section-subtitle">
+          Whether you have a project in mind or just want to explore what's possible,
+          we'd love to hear from you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CARD -->
+  <section id="contact" style="background: var(--bg-void); padding-top: 0;">
+    <div class="container">
+      <ContactCard eyebrow="Ready to Modernize?" title="Get In Touch">
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+          Or reach us directly at
+          <a href="mailto:hello@icecaplabs.com" style="color: var(--accent-bright); transition: color 0.2s;">hello@icecaplabs.com</a>
+        </p>
+      </ContactCard>
+    </div>
+  </section>
+
+  <!-- WHAT HAPPENS NEXT -->
+  <section id="next-steps" style="background: var(--bg-deep);">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">What to Expect</p>
+        <h2 class="section-title word-reveal" data-delay="0.05">What Happens Next?</h2>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step reveal" data-delay="0.0">
+          <div class="step-number-wrap">01</div>
+          <h3 class="step-title">We Reply Within 24 Hours</h3>
+          <p class="step-desc">You'll hear back from a real person — not a bot, not an auto-responder. We review every inquiry personally.</p>
+        </div>
+        <div class="process-step reveal" data-delay="0.1">
+          <div class="step-number-wrap">02</div>
+          <h3 class="step-title">Quick Discovery Call</h3>
+          <p class="step-desc">A short, no-pressure conversation to understand your business, goals, and challenges. We listen first.</p>
+        </div>
+        <div class="process-step reveal" data-delay="0.2">
+          <div class="step-number-wrap">03</div>
+          <h3 class="step-title">Clear Proposal</h3>
+          <p class="step-desc">You receive a straightforward proposal with timeline and pricing. No surprises, no hidden fees — just a clear path forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

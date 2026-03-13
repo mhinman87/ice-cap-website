@@ -1,0 +1,64 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const topoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" fill="none">
+  <g stroke="rgba(14,165,233,0.12)" stroke-width="1" fill="none">
+    <path d="M170,105 C180,75 215,58 240,62 C265,66 282,88 275,112 C268,136 240,150 215,146 C190,142 162,130 170,105Z"/>
+    <path d="M182,108 C188,88 212,78 230,80 C248,82 262,96 257,114 C252,132 232,142 216,139 C200,136 176,126 182,108Z"/>
+    <path d="M196,110 C200,100 214,94 225,95 C236,96 245,105 242,115 C239,125 226,132 218,130 C210,128 192,120 196,110Z"/>
+  </g>
+  <g stroke="rgba(14,165,233,0.12)" stroke-width="1" fill="none">
+    <path d="M55,225 C68,195 105,178 132,182 C160,186 178,210 170,238 C162,266 130,282 105,278 C80,274 44,252 55,225Z"/>
+    <path d="M68,228 C77,206 105,194 125,197 C145,200 158,218 152,238 C146,258 122,270 104,267 C86,264 60,248 68,228Z"/>
+    <path d="M82,230 C88,216 108,208 122,210 C136,212 144,224 140,238 C136,252 118,260 106,258 C94,256 78,244 82,230Z"/>
+  </g>
+  <g stroke="rgba(14,165,233,0.12)" stroke-width="1" fill="none">
+    <path d="M290,185 C305,150 345,132 375,136 C405,140 425,168 418,198 C411,228 378,248 350,243 C322,238 278,215 290,185Z"/>
+    <path d="M304,188 C314,162 342,148 365,151 C388,154 404,176 398,200 C392,224 366,238 345,234 C324,230 296,210 304,188Z"/>
+    <path d="M318,190 C325,172 346,162 362,165 C378,168 390,184 385,202 C380,220 360,230 344,227 C328,224 312,208 318,190Z"/>
+    <path d="M332,193 C336,182 350,176 360,178 C370,180 378,190 375,202 C372,214 358,220 348,218 C338,216 328,206 332,193Z"/>
+  </g>
+  <g stroke="rgba(14,165,233,0.08)" stroke-width="1" fill="none">
+    <path d="M-10,160 C30,130 90,100 160,90 C230,80 300,100 370,85 C410,75 430,60 450,50"/>
+    <path d="M-10,210 C50,195 120,180 190,178 C260,176 330,195 400,185 C430,180 450,170 470,160"/>
+    <path d="M-10,290 C60,275 130,265 200,268 C270,272 340,285 410,278"/>
+  </g>
+  <path d="M10,80 C40,110 80,140 120,165 C160,190 180,210 200,250 C220,290 250,310 280,330" stroke="rgba(14,165,233,0.08)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+  <g font-family="Outfit, sans-serif" font-size="7" fill="rgba(14,165,233,0.18)">
+    <text x="205" y="98">4,800</text>
+    <text x="85" y="218">3,950</text>
+    <text x="345" y="180">4,350</text>
+    <text x="155" y="170" font-size="6">PASS</text>
+    <text x="255" y="255">CREEK</text>
+    <text x="320" y="228">3,500</text>
+  </g>
+</svg>`;
+---
+<ArticleLayout
+  title="The Hidden Cost of Bad Design: How UI/UX Impacts Your Bottom Line"
+  description="Poor design doesn't just look bad — it quietly drives away customers, inflates support costs, and erodes trust."
+  date="2026-02-03"
+  dateFormatted="February 3, 2026"
+  topoSvg={topoSvg}
+>
+  <p>Most business owners don't think about design until something looks obviously wrong. A misaligned logo, a form that doesn't work on mobile, a checkout page that feels "off." But the real cost of bad design isn't in the obvious failures — it's in the invisible ones.</p>
+  <p>Every confusing navigation menu, every unclear call-to-action, every page that loads slowly or looks untrustworthy is quietly costing you customers. And unlike a broken feature that generates error reports, bad design fails silently. People just leave.</p>
+
+  <h2>The Numbers Don't Lie</h2>
+  <p>Studies consistently show that users form opinions about a website's credibility within 50 milliseconds. That's faster than conscious thought. If your site looks outdated, cluttered, or unprofessional, visitors have already decided they don't trust you before they've read a single word.</p>
+  <p>The downstream effects compound quickly:</p>
+  <ul>
+    <li>Higher bounce rates mean wasted ad spend</li>
+    <li>Confusing interfaces increase support tickets</li>
+    <li>Poor mobile experience loses the majority of modern web traffic</li>
+    <li>Inconsistent branding erodes trust over time</li>
+  </ul>
+
+  <h2>Design Is a Business Decision</h2>
+  <p>Good design isn't about making things pretty — it's about making things clear. Every element on your website should serve a purpose: guiding visitors toward the action you want them to take, communicating your value proposition, and building enough trust to convert a stranger into a customer.</p>
+
+  <h2>Where to Start</h2>
+  <p>If you suspect your design is costing you business, start with data. Look at your analytics: where do people drop off? Which pages have high bounce rates? Where are users clicking that leads nowhere?</p>
+  <p>Then prioritize ruthlessly. You don't need a complete redesign. Often, fixing the checkout flow, clarifying your homepage value proposition, or making your site mobile-responsive can have an outsized impact on conversion rates.</p>
+  <p>Design debt is real, and like technical debt, it compounds. The sooner you address it, the less it costs — and the more revenue it unlocks.</p>
+</ArticleLayout>

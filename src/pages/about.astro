@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCard from '../components/ContactCard.astro';
+---
+<BaseLayout title="About — Ice Cap Labs" description="Ice Cap Labs is a full-stack technology partner built for small businesses ready to modernize.">
+
+  <!-- PAGE TITLE -->
+  <header class="page-header">
+    <h1 class="page-title word-reveal">About</h1>
+  </header>
+
+  <!-- HERO -->
+  <section id="about-hero" style="background: var(--bg-void);">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Who We Are</p>
+        <h2 class="section-title word-reveal" data-delay="0.05" style="font-size: clamp(2rem, 5vw, 3.25rem);">Your Full-Stack Technology Partner</h2>
+      </div>
+      <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+        <p class="reveal" style="font-size: 1rem; color: var(--text-secondary); line-height: 1.85; margin-bottom: 1.5rem;">
+          We built Ice Cap Labs for one reason — small businesses deserve better technology partners. Not the overpriced agencies that hand you a template and call it custom. Not the freelancers who disappear mid-project. A real partner who sticks around.
+        </p>
+        <p class="reveal" style="font-size: 1rem; color: var(--text-primary); line-height: 1.85;">
+          We handle development, marketing, AI automation, and design under one roof. That means one team, one point of contact, and zero finger-pointing when something needs to get done.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="founder" style="background: var(--bg-deep);">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">The Founder</p>
+      </div>
+      <div class="founder-section">
+        <img src="/profile-image.jpeg" alt="Maxwell Hinman — Founder of Ice Cap Labs" class="founder-image reveal" />
+        <div class="founder-text">
+          <h2 class="founder-name reveal">Maxwell Hinman</h2>
+          <p class="reveal">
+            I started Ice Cap Labs because I kept watching small businesses get the short end of the stick. They'd hire an agency, get a cookie-cutter website, pay through the nose, and still end up calling someone else when they needed marketing help or wanted to automate something.
+          </p>
+          <p class="reveal">
+            That didn't sit right with me. I've spent my career across development, digital marketing, and design — and I saw firsthand how much better the results are when one person actually understands the full picture. Not a sales rep who hands you off. Not a project manager playing telephone between departments.
+          </p>
+          <p class="reveal" style="color: var(--text-primary);">
+            Ice Cap Labs is built on a simple idea: your technology partner should know your business as well as you do. I work directly with every client, and I don't move on until the work actually moves the needle.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach" style="background: var(--bg-void);">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Our Approach</p>
+        <h2 class="section-title word-reveal" data-delay="0.05">No Two Businesses Are the Same</h2>
+      </div>
+      <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+        <p class="reveal" style="font-size: 1rem; color: var(--text-secondary); line-height: 1.85; margin-bottom: 1.5rem;">
+          We've worked across industries — restaurants, law firms, startups, e-commerce, professional services. Every engagement starts with listening, not pitching. We learn your business first, then build solutions that actually fit.
+        </p>
+        <p class="reveal" style="font-size: 1rem; color: var(--text-primary); line-height: 1.85;">
+          There's no playbook we run on every client. Your strategy, your technology, your growth plan — it's all built from scratch around what your business actually needs. That's not a tagline. It's just how we work.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE BELIEVE -->
+  <section id="what-we-believe" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Our Principles</p>
+        <h2 class="section-title word-reveal" data-delay="0.05">What We Believe</h2>
+        <p class="section-subtitle">
+          Not slogans. Operating principles behind every decision we make.
+        </p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-item reveal" data-delay="0.0">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Lean by Design</h3>
+            <p>Senior-level expertise without the agency overhead. No layers of management inflating your invoice.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal" data-delay="0.05">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <div>
+            <h3>One Roof, Zero Gaps</h3>
+            <p>Development, marketing, AI, design — all under one team. No vendor juggling, no miscommunication.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal" data-delay="0.1">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Built for Growth</h3>
+            <p>Sized for small businesses. Priced for real budgets. Built to scale when you're ready.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal" data-delay="0.15">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <div>
+            <h3>AI That Actually Works</h3>
+            <p>We build automations that save real hours. If it doesn't measurably help your business, we don't ship it.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal" data-delay="0.2">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Strategy First</h3>
+            <p>We think about where you're headed, not just what you need today. Technology serves the business model.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal" data-delay="0.25">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Full Transparency</h3>
+            <p>No black boxes. No mystery retainers. You see everything — clear deliverables, honest timelines.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TILE STRIP -->
+  <section id="tile-strip">
+    <div class="tile-grid" id="tile-grid"></div>
+  </section>
+
+  <!-- CTA -->
+  <section id="about-cta" style="background: var(--bg-void);">
+    <div class="container">
+      <ContactCard
+        eyebrow="Ready to Start?"
+        title="Let's Talk About Your Business"
+        subtitle="No pitch decks. No pressure. Just an honest conversation about where you are, where you want to go, and how we can help you get there."
+        variant="button"
+        buttonText="Get In Touch"
+        buttonHref="/contact"
+      />
+    </div>
+  </section>
+
+</BaseLayout>

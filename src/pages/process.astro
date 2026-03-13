@@ -1,0 +1,773 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — Ice Cap Labs</title>
+  <meta name="description" content="Our clear, four-step process from discovery to growth. Climb the mountain with us." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <style is:global>
+    .climb-page { background: var(--bg-void); min-height: 100vh; overflow-x: hidden; padding-top: 18vh; }
+
+    /* ── Elevation HUD ──────────────────────────────────────── */
+    .elevation-hud {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 50;
+      text-align: right;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .elevation-hud.visible { opacity: 1; }
+    .elevation-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+    .elevation-value {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+    .elevation-value span {
+      font-size: 0.55em;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-left: 0.2em;
+    }
+    @media (max-width: 640px) {
+      .elevation-hud {
+        bottom: 1rem;
+        right: 1rem;
+      }
+    }
+
+    /* ── Summit (top of page) ─────────────────────────────── */
+    .summit {
+      text-align: center;
+      padding: clamp(10rem, 20vw, 16rem) clamp(1rem, 4vw, 2rem) clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: visible;
+    }
+    .summit-mountain-img {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 110%;
+      height: auto;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .summit-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--text-primary);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s 0.2s, transform 0.8s 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .summit-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .summit-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+      opacity: 0;
+      transition: opacity 0.8s 0.4s;
+    }
+    .summit-subtitle.visible { opacity: 1; }
+    .summit-cta {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.3s, transform 0.2s;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s 0.6s, transform 0.6s 0.6s, background 0.3s;
+    }
+    .summit-cta.visible { opacity: 1; transform: translateY(0); }
+    .summit-cta:hover { background: var(--accent-bright); transform: translateY(-2px); }
+    .summit-subtitle, .summit-cta { position: relative; z-index: 1; }
+
+    /* ── Trail container ──────────────────────────────────── */
+    .trail-section {
+      position: relative;
+      padding: 0 clamp(1rem, 4vw, 2rem) 0;
+      overflow: visible;
+    }
+    .trail-container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Jagged trail SVG */
+    .trail-svg-wrap {
+      position: absolute;
+      left: -40px;
+      top: 0;
+      width: 400px;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    .trail-svg-wrap svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: visible;
+    }
+    .trail-path-bg {
+      stroke: rgba(14,165,233,0.08);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 12 8;
+    }
+    .trail-path-fill {
+      stroke: var(--accent-bright);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 12 8;
+      filter: drop-shadow(0 0 8px rgba(14,165,233,0.5));
+    }
+    @media (max-width: 768px) {
+      .trail-svg-wrap { display: none; }
+    }
+
+    /* ── Trail step ───────────────────────────────────────── */
+    .trail-step {
+      position: relative;
+      padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2.5rem, 5vw, 4rem) 80px;
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .trail-step:last-child { border-bottom: none; }
+
+    @media (max-width: 640px) {
+      .trail-step { padding-left: 56px; }
+    }
+
+    .trail-marker {
+      position: absolute;
+      left: -54px;
+      top: clamp(2.5rem, 5vw, 4rem);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-void);
+      border: 3px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+    .trail-marker-inner {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .trail-step.reached .trail-marker {
+      border-color: var(--accent-bright);
+      box-shadow: 0 0 20px rgba(14,165,233,0.4);
+    }
+    .trail-step.reached .trail-marker-inner {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 640px) {
+      .trail-marker { left: -44px; width: 24px; height: 24px; }
+      .trail-marker-inner { width: 8px; height: 8px; }
+    }
+
+    .trail-altitude {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      opacity: 0.6;
+      transition: opacity 0.4s;
+    }
+    .trail-step.reached .trail-altitude { opacity: 1; }
+
+    .trail-step-number {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--text-muted);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      transition: color 0.4s;
+    }
+    .trail-step.reached .trail-step-number { color: var(--accent-bright); }
+
+    .trail-step-title {
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+      transition: color 0.4s;
+    }
+    .trail-step.reached .trail-step-title { color: var(--text-primary); }
+
+    .trail-step-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 680px;
+      margin-bottom: 1.5rem;
+      transition: color 0.4s;
+    }
+    .trail-step.reached .trail-step-desc { color: var(--text-secondary); }
+
+    .block-includes-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 0.75rem;
+    }
+    .block-includes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    @media (min-width: 640px) {
+      .block-includes { grid-template-columns: 1fr 1fr; }
+    }
+    .block-includes li {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      padding-left: 1.25rem;
+      position: relative;
+      transition: color 0.4s;
+    }
+    .trail-step.reached .block-includes li { color: var(--text-secondary); }
+    .block-includes li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ── Base camp banner (bottom) ────────────────────────── */
+    .base-camp {
+      text-align: center;
+      padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+      position: relative;
+    }
+    .base-camp-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .base-camp-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+    .base-camp-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      line-height: 1.75;
+    }
+    .scroll-up-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent-bright);
+      font-size: 0.85rem;
+      font-weight: 500;
+      animation: bounce-up 1.5s ease-in-out infinite;
+    }
+    .scroll-up-hint svg {
+      transform: rotate(180deg);
+    }
+    @keyframes bounce-up {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+
+  <Nav />
+
+  <!-- Elevation HUD -->
+  <div class="elevation-hud" id="elevation-hud">
+    <div class="elevation-label">Elevation</div>
+    <div class="elevation-value" id="elevation-value">4,200<span>ft</span></div>
+  </div>
+
+  <main class="climb-page">
+
+    <!-- TRAIL -->
+    <section class="trail-section" id="trail-section">
+      <div class="trail-svg-wrap" id="trail-svg-wrap"></div>
+
+      <!-- SUMMIT -->
+      <div class="summit" id="summit">
+        <img src="/summit-mountain.png" alt="" class="summit-mountain-img">
+        <h1 class="summit-title" id="summit-title">You've Reached the Summit</h1>
+        <p class="summit-subtitle" id="summit-subtitle">
+          From discovery to growth — a clear path with no black boxes.
+          Ready to start the climb?
+        </p>
+        <a href="/contact" class="summit-cta" id="summit-cta">Start Your Journey</a>
+      </div>
+      <div class="trail-container">
+
+        <!-- STEP 04 -->
+        <div class="trail-step" data-altitude="Summit Ridge — 12,033 FT">
+          <p class="trail-altitude">Summit Ridge — 12,033 FT</p>
+          <div class="trail-step-number">04</div>
+          <h2 class="trail-step-title">Grow</h2>
+          <p class="trail-step-desc">
+            Launch is just the start. We stick around to optimize, expand, and keep things running smoothly as you scale.
+          </p>
+          <p class="block-includes-label">What's Included</p>
+          <ul class="block-includes">
+            <li>Performance monitoring and monthly reports</li>
+            <li>Ongoing SEO, marketing, and feature updates</li>
+            <li>Priority support and strategic planning</li>
+          </ul>
+        </div>
+
+        <!-- STEP 03 -->
+        <div class="trail-step" data-altitude="High Camp — 9,464 FT">
+          <p class="trail-altitude">High Camp — 9,464 FT</p>
+          <div class="trail-step-number">03</div>
+          <h2 class="trail-step-title">Build &amp; Launch</h2>
+          <p class="trail-step-desc">
+            This is where it gets real. We build, you review, we iterate — no surprises, no big reveal at the end.
+          </p>
+          <p class="block-includes-label">What's Included</p>
+          <ul class="block-includes">
+            <li>Development sprints with regular demos</li>
+            <li>QA, testing, and launch coordination</li>
+            <li>Marketing and automation setup</li>
+            <li>Post-launch monitoring</li>
+          </ul>
+        </div>
+
+        <!-- STEP 02 -->
+        <div class="trail-step" data-altitude="Timberline — 6,883 FT">
+          <p class="trail-altitude">Timberline — 6,883 FT</p>
+          <div class="trail-step-number">02</div>
+          <h2 class="trail-step-title">Design</h2>
+          <p class="trail-step-desc">
+            We map out a plan that fits your budget, your customers, and your goals. You see everything before we write a single line of code.
+          </p>
+          <p class="block-includes-label">What's Included</p>
+          <ul class="block-includes">
+            <li>Architecture, wireframes, and visual direction</li>
+            <li>Marketing and automation strategy</li>
+            <li>Timeline, milestones, and transparent pricing</li>
+          </ul>
+        </div>
+
+        <!-- STEP 01 -->
+        <div class="trail-step" data-altitude="Base Camp — 4,325 FT">
+          <p class="trail-altitude">Base Camp — 4,325 FT</p>
+          <div class="trail-step-number">01</div>
+          <h2 class="trail-step-title">Discover</h2>
+          <p class="trail-step-desc">
+            We start by listening. Tell us where you are, where you want to be, and we'll figure out the fastest way to get there.
+          </p>
+          <p class="block-includes-label">What's Included</p>
+          <ul class="block-includes">
+            <li>Business goals and technology audit</li>
+            <li>Competitor and market review</li>
+            <li>Quick wins and opportunity roadmap</li>
+          </ul>
+        </div>
+
+      </div>
+
+    <!-- BASE CAMP BANNER -->
+    <div class="base-camp" id="base-camp">
+      <p class="base-camp-label">Base Camp</p>
+      <h2 class="base-camp-title">Your Climb Starts Here</h2>
+      <p class="base-camp-subtitle">
+        Four steps to the summit. Scroll up to begin the ascent.
+      </p>
+      <div class="scroll-up-hint">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+        Scroll up to climb
+      </div>
+    </div>
+    </section>
+
+    <Footer />
+  </main>
+
+  <script is:inline src="/script.js"></script>
+  <script is:inline>
+    // Scroll to bottom on load (base camp)
+    window.addEventListener('load', () => {
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    // ── Build jagged trail SVG ──────────────────────────────
+    (function() {
+      const wrap = document.getElementById('trail-svg-wrap');
+      const section = document.getElementById('trail-section');
+      const baseCamp = document.getElementById('base-camp');
+      if (!wrap || !section || !baseCamp) return;
+
+      let fillPath = null;
+      let clipRect = null;
+      let trailSvg = null;
+      let totalLen = 0;
+      let fillTotalH = 0;
+      let markerLengths = [];
+
+      function clamp(min, val, max) { return Math.max(min, Math.min(max, val)); }
+
+      function rebuild() {
+        let seed = 42;
+        function rand() { seed = (seed * 16807 + 0) % 2147483647; return seed / 2147483647; }
+
+        wrap.innerHTML = '';
+        document.querySelectorAll('.trail-marker-generated').forEach(el => el.remove());
+
+        const sectionRect = section.getBoundingClientRect();
+
+        const steps = section.querySelectorAll('.trail-step');
+        const stepYPositions = [];
+        steps.forEach((step) => {
+          const r = step.getBoundingClientRect();
+          stepYPositions.push(r.top + clamp(40, r.height * 0.15, 64) - sectionRect.top);
+        });
+
+        const summitEl = document.getElementById('summit');
+        const summitY = summitEl
+          ? summitEl.getBoundingClientRect().top + summitEl.offsetHeight * 0.2 - sectionRect.top
+          : 100;
+
+        const baseCampTitle = baseCamp.querySelector('.base-camp-title');
+        const startY = baseCampTitle
+          ? (baseCampTitle.getBoundingClientRect().top + baseCampTitle.offsetHeight / 2) - sectionRect.top
+          : section.scrollHeight;
+
+        const wrapLeft = wrap.getBoundingClientRect().left;
+        const viewportCenter = window.innerWidth / 2;
+        const centerInSvg = viewportCenter - wrapLeft;
+        const svgW = Math.max(400, centerInSvg + 60);
+        const totalH = startY + 40;
+
+        const containerEl = document.querySelector('.trail-container');
+        const containerLeft = containerEl ? containerEl.getBoundingClientRect().left : 0;
+        const availableWidth = containerLeft - wrapLeft;
+
+        if (availableWidth < 80) {
+          wrap.style.display = 'none';
+          return;
+        }
+        wrap.style.display = '';
+
+        wrap.style.height = totalH + 'px';
+        wrap.style.width = svgW + 'px';
+
+        const xMin = 30;
+        const xMax = Math.min(320, availableWidth - 20);
+        const microAmp = 7;
+        const microStep = 20;
+
+        const startX = Math.min(150 + rand() * 50, xMax - 20);
+        const waypoints = [{ x: startX, y: startY }];
+        for (let i = stepYPositions.length - 1; i >= 0; i--) {
+          waypoints.push({ x: Math.min(100 + rand() * 150, xMax - 10), y: stepYPositions[i] });
+        }
+        waypoints.push({ x: centerInSvg - window.innerWidth * 0.10, y: summitY });
+
+        const allPoints = [];
+
+        for (let w = 0; w < waypoints.length; w++) {
+          const from = w === 0 ? waypoints[0] : waypoints[w - 1];
+          const to = waypoints[w];
+
+          if (w === 0) {
+            allPoints.push({ x: to.x, y: to.y });
+            continue;
+          }
+
+          const dy = from.y - to.y;
+          if (dy <= 0) {
+            allPoints.push({ x: to.x, y: to.y });
+            continue;
+          }
+
+          const baseSwitchbacks = Math.max(2, Math.floor(dy / 120));
+          const numSwitchbacks = baseSwitchbacks + Math.floor(rand() * 3) - 1;
+
+          const rawHeights = [];
+          for (let s = 0; s < numSwitchbacks; s++) {
+            rawHeights.push(0.5 + rand() * 1.5);
+          }
+          rawHeights.push(0.8 + rand() * 0.4);
+          const totalWeight = rawHeights.reduce((a, b) => a + b, 0);
+          const segHeights = rawHeights.map(h => (h / totalWeight) * dy);
+
+          let goRight = (from.x < (xMin + xMax) / 2);
+          let currentY = from.y;
+
+          for (let s = 0; s < numSwitchbacks; s++) {
+            const segY = currentY - segHeights[s];
+            const xMid = (xMin + xMax) / 2;
+            const xRange = xMax - xMin;
+
+            const swingRoll = rand();
+            let targetX;
+            if (swingRoll < 0.2) {
+              targetX = goRight
+                ? xMid + rand() * xRange * 0.15
+                : xMid - rand() * xRange * 0.15;
+            } else if (swingRoll < 0.5) {
+              targetX = goRight
+                ? xMid + xRange * 0.2 + rand() * xRange * 0.15
+                : xMin + rand() * xRange * 0.2;
+            } else {
+              targetX = goRight
+                ? xMax - rand() * xRange * 0.12
+                : xMin + rand() * xRange * 0.12;
+            }
+
+            const prevPt = allPoints[allPoints.length - 1];
+            const microDy = prevPt.y - segY;
+            const microSteps = Math.max(2, Math.floor(microDy / microStep));
+            const microSegH = microDy / microSteps;
+            const microDx = (targetX - prevPt.x) / microSteps;
+
+            for (let m = 1; m <= microSteps; m++) {
+              const my = prevPt.y - microSegH * m;
+              const baseX = prevPt.x + microDx * m;
+              const jitterScale = 0.6 + rand() * 0.8;
+              const jitter = (m % 2 === 0 ? -1 : 1) * (microAmp * jitterScale + rand() * 5);
+              const mx = Math.max(xMin, Math.min(xMax, baseX + jitter));
+              allPoints.push({ x: mx, y: my });
+            }
+
+            currentY = segY;
+            if (rand() < 0.15) { /* same direction */ } else { goRight = !goRight; }
+          }
+
+          const lastPt = allPoints[allPoints.length - 1];
+          const finalDy = lastPt.y - to.y;
+          const finalSteps = Math.max(2, Math.floor(finalDy / microStep));
+          const finalSegH = finalDy / finalSteps;
+          const finalDx = (to.x - lastPt.x) / finalSteps;
+
+          for (let m = 1; m <= finalSteps; m++) {
+            const my = lastPt.y - finalSegH * m;
+            const baseX = lastPt.x + finalDx * m;
+            const jitter = (m % 2 === 0 ? -1 : 1) * (microAmp + rand() * 3);
+            const mx = (m === finalSteps)
+              ? to.x
+              : Math.max(xMin, Math.min(xMax, baseX + jitter));
+            allPoints.push({ x: mx, y: (m === finalSteps) ? to.y : my });
+          }
+        }
+
+        if (allPoints.length < 2) return;
+        let d = 'M' + allPoints[0].x.toFixed(1) + ',' + allPoints[0].y.toFixed(1);
+        for (let i = 1; i < allPoints.length; i++) {
+          d += ' L' + allPoints[i].x.toFixed(1) + ',' + allPoints[i].y.toFixed(1);
+        }
+
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttribute('width', svgW);
+        svg.setAttribute('height', totalH);
+        svg.setAttribute('viewBox', '0 0 ' + svgW + ' ' + totalH);
+        svg.style.width = svgW + 'px';
+        svg.style.height = totalH + 'px';
+
+        const bgPath = document.createElementNS(svgNS, 'path');
+        bgPath.setAttribute('d', d);
+        bgPath.setAttribute('class', 'trail-path-bg');
+        svg.appendChild(bgPath);
+
+        const clipId = 'trail-clip-' + Date.now();
+        const defs = document.createElementNS(svgNS, 'defs');
+        const clipPathEl = document.createElementNS(svgNS, 'clipPath');
+        clipPathEl.setAttribute('id', clipId);
+        clipRect = document.createElementNS(svgNS, 'rect');
+        clipRect.setAttribute('x', '0');
+        clipRect.setAttribute('width', svgW);
+        clipRect.setAttribute('y', totalH);
+        clipRect.setAttribute('height', '0');
+        clipPathEl.appendChild(clipRect);
+        defs.appendChild(clipPathEl);
+        svg.appendChild(defs);
+
+        fillPath = document.createElementNS(svgNS, 'path');
+        fillPath.setAttribute('d', d);
+        fillPath.setAttribute('class', 'trail-path-fill');
+        fillPath.setAttribute('clip-path', 'url(#' + clipId + ')');
+        svg.appendChild(fillPath);
+
+        wrap.appendChild(svg);
+        trailSvg = svg;
+
+        totalLen = fillPath.getTotalLength();
+        fillTotalH = totalH;
+
+        markerLengths = [];
+        for (let wi = 1; wi < waypoints.length; wi++) {
+          const targetY = waypoints[wi].y;
+          let bestLen = 0;
+          let bestDist = Infinity;
+          const searchSteps = 500;
+          for (let s = 0; s <= searchSteps; s++) {
+            const len = (s / searchSteps) * totalLen;
+            const pt = fillPath.getPointAtLength(len);
+            const dist = Math.abs(pt.y - targetY);
+            if (dist < bestDist) { bestDist = dist; bestLen = len; }
+          }
+          const lo = Math.max(0, bestLen - totalLen / searchSteps);
+          const hi = Math.min(totalLen, bestLen + totalLen / searchSteps);
+          for (let s = 0; s <= 100; s++) {
+            const len = lo + (s / 100) * (hi - lo);
+            const pt = fillPath.getPointAtLength(len);
+            const dist = Math.abs(pt.y - targetY);
+            if (dist < bestDist) { bestDist = dist; bestLen = len; }
+          }
+
+          const pt = fillPath.getPointAtLength(bestLen);
+          markerLengths.push(bestLen);
+
+          const marker = document.createElement('div');
+          marker.className = 'trail-marker-generated';
+          marker.innerHTML = '<div class="trail-marker-inner"></div>';
+          marker.style.cssText =
+            'position:absolute;left:' + (pt.x - 14) + 'px;top:' + (pt.y - 14) + 'px;' +
+            'width:28px;height:28px;border-radius:50%;background:var(--bg-void);' +
+            'border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;' +
+            'z-index:3;opacity:0;transform:scale(0.5);' +
+            'transition:opacity 0.4s,transform 0.4s,border-color 0.4s,box-shadow 0.4s;';
+          marker.querySelector('.trail-marker-inner').style.cssText =
+            'width:10px;height:10px;border-radius:50%;background:var(--accent);opacity:0.5;';
+          wrap.appendChild(marker);
+        }
+
+        updateTrail();
+      }
+
+      const elevHud = document.getElementById('elevation-hud');
+      const elevValue = document.getElementById('elevation-value');
+      const ELEV_MIN = 963;
+      const ELEV_MAX = 15480;
+
+      function updateTrail() {
+        if (!clipRect) return;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY;
+        const raw = 1 - (scrolled / maxScroll);
+        const progress = Math.max(0, Math.min(1, (raw - 0.05) / 0.95));
+        const clipH = progress * fillTotalH;
+        clipRect.setAttribute('y', fillTotalH - clipH);
+        clipRect.setAttribute('height', clipH);
+
+        const clipTop = fillTotalH - clipH;
+        const genMarkers = wrap.querySelectorAll('.trail-marker-generated');
+        markerLengths.forEach((len, i) => {
+          if (i < genMarkers.length) {
+            const markerY = parseFloat(genMarkers[i].style.top) + 14;
+            const reached = markerY >= clipTop;
+            genMarkers[i].style.opacity = reached ? '1' : '0';
+            genMarkers[i].style.transform = reached ? 'scale(1)' : 'scale(0.5)';
+            if (reached) {
+              genMarkers[i].style.borderColor = 'var(--accent-bright)';
+              genMarkers[i].style.boxShadow = '0 0 20px rgba(14,165,233,0.4)';
+            }
+          }
+        });
+
+        if (elevHud && elevValue) {
+          const elev = Math.round(ELEV_MIN + progress * (ELEV_MAX - ELEV_MIN));
+          elevValue.innerHTML = elev.toLocaleString() + '<span>ft</span>';
+          elevHud.classList.toggle('visible', progress > 0);
+        }
+      }
+
+      rebuild();
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(rebuild, 250);
+      });
+
+      window.addEventListener('scroll', updateTrail, { passive: true });
+    })();
+
+    // ── Light up trail steps ─────────
+    const trailSteps = document.querySelectorAll('.trail-step');
+    const trailObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reached');
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '0px 0px -80px 0px' });
+    trailSteps.forEach((step) => trailObserver.observe(step));
+
+    // ── Summit reveal ──────────────────
+    const summitEls = ['summit-title', 'summit-subtitle', 'summit-cta'];
+    const summitObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        summitEls.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.classList.add('visible');
+        });
+      }
+    }, { threshold: 0.3 });
+    const summitSection = document.getElementById('summit');
+    if (summitSection) summitObserver.observe(summitSection);
+  </script>
+</body>
+</html>

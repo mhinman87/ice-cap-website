@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCard from '../components/ContactCard.astro';
+---
+<BaseLayout title="Services — Ice Cap Labs" description="Web development, digital marketing, AI automation, and strategic design services from Ice Cap Labs.">
+
+  <!-- HERO -->
+  <header class="page-header">
+    <h1 class="page-title word-reveal">Services</h1>
+    <p class="page-subtitle reveal" data-delay="0.2">
+      We offer solutions across every discipline to move your business forward in creative ways. From full-service packages to a la carte options, Ice Cap Labs builds customized solutions to fit your specific needs.
+    </p>
+    <a href="/contact" class="btn-primary reveal" data-delay="0.4">Get In Touch</a>
+  </header>
+
+  <!-- SERVICE COLUMNS -->
+  <section class="svc-columns-section">
+    <div class="svc-columns" id="svc-columns">
+
+      <div class="svc-col" style="--col-bg:#0a1628">
+        <a href="/develop" class="svc-col-title">Development</a>
+        <ul class="svc-col-list">
+          <li>Custom Websites</li>
+          <li>Web Applications</li>
+          <li>Mobile-Responsive Design</li>
+          <li>E-Commerce Platforms</li>
+          <li>API Integrations</li>
+          <li>Ongoing Maintenance</li>
+        </ul>
+      </div>
+
+      <div class="svc-col" style="--col-bg:#0c2d4a">
+        <a href="/marketing" class="svc-col-title">Marketing</a>
+        <ul class="svc-col-list">
+          <li>SEO Strategy</li>
+          <li>Content Creation</li>
+          <li>Social Media</li>
+          <li>Paid Advertising</li>
+          <li>Email Campaigns</li>
+          <li>Analytics</li>
+        </ul>
+      </div>
+
+      <div class="svc-col" style="--col-bg:#0e4d6e">
+        <a href="/automate" class="svc-col-title">Automation</a>
+        <ul class="svc-col-list">
+          <li>Workflow Optimization</li>
+          <li>AI Chatbots</li>
+          <li>Document Processing</li>
+          <li>Automated Reporting</li>
+          <li>CRM Automation</li>
+          <li>Custom AI Tools</li>
+        </ul>
+      </div>
+
+      <div class="svc-col" style="--col-bg:#0ea5e9">
+        <a href="/design" class="svc-col-title">Design</a>
+        <ul class="svc-col-list">
+          <li>Brand Identity</li>
+          <li>UI/UX Design</li>
+          <li>Marketing Collateral</li>
+          <li>Pitch Decks</li>
+          <li>Design Systems</li>
+          <li>Experience Mapping</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact">
+    <div class="container">
+      <ContactCard eyebrow="Ready to Start?" />
+    </div>
+  </section>
+
+</BaseLayout>

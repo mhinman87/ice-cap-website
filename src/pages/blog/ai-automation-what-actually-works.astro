@@ -1,0 +1,62 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const topoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" fill="none">
+  <g stroke="rgba(14,165,233,0.12)" stroke-width="1" fill="none">
+    <path d="M140,180 C150,110 210,60 260,65 C310,70 360,120 355,185 C350,250 295,300 240,295 C185,290 130,250 140,180Z"/>
+    <path d="M160,185 C168,130 215,90 255,94 C295,98 335,138 330,190 C325,242 280,280 240,276 C200,272 152,240 160,185Z"/>
+    <path d="M180,188 C186,148 220,118 250,121 C280,124 310,152 306,192 C302,232 268,258 240,255 C212,252 174,228 180,188Z"/>
+    <path d="M200,190 C204,164 225,145 245,147 C265,149 285,168 282,195 C279,222 258,240 240,238 C222,236 196,216 200,190Z"/>
+    <path d="M218,192 C220,178 232,168 242,169 C252,170 262,180 260,196 C258,212 248,222 240,221 C232,220 216,208 218,192Z"/>
+  </g>
+  <g stroke="rgba(14,165,233,0.12)" stroke-width="1" fill="none">
+    <path d="M30,260 C45,235 80,220 110,225 C140,230 160,255 150,278 C140,300 105,310 78,305 C52,300 18,282 30,260Z"/>
+    <path d="M42,262 C52,245 78,235 100,238 C122,241 138,258 130,275 C122,292 96,300 78,296 C60,292 34,278 42,262Z"/>
+    <path d="M55,264 C62,254 78,248 92,250 C106,252 116,262 112,273 C108,284 92,290 80,288 C68,286 50,276 55,264Z"/>
+  </g>
+  <g stroke="rgba(14,165,233,0.08)" stroke-width="1" fill="none">
+    <path d="M-10,140 C40,100 100,70 180,60 C260,50 340,80 410,55"/>
+    <path d="M-10,260 C50,240 120,225 180,230 C240,235 300,260 410,250"/>
+    <path d="M-10,300 C60,288 140,278 220,280 C300,282 370,295 430,290"/>
+  </g>
+  <path d="M380,0 C360,50 340,100 310,140 C280,180 250,200 220,250 C190,300 170,320 160,340" stroke="rgba(14,165,233,0.08)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+  <g font-family="Outfit, sans-serif" font-size="7" fill="rgba(14,165,233,0.18)">
+    <text x="225" y="160">5,100</text>
+    <text x="195" y="220">4,400</text>
+    <text x="60" y="248">3,200</text>
+    <text x="145" y="130" font-size="6">SUMMIT</text>
+    <text x="30" y="290">BASIN</text>
+    <text x="310" y="120" font-size="6">COL</text>
+  </g>
+</svg>`;
+---
+<ArticleLayout
+  title="AI Automation in 2026: What Actually Works for Small Teams"
+  description="Cutting through the hype — practical AI tools and workflows that save real time without a dedicated engineering team."
+  date="2026-02-18"
+  dateFormatted="February 18, 2026"
+  topoSvg={topoSvg}
+>
+  <p>Every few months, a new wave of AI tools promises to revolutionize how small businesses operate. Most of them don't. The gap between a compelling demo and a reliable daily workflow is wider than most founders expect — and crossing it without a dedicated engineering team can feel impossible.</p>
+  <p>But here's the thing: the AI tools that actually work for small teams in 2026 aren't the flashy ones. They're the boring, reliable ones that quietly save you hours every week without breaking when you're not looking.</p>
+
+  <h2>What's Actually Working</h2>
+  <p>After working with dozens of small businesses on automation projects, patterns have emerged. The tools and workflows that stick share a few things in common:</p>
+  <ul>
+    <li>They automate tasks that are repetitive, predictable, and low-stakes</li>
+    <li>They integrate with tools you already use (CRM, email, invoicing)</li>
+    <li>They fail gracefully — when something goes wrong, it doesn't break your business</li>
+    <li>They save enough time to justify the setup cost within the first month</li>
+  </ul>
+
+  <h2>Customer Support Automation</h2>
+  <p>AI-powered customer support is the most mature use case for small businesses. Not the kind that replaces your team — the kind that handles the repetitive 60% so your team can focus on the complex 40%.</p>
+  <p>Think: automated responses to common questions, intelligent ticket routing, and draft responses that your team reviews before sending. The key is keeping a human in the loop while eliminating the copy-paste work.</p>
+
+  <h2>Document Processing</h2>
+  <p>If your team spends hours extracting data from invoices, contracts, or forms, this is the lowest-hanging fruit. Modern AI can extract structured data from messy documents with accuracy rates above 95% — and the setup is straightforward.</p>
+
+  <h2>What to Avoid</h2>
+  <p>Be skeptical of any tool that promises to "run your business on autopilot." The most dangerous AI implementations are the ones that make decisions without oversight. For small businesses, where every customer interaction matters, the goal should be augmentation, not replacement.</p>
+  <p>Start small. Pick one workflow that eats up disproportionate time. Automate it. Measure the results. Then decide where to go next.</p>
+</ArticleLayout>

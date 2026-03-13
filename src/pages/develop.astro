@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+---
+<BaseLayout title="Development — Ice Cap Labs" description="Custom web and software development from Ice Cap Labs — websites, web apps, e-commerce, APIs, and ongoing maintenance.">
+
+  <!-- PIXEL HERO -->
+  <section class="pixel-hero">
+    <h1 class="pixel-hero-title" aria-label="Develop">DEVELOP</h1>
+    <div class="pixel-title-grid" id="pixel-title-grid"></div>
+  </section>
+
+  <!-- SERVICE DETAILS -->
+  <section class="blocks-section" style="background: var(--bg-deep);">
+    <div class="blocks-container">
+      <div class="service-block reveal">
+        <div class="block-inner">
+          <div>
+            <p class="block-number">Web &amp; Software</p>
+            <h2 class="block-title">Code Built Around Your Business</h2>
+          </div>
+          <div>
+            <p class="block-desc">
+              Custom-built websites, web applications, and software solutions engineered around the way your business actually works. No templates, no compromises — just clean, performant code tailored to your goals.
+            </p>
+            <ul class="block-list">
+              <li>Custom websites and landing pages</li>
+              <li>Web application development</li>
+              <li>Mobile-responsive design and development</li>
+              <li>E-commerce platforms and integrations</li>
+              <li>API development and third-party integrations</li>
+              <li>Ongoing maintenance and performance optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="page-cta reveal">
+    <h2>Ready to Build?</h2>
+    <p>Let's talk about what your business needs and engineer the right solution.</p>
+    <a href="/contact" class="btn-primary">Get Started</a>
+  </section>
+
+</BaseLayout>
