@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCard from '../components/ContactCard.astro';
 ---
 <BaseLayout title="AI Automation | Ice Cap Labs | Wichita, KS" description="AI automation services for Wichita, Kansas businesses — workflow optimization, chatbots, document processing, reporting, and custom AI tools.">
 
@@ -15,79 +16,94 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2 class="reveal" style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 2rem; font-weight: 700;">
         You Need Automation
       </h2>
-      <p class="reveal" data-delay="0.1" style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+      <p class="reveal" data-delay="0.1" style="font-size: 1.25rem; color: white; line-height: 1.7; margin-bottom: 1.5rem;">
         Not because it's trendy. Because your competitors are already using it and you're spending 15 hours a week on work a computer could do in 15 minutes.
       </p>
-      <p class="reveal" data-delay="0.2" style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.7;">
+      <p class="reveal" data-delay="0.2" style="font-size: 1.25rem; color: white; line-height: 1.7;">
         We offer it in all sizes. Simple workflows to AI employees. You don't need to know all the answers. <strong>It's okay to be scared. Frankly, I am too.</strong> This is new for everyone.
       </p>
     </div>
   </section>
 
-  <!-- WHAT WE OFFER -->
+  <!-- PACKAGES -->
   <section style="background: var(--bg-void); padding: 6rem 0;">
-    <div class="container" style="max-width: 900px;">
-      <h2 class="reveal" style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 3rem; text-align: center; font-weight: 700;">
-        Three Ways We Can Help
+    <div class="container" style="max-width: 1000px;">
+      <h2 class="reveal" style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 4rem; text-align: center; font-weight: 700;">
+        Three Starting Points
       </h2>
 
-      <div style="display: grid; gap: 2rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
         <!-- SIMPLE -->
-        <div class="reveal" style="background: var(--bg-deep); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--accent);">
-          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Simple Automation</h3>
-          <p style="color: var(--text-secondary); margin-bottom: 1rem;">Email filters. Appointment scheduling. Auto-filing. Social media posting.</p>
-          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Starts at $1,500 • Saves 5-10 hrs/week</p>
+        <div class="reveal package-card" style="background: var(--bg-deep); padding: 2.5rem; border-radius: 12px; text-align: center;">
+          <p style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; margin-bottom: 1rem;">SIMPLE AUTOMATION</p>
+          <h3 style="font-size: 1.75rem; margin-bottom: 1rem; font-weight: 700;">Starts at $1,500</h3>
+          <p style="color: white; margin-bottom: 1.5rem; line-height: 1.6;">Email filters. Appointment scheduling. Auto-filing. Social media posting.</p>
+          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Saves 5-10 hrs/week</p>
         </div>
 
         <!-- WORKFLOWS -->
-        <div class="reveal" data-delay="0.1" style="background: var(--bg-deep); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--accent);">
-          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Multi-Step Workflows</h3>
-          <p style="color: var(--text-secondary); margin-bottom: 1rem;">Lead pipelines. Customer onboarding. Invoice-to-payment. Inventory sync.</p>
-          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Starts at $3,000 • Saves 10-20 hrs/week</p>
+        <div class="reveal package-card" data-delay="0.1" style="background: var(--bg-deep); padding: 2.5rem; border-radius: 12px; text-align: center;">
+          <p style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; margin-bottom: 1rem;">MULTI-STEP WORKFLOWS</p>
+          <h3 style="font-size: 1.75rem; margin-bottom: 1rem; font-weight: 700;">Starts at $3,000</h3>
+          <p style="color: white; margin-bottom: 1.5rem; line-height: 1.6;">Lead pipelines. Customer onboarding. Invoice-to-payment. Inventory sync.</p>
+          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Saves 10-20 hrs/week</p>
         </div>
 
         <!-- AI EMPLOYEES -->
-        <div class="reveal" data-delay="0.2" style="background: var(--bg-deep); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--accent);">
-          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">AI Employees</h3>
-          <p style="color: var(--text-secondary); margin-bottom: 1rem;">Agents that run your social media, track inventory, handle support, coordinate teams.</p>
-          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Starts at $8,000 • Saves 20-40+ hrs/week</p>
+        <div class="reveal package-card" data-delay="0.2" style="background: var(--bg-deep); padding: 2.5rem; border-radius: 12px; text-align: center;">
+          <p style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; margin-bottom: 1rem;">AI EMPLOYEES</p>
+          <h3 style="font-size: 1.75rem; margin-bottom: 1rem; font-weight: 700;">Starts at $8,000</h3>
+          <p style="color: white; margin-bottom: 1.5rem; line-height: 1.6;">Agents that run your social media, track inventory, handle support, coordinate teams.</p>
+          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Saves 20-40+ hrs/week</p>
         </div>
       </div>
 
-      <p class="reveal" data-delay="0.3" style="text-align: center; margin-top: 2rem; font-size: 0.95rem; color: var(--text-secondary);">
+      <p class="reveal" data-delay="0.3" style="text-align: center; margin-top: 3rem; font-size: 0.95rem; color: white;">
         I use AI employees to run Ice Cap Labs and two other businesses. <a href="/blog/five-weeks-with-openclaw" style="color: var(--accent); text-decoration: underline;">Here's how it works.</a>
       </p>
     </div>
   </section>
 
-  <!-- BIG CTA -->
-  <section style="background: var(--bg-deep); padding: 8rem 0;">
+  <!-- TWO BUTTONS -->
+  <section style="background: var(--bg-deep); padding: 6rem 0;">
     <div class="container" style="max-width: 700px; text-align: center;">
-      <p class="reveal" style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">
+      <p class="reveal" style="font-size: 1.1rem; color: white; margin-bottom: 3rem;">
         If you're nervous about the future and don't want to get left behind
       </p>
       
-      <a href="/contact" class="reveal giant-cta" data-delay="0.1" style="
-        display: inline-block;
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent) 0%, rgba(139,92,246,0.8) 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: white;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 10px 40px rgba(139,92,246,0.4);
-        margin: 0 auto;
-      ">
-        Let's Talk
-      </a>
+      <div class="reveal" data-delay="0.1" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-bottom: 3rem;">
+        <a href="/contact" class="big-button" style="
+          display: inline-block;
+          padding: 1.5rem 3rem;
+          background: var(--accent);
+          color: white;
+          font-size: 1.25rem;
+          font-weight: 700;
+          text-decoration: none;
+          border-radius: 50px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(139,92,246,0.4);
+        ">
+          I Need Agentic AI
+        </a>
 
-      <p class="reveal" data-delay="0.2" style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 2rem;">
+        <a href="/contact" class="big-button" style="
+          display: inline-block;
+          padding: 1.5rem 3rem;
+          background: var(--accent);
+          color: white;
+          font-size: 1.25rem;
+          font-weight: 700;
+          text-decoration: none;
+          border-radius: 50px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(139,92,246,0.4);
+        ">
+          What is Agentic AI? Help!
+        </a>
+      </div>
+
+      <p class="reveal" data-delay="0.2" style="font-size: 1.1rem; color: white;">
         I love talking to people. No pressure. No hard sell. Just a conversation about what you're dealing with and whether automation could help.
       </p>
     </div>
@@ -103,31 +119,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="display: grid; gap: 1.5rem;">
         <div class="reveal">
           <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">How long to set up?</h3>
-          <p style="color: var(--text-secondary);">1-2 days for simple. 1-2 weeks for workflows. 2-4 weeks for AI employees.</p>
+          <p style="color: white;">1-2 days for simple. 1-2 weeks for workflows. 2-4 weeks for AI employees.</p>
         </div>
 
         <div class="reveal" data-delay="0.05">
           <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">What if it breaks?</h3>
-          <p style="color: var(--text-secondary);">It escalates to you instead of failing silently. Plus monitoring + alerts.</p>
+          <p style="color: white;">It escalates to you instead of failing silently. Plus monitoring + alerts.</p>
         </div>
 
         <div class="reveal" data-delay="0.1">
           <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Will it replace my team?</h3>
-          <p style="color: var(--text-secondary);">Nope. It handles the repetitive 60% so they can focus on the strategic 40%.</p>
+          <p style="color: white;">Nope. It handles the repetitive 60% so they can focus on the strategic 40%.</p>
         </div>
 
         <div class="reveal" data-delay="0.15">
           <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Do I need to be technical?</h3>
-          <p style="color: var(--text-secondary);">No. You describe the workflow. We build it. We train your team.</p>
+          <p style="color: white;">No. You describe the workflow. We build it. We train your team.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACT CARD -->
+  <section id="contact" data-speed="0.75" style="background: var(--bg-deep); padding: 6rem 0;">
+    <div class="container">
+      <ContactCard />
+    </div>
+  </section>
+
   <style>
-    .giant-cta:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 50px rgba(139,92,246,0.6);
+    .big-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(139,92,246,0.6);
+    }
+
+    .package-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .package-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(139,92,246,0.3);
     }
   </style>
 
