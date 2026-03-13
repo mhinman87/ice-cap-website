@@ -24,6 +24,24 @@ const { title, description, date, dateFormatted, topoSvg } = Astro.props;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
+  <style is:global>
+    .article-content mark {
+      background: linear-gradient(to right, rgba(14, 165, 233, 0.9) 100%, transparent 0%);
+      background-size: 0% 100%;
+      background-repeat: no-repeat;
+      background-position: left center;
+      color: inherit;
+      padding: 0.15em 0.35em;
+      margin: 0 -0.15em;
+      border-radius: 4px;
+      transition: background-size 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  color 0.4s ease 0.2s;
+    }
+    .article-content mark.highlighted {
+      background-size: 100% 100%;
+      color: #0a0a0a;
+    }
+  </style>
 </head>
 <body>
 
@@ -61,5 +79,20 @@ const { title, description, date, dateFormatted, topoSvg } = Astro.props;
   <Footer />
 
   <script is:inline src="/script.js"></script>
+  <script is:inline>
+  (function() {
+    var marks = document.querySelectorAll('.article-content mark');
+    if (!marks.length) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('highlighted');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -33% 0px', threshold: 0.5 });
+    marks.forEach(function(mark) { observer.observe(mark); });
+  })();
+  </script>
 </body>
 </html>
