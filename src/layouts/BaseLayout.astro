@@ -9,14 +9,70 @@ interface Props {
 }
 
 const { title, description, footerSpeed } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="author" content="Ice Cap Labs" />
+  <link rel="canonical" href={canonicalURL} />
+  
+  <!-- Geo Tags -->
+  <meta name="geo.region" content="US-KS" />
+  <meta name="geo.placename" content="Wichita" />
+  
+  <!-- Open Graph / Social Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="Ice Cap Labs" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Ice Cap Labs",
+    "url": "https://icecaplabs.com",
+    "description": "Full-stack technology partner providing web development, digital marketing, AI automation, and strategic design services to small businesses in Wichita, Kansas.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Wichita",
+      "addressRegion": "KS",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 37.6872,
+      "longitude": -97.3301
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Wichita",
+      "containedIn": {
+        "@type": "State",
+        "name": "Kansas"
+      }
+    },
+    "priceRange": "$$",
+    "serviceType": ["Web Development", "Digital Marketing", "AI Automation", "SEO", "Strategic Design"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service"
+    }
+  })} />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
