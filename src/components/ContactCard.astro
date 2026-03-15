@@ -30,7 +30,18 @@ const {
     <p class="contact-subtitle">{subtitle}</p>
     {variant === 'form' ? (
       <form class="contact-form" id="contact-form" novalidate>
-        <div class="form-row">
+        <div class="form-group">
+          <input
+            type="text"
+            id="contact-name"
+            name="name"
+            placeholder="Your name"
+            autocomplete="name"
+            required
+            aria-label="Your name"
+          />
+        </div>
+        <div class="form-group">
           <input
             type="email"
             id="contact-email"
@@ -40,9 +51,36 @@ const {
             required
             aria-label="Your email address"
           />
-          <button type="submit" class="btn-primary">Get Started</button>
         </div>
-        <p class="form-note">No spam. Just a conversation about your business.</p>
+        <div class="form-group">
+          <input
+            type="tel"
+            id="contact-phone"
+            name="phone"
+            placeholder="Phone (optional)"
+            autocomplete="tel"
+            aria-label="Your phone number"
+          />
+        </div>
+        <div class="form-group">
+          <select
+            id="contact-service"
+            name="service"
+            aria-label="What do you need help with?"
+          >
+            <option value="">What do you need help with?</option>
+            <option value="website">Website Design/Development</option>
+            <option value="marketing">Digital Marketing & SEO</option>
+            <option value="ai">AI Automation</option>
+            <option value="all">All of the Above</option>
+            <option value="unsure">Not Sure Yet</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary" id="contact-submit">
+          <span class="btn-text">Get Started</span>
+          <span class="btn-loading" style="display: none;">Sending...</span>
+        </button>
+        <p class="form-note" id="form-message">No spam. Just a conversation about your business.</p>
       </form>
     ) : (
       <a href={buttonHref} class="btn-primary">{buttonText}</a>
@@ -50,3 +88,127 @@ const {
     <slot />
   </div>
 </div>
+
+<style>
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .contact-form input,
+  .contact-form select {
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  .contact-form input::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  .contact-form input:focus,
+  .contact-form select:focus {
+    outline: none;
+    border-color: var(--accent-bright);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .contact-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  .contact-form select option {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+  }
+
+  .btn-loading {
+    opacity: 0.7;
+  }
+
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  .form-note.success {
+    color: #10b981;
+    font-weight: 500;
+  }
+
+  .form-note.error {
+    color: #ef4444;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement;
+  const btnText = submitBtn?.querySelector('.btn-text') as HTMLElement;
+  const btnLoading = submitBtn?.querySelector('.btn-loading') as HTMLElement;
+  const formMessage = document.getElementById('form-message') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      service: formData.get('service') as string,
+    };
+
+    // Simple validation
+    if (!data.name || !data.email) {
+      formMessage.textContent = 'Please fill in your name and email.';
+      formMessage.className = 'form-note error';
+      return;
+    }
+
+    // Disable button and show loading
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        formMessage.textContent = "Thanks! We'll be in touch within 24 hours.";
+        formMessage.className = 'form-note success';
+        form.reset();
+      } else {
+        formMessage.textContent = result.error || 'Something went wrong. Please try again.';
+        formMessage.className = 'form-note error';
+      }
+    } catch (error) {
+      formMessage.textContent = 'Network error. Please try again.';
+      formMessage.className = 'form-note error';
+    } finally {
+      // Re-enable button
+      submitBtn.disabled = false;
+      btnText.style.display = 'inline';
+      btnLoading.style.display = 'none';
+    }
+  });
+</script>
