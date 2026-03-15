@@ -10,157 +10,201 @@ import ContactCard from '../components/ContactCard.astro';
     <div class="pixel-title-grid" id="pixel-title-grid"></div>
   </section>
 
-  <!-- INTRO -->
-  <section style="background: var(--bg-deep); padding: 6rem 0;">
-    <div class="container" style="max-width: 800px; text-align: center;">
-      <h2 class="reveal" style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 2rem; font-weight: 700;">
-        You Need Automation
-      </h2>
-      <p class="reveal" data-delay="0.1" style="font-size: 1.25rem; color: white; line-height: 1.7; margin-bottom: 1.5rem;">
-        Not because it's trendy. Because your competitors are already using it and you're spending 15 hours a week on work a computer could do in 15 minutes.
-      </p>
-      <p class="reveal" data-delay="0.2" style="font-size: 1.25rem; color: white; line-height: 1.7;">
-        We offer it in all sizes. Simple workflows to AI employees. You don't need to know all the answers. <strong>It's okay to be scared. Frankly, I am too.</strong> This is new for everyone.
-      </p>
+  <!-- CHOOSE YOUR PATH -->
+  <section class="chooser" id="chooser">
+    <div class="chooser-buttons" id="chooser-buttons">
+      <button class="chooser-btn" id="btn-need" data-choice="need">
+        <span class="chooser-btn-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </span>
+        <span class="chooser-btn-label">I Need AI Automation</span>
+      </button>
+      <button class="chooser-btn" id="btn-what" data-choice="what">
+        <span class="chooser-btn-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </span>
+        <span class="chooser-btn-label">What is AI Automation?</span>
+      </button>
     </div>
-  </section>
-
-  <!-- PACKAGES -->
-  <section style="background: var(--bg-void); padding: 6rem 0;">
-    <div class="container" style="max-width: 1000px;">
-      <h2 class="reveal" style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 4rem; text-align: center; font-weight: 700;">
-        Three Starting Points
-      </h2>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-        <!-- SIMPLE -->
-        <div class="reveal package-card" style="background: var(--bg-deep); padding: 2.5rem; border-radius: 12px; text-align: center;">
-          <p style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; margin-bottom: 1rem;">SIMPLE AUTOMATION</p>
-          <h3 style="font-size: 1.75rem; margin-bottom: 1rem; font-weight: 700;">Starts at $1,500</h3>
-          <p style="color: white; margin-bottom: 1.5rem; line-height: 1.6;">Email filters. Appointment scheduling. Auto-filing. Social media posting.</p>
-          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Saves 5-10 hrs/week</p>
-        </div>
-
-        <!-- WORKFLOWS -->
-        <div class="reveal package-card" data-delay="0.1" style="background: var(--bg-deep); padding: 2.5rem; border-radius: 12px; text-align: center;">
-          <p style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; margin-bottom: 1rem;">MULTI-STEP WORKFLOWS</p>
-          <h3 style="font-size: 1.75rem; margin-bottom: 1rem; font-weight: 700;">Starts at $3,000</h3>
-          <p style="color: white; margin-bottom: 1.5rem; line-height: 1.6;">Lead pipelines. Customer onboarding. Invoice-to-payment. Inventory sync.</p>
-          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Saves 10-20 hrs/week</p>
-        </div>
-
-        <!-- AI EMPLOYEES -->
-        <div class="reveal package-card" data-delay="0.2" style="background: var(--bg-deep); padding: 2.5rem; border-radius: 12px; text-align: center;">
-          <p style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; margin-bottom: 1rem;">AI EMPLOYEES</p>
-          <h3 style="font-size: 1.75rem; margin-bottom: 1rem; font-weight: 700;">Starts at $8,000</h3>
-          <p style="color: white; margin-bottom: 1.5rem; line-height: 1.6;">Agents that run your social media, track inventory, handle support, coordinate teams.</p>
-          <p style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">Saves 20-40+ hrs/week</p>
-        </div>
-      </div>
-
-      <p class="reveal" data-delay="0.3" style="text-align: center; margin-top: 3rem; font-size: 0.95rem; color: white;">
-        I use AI employees to run Ice Cap Labs and two other businesses. <a href="/blog/five-weeks-with-openclaw" style="color: var(--accent); text-decoration: underline;">Here's how it works.</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- TWO BUTTONS -->
-  <section style="background: var(--bg-deep); padding: 6rem 0;">
-    <div class="container" style="max-width: 700px; text-align: center;">
-      <p class="reveal" style="font-size: 1.1rem; color: white; margin-bottom: 3rem;">
-        If you're nervous about the future and don't want to get left behind
-      </p>
-      
-      <div class="reveal" data-delay="0.1" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-bottom: 3rem;">
-        <a href="/contact" class="big-button" style="
-          display: inline-block;
-          padding: 1.5rem 3rem;
-          background: var(--accent);
-          color: white;
-          font-size: 1.25rem;
-          font-weight: 700;
-          text-decoration: none;
-          border-radius: 50px;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 20px rgba(139,92,246,0.4);
-        ">
-          I Need Agentic AI
-        </a>
-
-        <a href="/contact" class="big-button" style="
-          display: inline-block;
-          padding: 1.5rem 3rem;
-          background: var(--accent);
-          color: white;
-          font-size: 1.25rem;
-          font-weight: 700;
-          text-decoration: none;
-          border-radius: 50px;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 20px rgba(139,92,246,0.4);
-        ">
-          What is Agentic AI? Help!
-        </a>
-      </div>
-
-      <p class="reveal" data-delay="0.2" style="font-size: 1.1rem; color: white;">
-        I love talking to people. No pressure. No hard sell. Just a conversation about what you're dealing with and whether automation could help.
-      </p>
-    </div>
-  </section>
-
-  <!-- QUICK FAQ -->
-  <section style="background: var(--bg-void); padding: 6rem 0;">
-    <div class="container" style="max-width: 800px;">
-      <h2 class="reveal" style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 3rem; text-align: center; font-weight: 700;">
-        Quick Answers
-      </h2>
-
-      <div style="display: grid; gap: 1.5rem;">
-        <div class="reveal">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">How long to set up?</h3>
-          <p style="color: white;">1-2 days for simple. 1-2 weeks for workflows. 2-4 weeks for AI employees.</p>
-        </div>
-
-        <div class="reveal" data-delay="0.05">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">What if it breaks?</h3>
-          <p style="color: white;">It escalates to you instead of failing silently. Plus monitoring + alerts.</p>
-        </div>
-
-        <div class="reveal" data-delay="0.1">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Will it replace my team?</h3>
-          <p style="color: white;">Nope. It handles the repetitive 60% so they can focus on the strategic 40%.</p>
-        </div>
-
-        <div class="reveal" data-delay="0.15">
-          <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Do I need to be technical?</h3>
-          <p style="color: white;">No. You describe the workflow. We build it. We train your team.</p>
-        </div>
-      </div>
-    </div>
+    <div class="chooser-line" id="chooser-line" aria-hidden="true"></div>
   </section>
 
   <!-- CONTACT CARD -->
-  <section id="contact" data-speed="0.75" style="background: var(--bg-deep); padding: 6rem 0;">
+  <section id="contact" style="background: var(--bg-deep); padding: 6rem 0;">
     <div class="container">
       <ContactCard />
     </div>
   </section>
 
-  <style>
-    .big-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 30px rgba(139,92,246,0.6);
+  <style is:global>
+    .chooser {
+      background: var(--bg-void);
+      padding: 6rem 0 8rem;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
     }
 
-    .package-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .chooser-buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+      padding: 0 clamp(1rem, 4vw, 2rem);
     }
 
-    .package-card:hover {
+    .chooser-btn {
+      flex: 1;
+      max-width: 400px;
+      padding: 2.5rem 2rem;
+      background: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 10px;
+      cursor: pointer;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      transition:
+        transform 2s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+    }
+
+    .chooser-btn:hover {
+      border-color: var(--accent-bright);
+      box-shadow:
+        0 0 40px rgba(14,165,233,0.4),
+        inset 0 0 30px rgba(255,255,255,0.05);
       transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(139,92,246,0.3);
+    }
+
+    .chooser-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .chooser-btn-icon {
+      color: #fff;
+    }
+
+    .chooser-btn.dismissed {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .chooser-btn.chosen {
+      pointer-events: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(14,165,233,0.3);
+    }
+
+    .chooser-line {
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(14,165,233,0.6), 0 0 4px rgba(14,165,233,0.8);
+      transition: height 3s linear;
+      position: relative;
+    }
+
+    .chooser-line::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 16px var(--accent), 0 0 6px var(--accent-bright);
+      opacity: 0;
+      transition: opacity 0.5s ease 1.8s;
+    }
+
+    .chooser-line.extending {
+      height: 200px;
+    }
+
+    .chooser-line.extending::after {
+      opacity: 1;
+    }
+
+    @media (max-width: 640px) {
+      .chooser-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .chooser-btn {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem 1.5rem;
+        font-size: 1.15rem;
+      }
+
+      .chooser-btn.dismissed {
+        transform: scale(0.9) !important;
+      }
     }
   </style>
+
+  <script is:inline>
+  (function() {
+    var container = document.getElementById('chooser-buttons');
+    var line = document.getElementById('chooser-line');
+    if (!container || !line) return;
+
+    var btnNeed = document.getElementById('btn-need');
+    var btnWhat = document.getElementById('btn-what');
+    var chosen = false;
+
+    function handleChoice(chosenBtn, dismissedBtn) {
+      if (chosen) return;
+      chosen = true;
+
+      var containerRect = container.getBoundingClientRect();
+      var chosenRect = chosenBtn.getBoundingClientRect();
+      var dismissedRect = dismissedBtn.getBoundingClientRect();
+
+      var containerCenterX = containerRect.left + containerRect.width / 2;
+      var chosenCenterX = chosenRect.left + chosenRect.width / 2;
+      var offsetX = containerCenterX - chosenCenterX;
+
+      var dismissDirection = dismissedRect.left < chosenRect.left ? -1 : 1;
+      var dismissX = dismissDirection * containerRect.width;
+
+      dismissedBtn.style.transform = 'translateX(' + dismissX + 'px)';
+      dismissedBtn.classList.add('dismissed');
+
+      chosenBtn.style.transform = 'translateX(' + offsetX + 'px)';
+      chosenBtn.classList.add('chosen');
+
+      setTimeout(function() {
+        line.classList.add('extending');
+      }, 800);
+    }
+
+    btnNeed.addEventListener('click', function() { handleChoice(btnNeed, btnWhat); });
+    btnWhat.addEventListener('click', function() { handleChoice(btnWhat, btnNeed); });
+  })();
+  </script>
 
 </BaseLayout>

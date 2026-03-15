@@ -1661,7 +1661,7 @@ input:focus-visible {
 
 .article-content p {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   line-height: 1.85;
   margin-bottom: 1.5rem;
 }
@@ -1673,14 +1673,15 @@ input:focus-visible {
 
 .article-content li {
   font-size: 0.95rem;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   line-height: 1.75;
   margin-bottom: 0.5rem;
 }
 
 .article-back-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: fit-content;
   gap: 0.5rem;
   font-size: 0.85rem;
   color: var(--accent-bright);

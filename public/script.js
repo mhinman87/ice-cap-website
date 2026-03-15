@@ -151,25 +151,8 @@ function initNav() {
 
 /* ── Contact form ─────────────────────────────────────────── */
 function initContactForm() {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const emailInput = form.querySelector('input[type="email"]');
-    const email      = emailInput ? emailInput.value.trim() : '';
-
-    if (!email) {
-      emailInput && emailInput.focus();
-      return;
-    }
-
-    const subject = encodeURIComponent('Hello from Ice Cap Labs website');
-    const body    = encodeURIComponent(
-      `Hi Ice Cap Labs team,\n\nI found you through your website and wanted to connect.\n\nMy email: ${email}\n\n`
-    );
-    window.location.href = `mailto:hello@icecaplabs.com?subject=${subject}&body=${body}`;
-  });
+  // Contact form is now handled by the inline script in ContactCard.astro
+  // which submits via the /api/contact endpoint.
 }
 
 /* ── Tile strip ──────────────────────────────────────────── */
