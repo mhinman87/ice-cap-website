@@ -20,6 +20,16 @@ const { title, description, date, dateFormatted, topoSvg } = Astro.props;
   <title>{title} — Ice Cap Labs</title>
   <meta name="description" content={description} />
   <link rel="icon" type="image/png" href="/yeti-transparent.png" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQN4H5N61M"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GQN4H5N61M');
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
