@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { name, email, phone, service } = await req.json();
+    const { name, email, phone, service, recommended_package } = await req.json();
 
     if (!name || !email) {
       return new Response(
@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
 
     const { error: dbError } = await supabase
       .from("contact_submissions")
-      .insert({ name, email, phone, service });
+      .insert({ name, email, phone, service, recommended_package });
 
     if (dbError) {
       console.error("Database error:", dbError);
@@ -56,7 +56,7 @@ Deno.serve(async (req) => {
       to: Deno.env.get("GMAIL_USER")!,
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
-      content: `New contact form submission from Ice Cap Labs website:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || "Not provided"}\nService Interest: ${service || "Not specified"}\n\n---\nReply directly to this email to respond to ${name}.`,
+      content: `New contact form submission from Ice Cap Labs website:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || "Not provided"}\nService Interest: ${service || "Not specified"}\nRecommended Package: ${recommended_package || "None"}\n\n---\nReply directly to this email to respond to ${name}.`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0EA5E9;">New Contact Form Submission</h2>
@@ -66,6 +66,7 @@ Deno.serve(async (req) => {
             <p style="margin: 8px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
             <p style="margin: 8px 0;"><strong>Phone:</strong> ${phone || "Not provided"}</p>
             <p style="margin: 8px 0;"><strong>Service Interest:</strong> ${service || "Not specified"}</p>
+            ${recommended_package ? `<p style="margin: 8px 0;"><strong>Recommended Package:</strong> ${recommended_package}</p>` : ""}
           </div>
           <p style="color: #64748b; font-size: 14px;">Reply directly to this email to respond to ${name}.</p>
         </div>

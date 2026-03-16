@@ -542,6 +542,7 @@ import ContactCard from '../components/ContactCard.astro';
     var answers = {};
     var currentPath = null;
     var currentStepIndex = 0;
+    var currentRec = null;
 
     /* ── Step Definitions ───────────────────────────────── */
 
@@ -810,6 +811,7 @@ import ContactCard from '../components/ContactCard.astro';
 
     function buildResultCard() {
       var rec = getRecommendation();
+      currentRec = rec;
 
       var card = document.createElement('div');
       card.className = 'flow-card';
@@ -819,7 +821,7 @@ import ContactCard from '../components/ContactCard.astro';
 
       var eyebrow = document.createElement('p');
       eyebrow.className = 'flow-result-eyebrow';
-      eyebrow.textContent = 'WE RECOMMEND';
+      eyebrow.textContent = 'WE THINK WE SHOULD START THE CONVERSATION WITH...';
       result.appendChild(eyebrow);
 
       var h3 = document.createElement('h3');
@@ -895,6 +897,9 @@ import ContactCard from '../components/ContactCard.astro';
           // Pre-select AI Automation in the service dropdown
           var serviceSelect = document.getElementById('contact-service');
           if (serviceSelect) serviceSelect.value = 'ai';
+          // Set recommended package hidden field
+          var pkgField = document.getElementById('contact-recommended-package');
+          if (pkgField && currentRec) pkgField.value = currentRec.name + ' (' + currentRec.price + ')';
           setTimeout(function() {
             // Let the user scroll naturally
           }, 200);

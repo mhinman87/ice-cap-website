@@ -76,6 +76,7 @@ const {
             <option value="unsure">Not Sure Yet</option>
           </select>
         </div>
+        <input type="hidden" id="contact-recommended-package" name="recommended_package" value="" />
         <button type="submit" class="btn-primary" id="contact-submit">
           <span class="btn-text">Get Started</span>
           <span class="btn-loading" style="display: none;">Sending...</span>
@@ -170,6 +171,7 @@ const {
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
       service: formData.get('service') as string,
+      recommended_package: formData.get('recommended_package') as string,
     };
 
     // Simple validation
