@@ -1412,9 +1412,19 @@ input:focus-visible {
   z-index: 1;
 }
 
-/* When pixel grid is active, hide the original text */
+/* When pixel grid is active, hide the original text (desktop only) */
 .pixel-hero.pixels-active .pixel-hero-title {
   visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .pixel-hero.pixels-active .pixel-hero-title {
+    visibility: visible;
+  }
+
+  .pixel-title-grid {
+    display: none;
+  }
 }
 
 .pixel-title-grid {

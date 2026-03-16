@@ -33,24 +33,25 @@ import ContactCard from '../components/ContactCard.astro';
       </button>
     </div>
     <div class="chooser-line" id="chooser-line" aria-hidden="true"></div>
+    <div id="flow-container" class="flow-container" aria-live="polite"></div>
   </section>
 
   <!-- CONTACT CARD -->
-  <section id="contact" style="background: var(--bg-deep); padding: 6rem 0;">
+  <section id="contact" class="flow-contact-hidden" style="background: var(--bg-deep); padding: 6rem 0;">
     <div class="container">
       <ContactCard />
     </div>
   </section>
 
   <style is:global>
+    /* ── Chooser ──────────────────────────────────────────── */
     .chooser {
       background: var(--bg-void);
-      padding: 6rem 0 8rem;
-      min-height: 60vh;
+      padding: 6rem 0 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .chooser-buttons {
@@ -121,6 +122,7 @@ import ContactCard from '../components/ContactCard.astro';
       box-shadow: 0 0 12px rgba(14,165,233,0.6), 0 0 4px rgba(14,165,233,0.8);
       transition: height 3s linear;
       position: relative;
+      align-self: center;
     }
 
     .chooser-line::after {
@@ -146,6 +148,10 @@ import ContactCard from '../components/ContactCard.astro';
       opacity: 1;
     }
 
+    .chooser-line.hide-line {
+      display: none;
+    }
+
     @media (max-width: 640px) {
       .chooser-buttons {
         flex-direction: column;
@@ -164,19 +170,804 @@ import ContactCard from '../components/ContactCard.astro';
         transform: scale(0.9) !important;
       }
     }
+
+    /* ── Flow Container ──────────────────────────────────── */
+    .flow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 2rem);
+    }
+
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── Flow Line Segments ──────────────────────────────── */
+    .flow-line {
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(14,165,233,0.6), 0 0 4px rgba(14,165,233,0.8);
+      transition: height 2s linear;
+      position: relative;
+    }
+
+    .flow-line::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 16px var(--accent), 0 0 6px var(--accent-bright);
+      opacity: 0;
+      transition: opacity 0.4s ease 1.6s;
+    }
+
+    .flow-line.extending {
+      height: 120px;
+    }
+
+    .flow-line.extending::after {
+      opacity: 1;
+    }
+
+    .flow-line.arrow::after {
+      width: 0;
+      height: 0;
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 12px solid var(--accent-bright);
+      bottom: -12px;
+      filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 4px var(--accent-bright));
+    }
+
+    /* ── Flow Cards ──────────────────────────────────────── */
+    .flow-card {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+      padding: 1rem 0 0;
+    }
+
+    .flow-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .flow-card-title {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .flow-card-text {
+      font-size: 1.1rem;
+      color: white;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Flow Options (answer buttons) ───────────────────── */
+    .flow-card-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .flow-option {
+      -webkit-appearance: none;
+      appearance: none;
+      padding: 1rem 1.5rem;
+      background: var(--accent) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .flow-option:hover {
+      border-color: var(--accent-bright);
+      box-shadow: 0 0 20px rgba(14,165,233,0.3);
+      transform: translateY(-2px);
+    }
+
+    .flow-option.chosen {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 0 30px rgba(14,165,233,0.3);
+      pointer-events: none;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .flow-option.dismissed {
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .flow-option.dismissed-left {
+      transform: translateX(-200vw);
+    }
+
+    .flow-option.dismissed-right {
+      transform: translateX(200vw);
+    }
+
+    /* ── Continue Button ─────────────────────────────────── */
+    .flow-continue {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(14,165,233,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 1rem;
+    }
+
+    .flow-continue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(14,165,233,0.55);
+    }
+
+    /* ── Examples Grid ───────────────────────────────────── */
+    .flow-examples {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+
+    .flow-example {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    .flow-example-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(14, 165, 233, 0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+      color: var(--accent-bright);
+    }
+
+    .flow-example h4 {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .flow-example p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Tiers Grid ──────────────────────────────────────── */
+    .flow-tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+
+    .flow-tier {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 2rem 1.25rem;
+      text-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .flow-tier.recommended {
+      border-color: var(--accent);
+      box-shadow: 0 0 30px rgba(14,165,233,0.2);
+    }
+
+    .flow-tier-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 0.75rem;
+    }
+
+    .flow-tier h4 {
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .flow-tier-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-bright);
+      margin-bottom: 0.75rem;
+    }
+
+    .flow-tier-saves {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .flow-tier p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Result Card ─────────────────────────────────────── */
+    .flow-result {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--accent);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(14,165,233,0.2);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .flow-result-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 0.75rem;
+    }
+
+    .flow-result h3 {
+      font-size: 1.4rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .flow-result-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-bright);
+      margin-bottom: 1rem;
+    }
+
+    .flow-result p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Contact Reveal ──────────────────────────────────── */
+    .flow-contact-hidden {
+      display: none;
+    }
+
+    .flow-contact-reveal {
+      display: block;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .flow-contact-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .flow-examples {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-tiers {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-option.dismissed {
+        transform: scale(0.85) !important;
+      }
+    }
   </style>
 
   <script is:inline>
   (function() {
     var container = document.getElementById('chooser-buttons');
-    var line = document.getElementById('chooser-line');
-    if (!container || !line) return;
+    var chooserLine = document.getElementById('chooser-line');
+    var flowContainer = document.getElementById('flow-container');
+    var contactSection = document.getElementById('contact');
+    if (!container || !chooserLine || !flowContainer) return;
 
     var btnNeed = document.getElementById('btn-need');
     var btnWhat = document.getElementById('btn-what');
     var chosen = false;
+    var answers = {};
+    var currentPath = null;
+    var currentStepIndex = 0;
 
-    function handleChoice(chosenBtn, dismissedBtn) {
+    /* ── Step Definitions ───────────────────────────────── */
+
+    var NEED_STEPS = [
+      {
+        id: 'need-1',
+        type: 'question',
+        title: 'What takes up most of your time?',
+        key: 'task',
+        options: [
+          { value: 'emails', label: 'Emails & Scheduling' },
+          { value: 'data', label: 'Data Entry & Reports' },
+          { value: 'followups', label: 'Customer Follow-ups' },
+          { value: 'social', label: 'Social Media' },
+          { value: 'unsure', label: 'Not Sure' }
+        ]
+      },
+      {
+        id: 'need-2',
+        type: 'question',
+        title: 'How big is your team?',
+        key: 'team',
+        options: [
+          { value: 'solo', label: 'Just Me' },
+          { value: 'small', label: '2\u201310' },
+          { value: 'medium', label: '10+' }
+        ]
+      },
+      {
+        id: 'need-3',
+        type: 'question',
+        title: "What\u2019s your budget range?",
+        key: 'budget',
+        options: [
+          { value: 'low', label: 'Under $2k' },
+          { value: 'mid', label: '$2\u20135k' },
+          { value: 'high', label: '$5k+' }
+        ]
+      }
+    ];
+
+    var WHAT_STEPS = [
+      {
+        id: 'what-1',
+        type: 'info',
+        text: 'AI automation handles the repetitive 60% of your work so you can focus on the strategic 40%. Not the sci\u2011fi kind \u2014 the practical kind. The kind that saves you 15 hours a week starting next month.',
+        continueLabel: 'Tell Me More'
+      },
+      {
+        id: 'what-2',
+        type: 'examples',
+        title: "Here\u2019s what it looks like in practice:",
+        examples: [
+          {
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+            title: 'Email Triage',
+            desc: 'AI reads, sorts, and drafts replies to routine emails automatically.'
+          },
+          {
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+            title: 'Lead Follow-Up',
+            desc: 'Instant personalized responses the moment a prospect reaches out.'
+          },
+          {
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>',
+            title: 'Inventory Sync',
+            desc: 'Real-time updates across every platform \u2014 no more spreadsheet juggling.'
+          }
+        ],
+        continueLabel: 'What Does It Cost?'
+      },
+      {
+        id: 'what-3',
+        type: 'tiers',
+        title: 'It comes in three sizes:'
+      }
+    ];
+
+    /* ── Recommendation Logic ───────────────────────────── */
+
+    function getRecommendation() {
+      // Budget is the hard constraint — never recommend above it
+      if (answers.budget === 'high') {
+        return {
+          label: 'AI EMPLOYEES',
+          name: 'AI Employees',
+          price: 'Starts at $8,000',
+          desc: 'Autonomous agents that think, decide, and execute \u2014 built for teams ready to scale.',
+          saves: 'Saves 20\u201340+ hrs/week'
+        };
+      }
+      if (answers.budget === 'mid') {
+        return {
+          label: 'MULTI-STEP WORKFLOWS',
+          name: 'Multi-Step Workflows',
+          price: 'Starts at $3,000',
+          desc: 'Chain your tools together into seamless end-to-end automations.',
+          saves: 'Saves 10\u201320 hrs/week'
+        };
+      }
+      // Budget is 'low' (under $2k) — always recommend Simple, regardless of team size
+      return {
+        label: 'SIMPLE AUTOMATION',
+        name: 'Simple Automation',
+        price: 'Starts at $1,500',
+        desc: 'One trigger, one action \u2014 the fastest way to reclaim your time.',
+        saves: 'Saves 5\u201310 hrs/week'
+      };
+    }
+
+    /* ── Render Helpers ─────────────────────────────────── */
+
+    function createLine() {
+      var line = document.createElement('div');
+      line.className = 'flow-line';
+      return line;
+    }
+
+    function buildQuestionCard(step) {
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var title = document.createElement('h3');
+      title.className = 'flow-card-title';
+      title.textContent = step.title;
+      card.appendChild(title);
+
+      var opts = document.createElement('div');
+      opts.className = 'flow-card-options';
+
+      step.options.forEach(function(opt) {
+        var btn = document.createElement('button');
+        btn.className = 'flow-option';
+        btn.textContent = opt.label;
+        btn.dataset.value = opt.value;
+        btn.addEventListener('click', function() {
+          handleOptionClick(btn, opts, step.key, opt.value);
+        });
+        opts.appendChild(btn);
+      });
+
+      card.appendChild(opts);
+      return card;
+    }
+
+    function buildInfoCard(step) {
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var text = document.createElement('p');
+      text.className = 'flow-card-text';
+      text.textContent = step.text;
+      card.appendChild(text);
+
+      var btn = document.createElement('button');
+      btn.className = 'flow-continue';
+      btn.textContent = step.continueLabel;
+      btn.addEventListener('click', function() {
+        btn.style.opacity = '0';
+        btn.style.pointerEvents = 'none';
+        advanceStep();
+      });
+      card.appendChild(btn);
+
+      return card;
+    }
+
+    function buildExamplesCard(step) {
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var title = document.createElement('h3');
+      title.className = 'flow-card-title';
+      title.textContent = step.title;
+      card.appendChild(title);
+
+      var grid = document.createElement('div');
+      grid.className = 'flow-examples';
+
+      step.examples.forEach(function(ex) {
+        var item = document.createElement('div');
+        item.className = 'flow-example';
+
+        var icon = document.createElement('div');
+        icon.className = 'flow-example-icon';
+        icon.innerHTML = ex.icon;
+        item.appendChild(icon);
+
+        var h4 = document.createElement('h4');
+        h4.textContent = ex.title;
+        item.appendChild(h4);
+
+        var p = document.createElement('p');
+        p.textContent = ex.desc;
+        item.appendChild(p);
+
+        grid.appendChild(item);
+      });
+
+      card.appendChild(grid);
+
+      var btn = document.createElement('button');
+      btn.className = 'flow-continue';
+      btn.textContent = step.continueLabel;
+      btn.addEventListener('click', function() {
+        btn.style.opacity = '0';
+        btn.style.pointerEvents = 'none';
+        advanceStep();
+      });
+      card.appendChild(btn);
+
+      return card;
+    }
+
+    function buildTiersCard(step) {
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var title = document.createElement('h3');
+      title.className = 'flow-card-title';
+      title.textContent = step.title;
+      card.appendChild(title);
+
+      var grid = document.createElement('div');
+      grid.className = 'flow-tiers';
+
+      var tiers = [
+        { label: 'SIMPLE AUTOMATION', name: 'Simple Automation', price: '$1,500', saves: 'Saves 5\u201310 hrs/week', desc: 'Email filters. Appointment scheduling. Auto-filing. Social media posting.' },
+        { label: 'MULTI-STEP WORKFLOWS', name: 'Multi-Step Workflows', price: '$3,000', saves: 'Saves 10\u201320 hrs/week', desc: 'Lead pipelines. Customer onboarding. Invoice-to-payment. Inventory sync.' },
+        { label: 'AI EMPLOYEES', name: 'AI Employees', price: '$8,000', saves: 'Saves 20\u201340+ hrs/week', desc: 'Agents that run your social media, track inventory, handle support, coordinate teams.' }
+      ];
+
+      tiers.forEach(function(t) {
+        var item = document.createElement('div');
+        item.className = 'flow-tier';
+
+        var label = document.createElement('p');
+        label.className = 'flow-tier-label';
+        label.textContent = t.label;
+        item.appendChild(label);
+
+        var h4 = document.createElement('h4');
+        h4.textContent = t.name;
+        item.appendChild(h4);
+
+        var price = document.createElement('p');
+        price.className = 'flow-tier-price';
+        price.textContent = t.price;
+        item.appendChild(price);
+
+        var saves = document.createElement('p');
+        saves.className = 'flow-tier-saves';
+        saves.textContent = t.saves;
+        item.appendChild(saves);
+
+        var desc = document.createElement('p');
+        desc.textContent = t.desc;
+        item.appendChild(desc);
+
+        grid.appendChild(item);
+      });
+
+      card.appendChild(grid);
+      return card;
+    }
+
+    function buildResultCard() {
+      var rec = getRecommendation();
+
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var result = document.createElement('div');
+      result.className = 'flow-result';
+
+      var eyebrow = document.createElement('p');
+      eyebrow.className = 'flow-result-eyebrow';
+      eyebrow.textContent = 'WE RECOMMEND';
+      result.appendChild(eyebrow);
+
+      var h3 = document.createElement('h3');
+      h3.textContent = rec.name;
+      result.appendChild(h3);
+
+      var price = document.createElement('p');
+      price.className = 'flow-result-price';
+      price.textContent = rec.price;
+      result.appendChild(price);
+
+      var saves = document.createElement('p');
+      saves.className = 'flow-tier-saves';
+      saves.style.marginBottom = '1rem';
+      saves.textContent = rec.saves;
+      result.appendChild(saves);
+
+      var desc = document.createElement('p');
+      desc.textContent = rec.desc;
+      result.appendChild(desc);
+
+      card.appendChild(result);
+      return card;
+    }
+
+    /* ── Flow Engine ────────────────────────────────────── */
+
+    function renderStep(step) {
+      var node = document.createElement('div');
+      node.className = 'flow-node';
+
+      var line = createLine();
+      node.appendChild(line);
+
+      var card;
+      if (step.type === 'question') card = buildQuestionCard(step);
+      else if (step.type === 'info') card = buildInfoCard(step);
+      else if (step.type === 'examples') card = buildExamplesCard(step);
+      else if (step.type === 'tiers') card = buildTiersCard(step);
+      else if (step.type === 'result') card = buildResultCard();
+
+      node.appendChild(card);
+      flowContainer.appendChild(node);
+
+      // Force browser to paint the element at height:0 first
+      line.getBoundingClientRect();
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          line.classList.add('extending');
+          setTimeout(function() {
+            card.classList.add('visible');
+            node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 2000);
+        });
+      });
+    }
+
+    function revealContact() {
+      var node = document.createElement('div');
+      node.className = 'flow-node';
+      var line = createLine();
+      line.classList.add('arrow');
+      node.appendChild(line);
+      flowContainer.appendChild(node);
+
+      requestAnimationFrame(function() {
+        line.classList.add('extending');
+        setTimeout(function() {
+          contactSection.classList.remove('flow-contact-hidden');
+          contactSection.classList.add('flow-contact-reveal');
+          contactSection.getBoundingClientRect();
+          contactSection.classList.add('flow-contact-visible');
+          // Pre-select AI Automation in the service dropdown
+          var serviceSelect = document.getElementById('contact-service');
+          if (serviceSelect) serviceSelect.value = 'ai';
+          setTimeout(function() {
+            contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 200);
+        }, 1000);
+      });
+    }
+
+    function handleOptionClick(chosenBtn, optionsContainer, key, value) {
+      answers[key] = value;
+
+      var buttons = Array.from(optionsContainer.querySelectorAll('.flow-option'));
+      var chosenIndex = buttons.indexOf(chosenBtn);
+
+      // Calculate center offset for the chosen button
+      var containerRect = optionsContainer.getBoundingClientRect();
+      var chosenRect = chosenBtn.getBoundingClientRect();
+      var containerCenterX = containerRect.left + containerRect.width / 2;
+      var chosenCenterX = chosenRect.left + chosenRect.width / 2;
+      var offsetX = containerCenterX - chosenCenterX;
+
+      buttons.forEach(function(btn, i) {
+        if (btn === chosenBtn) {
+          btn.classList.add('chosen');
+          btn.style.transform = 'translateX(' + offsetX + 'px)';
+        } else {
+          btn.classList.add('dismissed');
+          btn.classList.add(i < chosenIndex ? 'dismissed-left' : 'dismissed-right');
+        }
+      });
+
+      // After fly-off, collapse dismissed buttons and recenter chosen
+      setTimeout(function() {
+        buttons.forEach(function(btn) {
+          if (btn !== chosenBtn) {
+            btn.style.display = 'none';
+          }
+        });
+        chosenBtn.style.transform = 'none';
+      }, 800);
+
+      setTimeout(function() {
+        advanceStep();
+      }, 1000);
+    }
+
+    function advanceStep() {
+      currentStepIndex++;
+      var steps = currentPath === 'need' ? NEED_STEPS : WHAT_STEPS;
+
+      if (currentStepIndex < steps.length) {
+        renderStep(steps[currentStepIndex]);
+      } else if (currentPath === 'need') {
+        // Show result then contact
+        renderStep({ type: 'result' });
+        setTimeout(function() {
+          revealContact();
+        }, 2000);
+      } else {
+        // "what" path — go straight to contact after tiers
+        setTimeout(function() {
+          revealContact();
+        }, 1500);
+      }
+    }
+
+    function startFlow(path) {
+      currentPath = path;
+      currentStepIndex = 0;
+      answers = {};
+      var steps = path === 'need' ? NEED_STEPS : WHAT_STEPS;
+      setTimeout(function() {
+        renderStep(steps[0]);
+      }, 600);
+    }
+
+    /* ── Chooser Button Handlers ────────────────────────── */
+
+    function handleChoice(chosenBtn, dismissedBtn, path) {
       if (chosen) return;
       chosen = true;
 
@@ -197,13 +988,13 @@ import ContactCard from '../components/ContactCard.astro';
       chosenBtn.style.transform = 'translateX(' + offsetX + 'px)';
       chosenBtn.classList.add('chosen');
 
-      setTimeout(function() {
-        line.classList.add('extending');
-      }, 800);
+      chooserLine.classList.add('hide-line');
+
+      startFlow(path);
     }
 
-    btnNeed.addEventListener('click', function() { handleChoice(btnNeed, btnWhat); });
-    btnWhat.addEventListener('click', function() { handleChoice(btnWhat, btnNeed); });
+    btnNeed.addEventListener('click', function() { handleChoice(btnNeed, btnWhat, 'need'); });
+    btnWhat.addEventListener('click', function() { handleChoice(btnWhat, btnNeed, 'what'); });
   })();
   </script>
 
