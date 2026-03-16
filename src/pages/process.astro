@@ -244,50 +244,33 @@ import Footer from '../components/Footer.astro';
     }
     .trail-step.reached .trail-step-title { color: var(--text-primary); }
 
+    .trail-callout {
+      background: rgba(14, 165, 233, 0.08);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent-bright);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      opacity: 0.7;
+      transition: opacity 0.4s, border-color 0.4s;
+    }
+    .trail-step.reached .trail-callout {
+      opacity: 1;
+      border-color: var(--accent-bright);
+    }
+
     .trail-step-desc {
       font-size: 0.95rem;
       color: var(--text-muted);
       line-height: 1.8;
       max-width: 680px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       transition: color 0.4s;
     }
     .trail-step.reached .trail-step-desc { color: var(--text-secondary); }
-
-    .block-includes-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-bright);
-      margin-bottom: 0.75rem;
-    }
-    .block-includes {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
-    }
-    @media (min-width: 640px) {
-      .block-includes { grid-template-columns: 1fr 1fr; }
-    }
-    .block-includes li {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      padding-left: 1.25rem;
-      position: relative;
-      transition: color 0.4s;
-    }
-    .trail-step.reached .block-includes li { color: var(--text-secondary); }
-    .block-includes li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.55em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
 
     /* ── Base camp banner (bottom) ────────────────────────── */
     .base-camp {
@@ -364,34 +347,29 @@ import Footer from '../components/Footer.astro';
         <div class="trail-step" data-altitude="Summit Ridge — 12,033 FT">
           <p class="trail-altitude">Summit Ridge — 12,033 FT</p>
           <div class="trail-step-number">04</div>
-          <h2 class="trail-step-title">Optimize</h2>
+          <h2 class="trail-step-title">Optimize (Optional)</h2>
+          <div class="trail-callout">
+            Keep Growing — Or Don't<br>Your Call
+          </div>
           <p class="trail-step-desc">
-            Launch is just the start. We monitor performance, refine your AI systems, and add new automations as your business grows.
+            Want us to stick around? We'll train your AI to get better at converting leads, add new automations as you grow, and cover your API costs. Monthly subscription. Cancel anytime.
           </p>
-          <p class="block-includes-label">What's Included</p>
-          <ul class="block-includes">
-            <li>Performance monitoring and monthly automation reports</li>
-            <li>Call handling optimization and conversation quality reviews</li>
-            <li>New automation workflows as needs evolve</li>
-            <li>Priority support and strategic planning</li>
-          </ul>
+          <p class="trail-step-desc">
+            <strong>Or skip this step.</strong> You own the system. Do whatever you want with it.
+          </p>
         </div>
 
         <!-- STEP 03 -->
         <div class="trail-step" data-altitude="High Camp — 9,464 FT">
           <p class="trail-altitude">High Camp — 9,464 FT</p>
           <div class="trail-step-number">03</div>
-          <h2 class="trail-step-title">Build &amp; Launch</h2>
+          <h2 class="trail-step-title">Build &amp; Deliver</h2>
+          <div class="trail-callout">
+            You Own What We Build<br>No Strings Attached
+          </div>
           <p class="trail-step-desc">
-            This is where it gets real. We build your AI systems, you test them with real calls, we refine — no surprises, no big reveal at the end.
+            We build your AI system, test it with real calls, and hand you the keys. It's yours. Run it yourself, hand it to your team, or hire someone else to manage it. We don't lock you in.
           </p>
-          <p class="block-includes-label">What's Included</p>
-          <ul class="block-includes">
-            <li>Development sprints with live demos and test calls</li>
-            <li>Voice training, conversation flow optimization, and QA</li>
-            <li>Integration with your calendar, CRM, and phone system</li>
-            <li>Launch coordination and post-launch monitoring</li>
-          </ul>
         </div>
 
         <!-- STEP 02 -->
@@ -399,15 +377,12 @@ import Footer from '../components/Footer.astro';
           <p class="trail-altitude">Timberline — 6,883 FT</p>
           <div class="trail-step-number">02</div>
           <h2 class="trail-step-title">Design</h2>
+          <div class="trail-callout">
+            Know the Plan &amp; Price Before We Start<br>No Surprises, No Lengthy Proposals
+          </div>
           <p class="trail-step-desc">
-            We map out an automation blueprint that fits your workflows, your team, and your budget. You see the plan before we build anything.
+            By the end of our discovery call, you'll know exactly what we'll build, how much it costs, and when it's ready. If we both agree on the strategy and price, we move forward. If not, no hard feelings.
           </p>
-          <p class="block-includes-label">What's Included</p>
-          <ul class="block-includes">
-            <li>Conversation flows, call routing logic, and system architecture</li>
-            <li>Integration plan (calendar, CRM, phone system, notifications)</li>
-            <li>Timeline, milestones, and transparent pricing</li>
-          </ul>
         </div>
 
         <!-- STEP 01 -->
@@ -415,15 +390,12 @@ import Footer from '../components/Footer.astro';
           <p class="trail-altitude">Base Camp — 4,325 FT</p>
           <div class="trail-step-number">01</div>
           <h2 class="trail-step-title">Discover</h2>
+          <div class="trail-callout">
+            FREE Discovery Call<br>Your Office or Ours — No Charge, No Obligation
+          </div>
           <p class="trail-step-desc">
-            We start by listening. Tell us where you're losing time and money, and we'll map out the automations that fix it.
+            30-minute conversation to understand where you're losing time and money. We'll map out what automation can fix and whether we're a good fit.
           </p>
-          <p class="block-includes-label">What's Included</p>
-          <ul class="block-includes">
-            <li>Workflow audit and time-drain analysis</li>
-            <li>Call volume, lead response time, and missed opportunity review</li>
-            <li>Quick wins and automation roadmap prioritized by ROI</li>
-          </ul>
         </div>
 
       </div>
