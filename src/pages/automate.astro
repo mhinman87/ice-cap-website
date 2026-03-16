@@ -274,16 +274,17 @@ import ContactCard from '../components/ContactCard.astro';
     /* ── Flow Options (answer buttons) ───────────────────── */
     .flow-card-options {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+      flex-wrap: nowrap;
+      gap: 0.5rem;
       justify-content: center;
     }
 
     .flow-option {
       -webkit-appearance: none;
       appearance: none;
-      padding: 1rem 1.5rem;
+      padding: 0.75rem 1rem;
       background: var(--accent) !important;
+      white-space: nowrap;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 10px;
       color: #fff;
@@ -519,6 +520,10 @@ import ContactCard from '../components/ContactCard.astro';
 
       .flow-option.dismissed {
         transform: scale(0.85) !important;
+      }
+
+      .flow-card-options {
+        flex-wrap: wrap;
       }
     }
   </style>
@@ -866,7 +871,7 @@ import ContactCard from '../components/ContactCard.astro';
           line.classList.add('extending');
           setTimeout(function() {
             card.classList.add('visible');
-            node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Let the user scroll naturally
           }, 2000);
         });
       });
@@ -891,7 +896,7 @@ import ContactCard from '../components/ContactCard.astro';
           var serviceSelect = document.getElementById('contact-service');
           if (serviceSelect) serviceSelect.value = 'ai';
           setTimeout(function() {
-            contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Let the user scroll naturally
           }, 200);
         }, 1000);
       });
@@ -919,16 +924,6 @@ import ContactCard from '../components/ContactCard.astro';
           btn.classList.add(i < chosenIndex ? 'dismissed-left' : 'dismissed-right');
         }
       });
-
-      // After fly-off, collapse dismissed buttons and recenter chosen
-      setTimeout(function() {
-        buttons.forEach(function(btn) {
-          if (btn !== chosenBtn) {
-            btn.style.display = 'none';
-          }
-        });
-        chosenBtn.style.transform = 'none';
-      }, 800);
 
       setTimeout(function() {
         advanceStep();
