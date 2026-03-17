@@ -740,6 +740,9 @@ import ContactCard from '../components/ContactCard.astro';
           line.classList.add('extending');
           setTimeout(function() {
             card.classList.add('visible');
+            if (step.type === 'tiers') {
+              setTimeout(function() { advanceStep(); }, 2000);
+            }
           }, 2000);
         });
       });

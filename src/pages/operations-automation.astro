@@ -858,7 +858,10 @@ import ContactCard from '../components/ContactCard.astro';
           line.classList.add('extending');
           setTimeout(function() {
             card.classList.add('visible');
-            // Let the user scroll naturally
+            // Auto-advance after tiers card is visible
+            if (step.type === 'tiers') {
+              setTimeout(function() { advanceStep(); }, 2000);
+            }
           }, 2000);
         });
       });
