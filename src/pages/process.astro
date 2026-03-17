@@ -166,116 +166,69 @@ import Footer from '../components/Footer.astro';
       .trail-svg-wrap { display: none; }
     }
 
-    /* ── Trail step ───────────────────────────────────────── */
+    /* ── Trail Steps (Cards) ───────────────────────────────── */
     .trail-step {
       position: relative;
-      padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2.5rem, 5vw, 4rem) 80px;
-      border-bottom: 1px solid var(--border-dim);
+      padding: clamp(2rem, 4vw, 2.5rem) clamp(1.5rem, 3vw, 2rem);
+      margin-left: 80px;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .trail-step:last-child { border-bottom: none; }
-
-    @media (max-width: 640px) {
-      .trail-step { padding-left: 56px; }
-    }
-
-    .trail-marker {
-      position: absolute;
-      left: -54px;
-      top: clamp(2.5rem, 5vw, 4rem);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--bg-void);
-      border: 3px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
-    }
-    .trail-marker-inner {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.5;
-      transition: opacity 0.4s, transform 0.4s;
-    }
-    .trail-step.reached .trail-marker {
-      border-color: var(--accent-bright);
-      box-shadow: 0 0 20px rgba(14,165,233,0.4);
-    }
-    .trail-step.reached .trail-marker-inner {
+    .trail-step.reached {
       opacity: 1;
-      transform: scale(1.2);
+      transform: translateY(0);
     }
 
     @media (max-width: 640px) {
-      .trail-marker { left: -44px; width: 24px; height: 24px; }
-      .trail-marker-inner { width: 8px; height: 8px; }
+      .trail-step { margin-left: 0; }
     }
 
     .trail-altitude {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 0.5rem;
-      opacity: 0.6;
-      transition: opacity 0.4s;
     }
-    .trail-step.reached .trail-altitude { opacity: 1; }
 
     .trail-step-number {
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
-      color: var(--text-muted);
+      color: var(--accent-bright);
       line-height: 1;
-      margin-bottom: 0.75rem;
-      transition: color 0.4s;
+      margin-bottom: 0.5rem;
     }
-    .trail-step.reached .trail-step-number { color: var(--accent-bright); }
 
     .trail-step-title {
-      font-size: clamp(1.35rem, 3vw, 1.75rem);
-      color: var(--text-muted);
-      margin-bottom: 0.85rem;
-      transition: color 0.4s;
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
     }
-    .trail-step.reached .trail-step-title { color: var(--text-primary); }
 
     .trail-callout {
-      background: transparent;
-      border: 2px solid var(--accent);
-      padding: 1rem 1.5rem;
-      border-radius: 4px;
       font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--accent-bright);
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      line-height: 1.5;
-      margin-bottom: 1.25rem;
-      position: relative;
-      transform: rotate(-1deg);
-      opacity: 0.7;
-      transition: opacity 0.4s, border-color 0.4s, transform 0.4s;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
     }
-    .trail-step.reached .trail-callout {
-      opacity: 1;
-      border-color: var(--accent-bright);
+    .trail-callout strong {
+      font-weight: 700;
     }
 
     .trail-step-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      max-width: 680px;
-      margin-bottom: 1rem;
-      transition: color 0.4s;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 0.5rem;
     }
-    .trail-step.reached .trail-step-desc { color: var(--text-secondary); }
 
     /* ── Base camp banner (bottom) ────────────────────────── */
     .base-camp {
@@ -354,7 +307,7 @@ import Footer from '../components/Footer.astro';
           <div class="trail-step-number">04</div>
           <h2 class="trail-step-title">Optimize (Optional)</h2>
           <div class="trail-callout">
-            Keep Growing — Or Don't<br>Your Call
+            <strong>Keep growing — or don't.</strong> Your call. You own the system either way.
           </div>
           <p class="trail-step-desc">
             Want us to stick around? We'll train your AI to get better at converting leads, add new automations as you grow, and cover your API costs. Monthly subscription. Cancel anytime.
@@ -370,7 +323,7 @@ import Footer from '../components/Footer.astro';
           <div class="trail-step-number">03</div>
           <h2 class="trail-step-title">Build &amp; Deliver</h2>
           <div class="trail-callout">
-            You Own What We Build<br>No Strings Attached
+            <strong>You own what we build.</strong> No strings attached — run it yourself or hand it off.
           </div>
           <p class="trail-step-desc">
             We build your AI system, test it with real calls, and hand you the keys. It's yours. Run it yourself, hand it to your team, or hire someone else to manage it. We don't lock you in.
@@ -383,7 +336,7 @@ import Footer from '../components/Footer.astro';
           <div class="trail-step-number">02</div>
           <h2 class="trail-step-title">Design</h2>
           <div class="trail-callout">
-            Know the Plan &amp; Price Before We Start<br>No Surprises, No Lengthy Proposals
+            <strong>Know the plan &amp; price before we start.</strong> No surprises, no lengthy proposals.
           </div>
           <p class="trail-step-desc">
             By the end of our discovery call, you'll know exactly what we'll build, how much it costs, and when it's ready. If we both agree on the strategy and price, we move forward. If not, no hard feelings.
@@ -396,7 +349,7 @@ import Footer from '../components/Footer.astro';
           <div class="trail-step-number">01</div>
           <h2 class="trail-step-title">Discover</h2>
           <div class="trail-callout">
-            FREE Discovery Call<br>Your Office or Ours — No Charge, No Obligation
+            <strong>Free discovery call.</strong> Your office or ours — no charge, no obligation.
           </div>
           <p class="trail-step-desc">
             30-minute conversation to understand where you're losing time and money. We'll map out what automation can fix and whether we're a good fit.
@@ -732,7 +685,7 @@ import Footer from '../components/Footer.astro';
           entry.target.classList.add('reached');
         }
       });
-    }, { threshold: 0.3, rootMargin: '0px 0px -80px 0px' });
+    }, { threshold: 0.3, rootMargin: '-50% 0px 0px 0px' });
     trailSteps.forEach((step) => trailObserver.observe(step));
 
     // ── Summit reveal ──────────────────

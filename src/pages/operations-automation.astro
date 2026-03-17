@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCard from '../components/ContactCard.astro';
 ---
-<BaseLayout title="Digital Marketing & SEO | Ice Cap Labs | Wichita, KS" description="SEO and AI-powered social media services for Wichita, Kansas businesses — search optimization, content strategy, and automated social media management.">
+<BaseLayout title="Operations & Scheduling Automation | Ice Cap Labs | Wichita, KS" description="AI-powered operations automation for Wichita, Kansas businesses — job scheduling, dispatch, inventory alerts, team coordination, and workflow automation.">
 
   <!-- PIXEL HERO -->
   <section class="pixel-hero">
-    <h1 class="pixel-hero-title" aria-label="Marketing">MARKETING</h1>
+    <h1 class="pixel-hero-title" aria-label="Operations">OPERATIONS</h1>
     <div class="pixel-title-grid" id="pixel-title-grid"></div>
   </section>
 
@@ -16,21 +16,20 @@ import ContactCard from '../components/ContactCard.astro';
       <button class="chooser-btn" id="btn-need" data-choice="need">
         <span class="chooser-btn-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-            <polyline points="17 6 23 6 23 12"/>
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
           </svg>
         </span>
-        <span class="chooser-btn-label">I Need More Traffic</span>
+        <span class="chooser-btn-label">I Need to Streamline Operations</span>
       </button>
       <button class="chooser-btn" id="btn-what" data-choice="what">
         <span class="chooser-btn-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
-            <circle cx="12" cy="12" r="6"/>
-            <circle cx="12" cy="12" r="2"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
           </svg>
         </span>
-        <span class="chooser-btn-label">I Need More Conversions</span>
+        <span class="chooser-btn-label">What Can Be Automated?</span>
       </button>
     </div>
     <div class="chooser-line" id="chooser-line" aria-hidden="true"></div>
@@ -551,35 +550,36 @@ import ContactCard from '../components/ContactCard.astro';
       {
         id: 'need-1',
         type: 'question',
-        title: 'What are you doing for marketing right now?',
-        key: 'current',
+        title: 'What\u2019s the biggest bottleneck in your operations?',
+        key: 'task',
         options: [
-          { value: 'nothing', label: 'Nothing Yet' },
-          { value: 'social', label: 'Some Social Media' },
-          { value: 'seo', label: 'Basic SEO/Google Business' },
-          { value: 'active', label: 'Active Campaigns' }
+          { value: 'scheduling', label: 'Job Scheduling' },
+          { value: 'dispatch', label: 'Dispatch & Routing' },
+          { value: 'inventory', label: 'Inventory Tracking' },
+          { value: 'coordination', label: 'Team Coordination' },
+          { value: 'unsure', label: 'Not Sure' }
         ]
       },
       {
         id: 'need-2',
         type: 'question',
-        title: 'How long has your website been live?',
-        key: 'sitetime',
+        title: 'How big is your team?',
+        key: 'team',
         options: [
-          { value: 'new', label: 'Less Than 6 Months' },
-          { value: 'mid', label: '6 Months\u20132 Years' },
-          { value: 'established', label: '2+ Years' }
+          { value: 'solo', label: 'Just Me' },
+          { value: 'small', label: '2\u201310' },
+          { value: 'medium', label: '10+' }
         ]
       },
       {
         id: 'need-3',
         type: 'question',
-        title: "What\u2019s your monthly marketing budget?",
+        title: "What\u2019s your budget range?",
         key: 'budget',
         options: [
-          { value: 'low', label: 'Under $1.5k/mo' },
-          { value: 'mid', label: '$1.5\u20133k/mo' },
-          { value: 'high', label: '$3k+/mo' }
+          { value: 'low', label: 'Under $2k' },
+          { value: 'mid', label: '$2\u20135k' },
+          { value: 'high', label: '$5k+' }
         ]
       }
     ];
@@ -587,61 +587,65 @@ import ContactCard from '../components/ContactCard.astro';
     var WHAT_STEPS = [
       {
         id: 'what-1',
-        type: 'question',
-        title: 'How much traffic does your site get monthly?',
-        key: 'traffic',
-        options: [
-          { value: 'low', label: 'Under 500 Visitors' },
-          { value: 'mid', label: '500\u20135,000 Visitors' },
-          { value: 'high', label: '5,000+ Visitors' }
-        ]
+        type: 'info',
+        text: 'Operations automation takes the chaos out of scheduling, dispatch, inventory, and team coordination. Instead of juggling spreadsheets and phone calls, your systems talk to each other and things just work.',
+        continueLabel: 'Tell Me More'
       },
       {
         id: 'what-2',
-        type: 'question',
-        title: "What\u2019s not converting?",
-        key: 'problem',
-        options: [
-          { value: 'forms', label: 'Nobody Fills Out Forms' },
-          { value: 'bounce', label: 'People Leave Quickly' },
-          { value: 'phone', label: "Phone Doesn\u2019t Ring" },
-          { value: 'products', label: "Products Aren\u2019t Selling" }
-        ]
+        type: 'examples',
+        title: "Here\u2019s what operations automation looks like:",
+        examples: [
+          {
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+            title: 'Job Scheduling',
+            desc: 'Automatically assign and schedule jobs based on availability, location, and skill set.'
+          },
+          {
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>',
+            title: 'Dispatch & Routing',
+            desc: 'Optimized routes and real-time dispatch so your team spends less time driving and more time working.'
+          },
+          {
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>',
+            title: 'Inventory Alerts',
+            desc: 'Real-time stock tracking with automatic reorder alerts \u2014 no more surprise shortages.'
+          }
+        ],
+        continueLabel: 'What Does It Cost?'
       },
       {
         id: 'what-3',
-        type: 'question',
-        title: "What\u2019s your monthly marketing budget?",
-        key: 'budget',
-        options: [
-          { value: 'low', label: 'Under $1.5k/mo' },
-          { value: 'mid', label: '$1.5\u20133k/mo' },
-          { value: 'high', label: '$3k+/mo' }
-        ]
+        type: 'tiers',
+        title: 'It comes in three sizes:'
       }
     ];
 
     /* ── Recommendation Logic ───────────────────────────── */
 
     function getRecommendation() {
+      // Budget is the hard constraint
       if (answers.budget === 'high') {
         return {
-          name: 'SEO + AI Social',
-          price: '$3,500/mo',
-          desc: 'Full SEO strategy plus a custom AI social media agent \u2014 trained over 3 weeks to post on-brand content automatically.'
+          label: 'FULL OPERATIONS AUTOMATION',
+          name: 'Full Operations Automation',
+          price: 'Starts at $5,000',
+          desc: 'End-to-end scheduling, dispatch, inventory, and team coordination \u2014 fully automated.'
         };
       }
       if (answers.budget === 'mid') {
         return {
-          name: 'SEO + Content',
-          price: '$2,000/mo',
-          desc: 'On-page optimization, technical SEO, and monthly content strategy to build organic authority.'
+          label: 'SMART SCHEDULING & DISPATCH',
+          name: 'Smart Scheduling & Dispatch',
+          price: 'Starts at $3,000',
+          desc: 'Automated job scheduling, route optimization, and real-time team updates.'
         };
       }
       return {
-        name: 'SEO Foundation',
-        price: '$1,000/mo',
-        desc: 'Google Business optimization, on-page SEO, keyword research, and monthly reporting.'
+        label: 'SCHEDULING AUTOMATION',
+        name: 'Scheduling Automation',
+        price: 'Starts at $1,500',
+        desc: 'Automated job scheduling and calendar management to eliminate double-bookings.'
       };
     }
 
@@ -677,6 +681,122 @@ import ContactCard from '../components/ContactCard.astro';
       });
 
       card.appendChild(opts);
+      return card;
+    }
+
+    function buildInfoCard(step) {
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var text = document.createElement('p');
+      text.className = 'flow-card-text';
+      text.textContent = step.text;
+      card.appendChild(text);
+
+      var btn = document.createElement('button');
+      btn.className = 'flow-continue';
+      btn.textContent = step.continueLabel;
+      btn.addEventListener('click', function() {
+        btn.style.opacity = '0';
+        btn.style.pointerEvents = 'none';
+        advanceStep();
+      });
+      card.appendChild(btn);
+
+      return card;
+    }
+
+    function buildExamplesCard(step) {
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var title = document.createElement('h3');
+      title.className = 'flow-card-title';
+      title.textContent = step.title;
+      card.appendChild(title);
+
+      var grid = document.createElement('div');
+      grid.className = 'flow-examples';
+
+      step.examples.forEach(function(ex) {
+        var item = document.createElement('div');
+        item.className = 'flow-example';
+
+        var icon = document.createElement('div');
+        icon.className = 'flow-example-icon';
+        icon.innerHTML = ex.icon;
+        item.appendChild(icon);
+
+        var h4 = document.createElement('h4');
+        h4.textContent = ex.title;
+        item.appendChild(h4);
+
+        var p = document.createElement('p');
+        p.textContent = ex.desc;
+        item.appendChild(p);
+
+        grid.appendChild(item);
+      });
+
+      card.appendChild(grid);
+
+      var btn = document.createElement('button');
+      btn.className = 'flow-continue';
+      btn.textContent = step.continueLabel;
+      btn.addEventListener('click', function() {
+        btn.style.opacity = '0';
+        btn.style.pointerEvents = 'none';
+        advanceStep();
+      });
+      card.appendChild(btn);
+
+      return card;
+    }
+
+    function buildTiersCard(step) {
+      var card = document.createElement('div');
+      card.className = 'flow-card';
+
+      var title = document.createElement('h3');
+      title.className = 'flow-card-title';
+      title.textContent = step.title;
+      card.appendChild(title);
+
+      var grid = document.createElement('div');
+      grid.className = 'flow-tiers';
+
+      var tiers = [
+        { label: 'SCHEDULING AUTOMATION', name: 'Scheduling Automation', price: '$1,500', desc: 'Automated job scheduling, calendar management, and appointment coordination.' },
+        { label: 'SMART SCHEDULING & DISPATCH', name: 'Smart Scheduling & Dispatch', price: '$3,000', desc: 'Route optimization, real-time team updates, and automated dispatch workflows.' },
+        { label: 'FULL OPERATIONS AUTOMATION', name: 'Full Operations Automation', price: '$5,000', desc: 'End-to-end scheduling, dispatch, inventory alerts, and team coordination.' }
+      ];
+
+      tiers.forEach(function(t) {
+        var item = document.createElement('div');
+        item.className = 'flow-tier';
+
+        var label = document.createElement('p');
+        label.className = 'flow-tier-label';
+        label.textContent = t.label;
+        item.appendChild(label);
+
+        var h4 = document.createElement('h4');
+        h4.textContent = t.name;
+        item.appendChild(h4);
+
+        var price = document.createElement('p');
+        price.className = 'flow-tier-price';
+        price.textContent = t.price;
+        item.appendChild(price);
+
+        var desc = document.createElement('p');
+        desc.textContent = t.desc;
+        item.appendChild(desc);
+
+        grid.appendChild(item);
+      });
+
+      card.appendChild(grid);
       return card;
     }
 
@@ -723,6 +843,9 @@ import ContactCard from '../components/ContactCard.astro';
 
       var card;
       if (step.type === 'question') card = buildQuestionCard(step);
+      else if (step.type === 'info') card = buildInfoCard(step);
+      else if (step.type === 'examples') card = buildExamplesCard(step);
+      else if (step.type === 'tiers') card = buildTiersCard(step);
       else if (step.type === 'result') card = buildResultCard();
 
       node.appendChild(card);
@@ -735,6 +858,7 @@ import ContactCard from '../components/ContactCard.astro';
           line.classList.add('extending');
           setTimeout(function() {
             card.classList.add('visible');
+            // Let the user scroll naturally
           }, 2000);
         });
       });
@@ -755,9 +879,9 @@ import ContactCard from '../components/ContactCard.astro';
           contactSection.classList.add('flow-contact-reveal');
           contactSection.getBoundingClientRect();
           contactSection.classList.add('flow-contact-visible');
-          // Pre-select Digital Marketing & SEO in the service dropdown
+          // Pre-select AI Automation in the service dropdown
           var serviceSelect = document.getElementById('contact-service');
-          if (serviceSelect) serviceSelect.value = 'marketing';
+          if (serviceSelect) serviceSelect.value = 'ai';
           // Set recommended package hidden field
           var pkgField = document.getElementById('contact-recommended-package');
           if (pkgField && currentRec) pkgField.value = currentRec.name + ' (' + currentRec.price + ')';
@@ -802,11 +926,17 @@ import ContactCard from '../components/ContactCard.astro';
 
       if (currentStepIndex < steps.length) {
         renderStep(steps[currentStepIndex]);
-      } else {
+      } else if (currentPath === 'need') {
+        // Show result then contact
         renderStep({ type: 'result' });
         setTimeout(function() {
           revealContact();
         }, 2000);
+      } else {
+        // "what" path — go straight to contact after tiers
+        setTimeout(function() {
+          revealContact();
+        }, 1500);
       }
     }
 

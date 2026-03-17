@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCard from '../components/ContactCard.astro';
 ---
-<BaseLayout title="AI Automation | Ice Cap Labs | Wichita, KS" description="AI automation services for Wichita, Kansas businesses — workflow optimization, chatbots, document processing, reporting, and custom AI tools.">
+<BaseLayout title="Customer Service Automation | Ice Cap Labs | Wichita, KS" description="AI-powered customer service automation for Wichita, Kansas businesses — follow-ups, review requests, appointment reminders, and retention campaigns.">
 
   <!-- PIXEL HERO -->
   <section class="pixel-hero">
-    <h1 class="pixel-hero-title" aria-label="Automate">AUTOMATE</h1>
+    <h1 class="pixel-hero-title" aria-label="Customer Service">CUSTOMER SERVICE</h1>
     <div class="pixel-title-grid" id="pixel-title-grid"></div>
   </section>
 
@@ -16,20 +16,21 @@ import ContactCard from '../components/ContactCard.astro';
       <button class="chooser-btn" id="btn-need" data-choice="need">
         <span class="chooser-btn-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
           </svg>
         </span>
-        <span class="chooser-btn-label">I Need AI Automation</span>
+        <span class="chooser-btn-label">I Need Better Follow-Ups</span>
       </button>
       <button class="chooser-btn" id="btn-what" data-choice="what">
         <span class="chooser-btn-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-            <line x1="12" y1="17" x2="12.01" y2="17"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
           </svg>
         </span>
-        <span class="chooser-btn-label">What is AI Automation?</span>
+        <span class="chooser-btn-label">I Want More Reviews</span>
       </button>
     </div>
     <div class="chooser-line" id="chooser-line" aria-hidden="true"></div>
@@ -550,25 +551,25 @@ import ContactCard from '../components/ContactCard.astro';
       {
         id: 'need-1',
         type: 'question',
-        title: 'What takes up most of your time?',
-        key: 'task',
+        title: 'What happens after you finish a job?',
+        key: 'current',
         options: [
-          { value: 'emails', label: 'Emails & Scheduling' },
-          { value: 'data', label: 'Data Entry & Reports' },
-          { value: 'followups', label: 'Customer Follow-ups' },
-          { value: 'social', label: 'Social Media' },
-          { value: 'unsure', label: 'Not Sure' }
+          { value: 'nothing', label: 'Nothing \u2014 We Move On' },
+          { value: 'manual', label: 'We Send a Thank You Email' },
+          { value: 'some', label: 'Sometimes We Follow Up' },
+          { value: 'system', label: 'We Have a System Already' }
         ]
       },
       {
         id: 'need-2',
         type: 'question',
-        title: 'How big is your team?',
-        key: 'team',
+        title: 'What\u2019s your biggest customer service gap?',
+        key: 'gap',
         options: [
-          { value: 'solo', label: 'Just Me' },
-          { value: 'small', label: '2\u201310' },
-          { value: 'medium', label: '10+' }
+          { value: 'followup', label: 'No Post-Service Follow-Up' },
+          { value: 'reviews', label: 'Not Enough Reviews' },
+          { value: 'reminders', label: 'Missed Appointments' },
+          { value: 'retention', label: 'Customers Don\u2019t Come Back' }
         ]
       },
       {
@@ -587,69 +588,61 @@ import ContactCard from '../components/ContactCard.astro';
     var WHAT_STEPS = [
       {
         id: 'what-1',
-        type: 'info',
-        text: 'AI automation handles the repetitive 60% of your work so you can focus on the strategic 40%. Not the sci\u2011fi kind \u2014 the practical kind. The kind that saves you 15 hours a week starting next month.',
-        continueLabel: 'Tell Me More'
+        type: 'question',
+        title: 'How many customers do you serve per month?',
+        key: 'volume',
+        options: [
+          { value: 'few', label: 'Under 20' },
+          { value: 'moderate', label: '20\u2013100' },
+          { value: 'many', label: '100+' }
+        ]
       },
       {
         id: 'what-2',
-        type: 'examples',
-        title: "Here\u2019s what it looks like in practice:",
-        examples: [
-          {
-            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
-            title: 'Email Triage',
-            desc: 'AI reads, sorts, and drafts replies to routine emails automatically.'
-          },
-          {
-            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-            title: 'Lead Follow-Up',
-            desc: 'Instant personalized responses the moment a prospect reaches out.'
-          },
-          {
-            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>',
-            title: 'Inventory Sync',
-            desc: 'Real-time updates across every platform \u2014 no more spreadsheet juggling.'
-          }
-        ],
-        continueLabel: 'What Does It Cost?'
+        type: 'question',
+        title: 'What would help your business most right now?',
+        key: 'priority',
+        options: [
+          { value: 'reviews', label: 'More 5-Star Reviews' },
+          { value: 'retention', label: 'Repeat Customers' },
+          { value: 'reminders', label: 'Fewer No-Shows' },
+          { value: 'payments', label: 'Faster Payments' }
+        ]
       },
       {
         id: 'what-3',
-        type: 'tiers',
-        title: 'It comes in three sizes:'
+        type: 'question',
+        title: "What\u2019s your budget range?",
+        key: 'budget',
+        options: [
+          { value: 'low', label: 'Under $2k' },
+          { value: 'mid', label: '$2\u20135k' },
+          { value: 'high', label: '$5k+' }
+        ]
       }
     ];
 
     /* ── Recommendation Logic ───────────────────────────── */
 
     function getRecommendation() {
-      // Budget is the hard constraint — never recommend above it
       if (answers.budget === 'high') {
         return {
-          label: 'AI EMPLOYEES',
-          name: 'AI Employees',
-          price: 'Starts at $8,000',
-          desc: 'Autonomous agents that think, decide, and execute \u2014 built for teams ready to scale.',
-          saves: 'Saves 20\u201340+ hrs/week'
+          name: 'Full Customer Lifecycle',
+          price: 'Starts at $5,000',
+          desc: 'End-to-end automation \u2014 post-service follow-ups, review requests, appointment reminders, payment notifications, and loyalty campaigns.'
         };
       }
       if (answers.budget === 'mid') {
         return {
-          label: 'MULTI-STEP WORKFLOWS',
-          name: 'Multi-Step Workflows',
+          name: 'Reviews + Retention',
           price: 'Starts at $3,000',
-          desc: 'Chain your tools together into seamless end-to-end automations.',
-          saves: 'Saves 10\u201320 hrs/week'
+          desc: 'Automated review requests after every job, follow-up sequences, and re-engagement campaigns to bring customers back.'
         };
       }
-      // Budget is 'low' (under $2k) — always recommend Simple, regardless of team size
       return {
-        label: 'SIMPLE AUTOMATION',
-        name: 'Simple Automation',
+        name: 'Follow-Up Automation',
         price: 'Starts at $1,500',
-        desc: 'One trigger, one action \u2014 the fastest way to reclaim your time.',
-        saves: 'Saves 5\u201310 hrs/week'
+        desc: 'Automated post-service thank you messages, review requests, and appointment reminders.'
       };
     }
 
@@ -688,127 +681,6 @@ import ContactCard from '../components/ContactCard.astro';
       return card;
     }
 
-    function buildInfoCard(step) {
-      var card = document.createElement('div');
-      card.className = 'flow-card';
-
-      var text = document.createElement('p');
-      text.className = 'flow-card-text';
-      text.textContent = step.text;
-      card.appendChild(text);
-
-      var btn = document.createElement('button');
-      btn.className = 'flow-continue';
-      btn.textContent = step.continueLabel;
-      btn.addEventListener('click', function() {
-        btn.style.opacity = '0';
-        btn.style.pointerEvents = 'none';
-        advanceStep();
-      });
-      card.appendChild(btn);
-
-      return card;
-    }
-
-    function buildExamplesCard(step) {
-      var card = document.createElement('div');
-      card.className = 'flow-card';
-
-      var title = document.createElement('h3');
-      title.className = 'flow-card-title';
-      title.textContent = step.title;
-      card.appendChild(title);
-
-      var grid = document.createElement('div');
-      grid.className = 'flow-examples';
-
-      step.examples.forEach(function(ex) {
-        var item = document.createElement('div');
-        item.className = 'flow-example';
-
-        var icon = document.createElement('div');
-        icon.className = 'flow-example-icon';
-        icon.innerHTML = ex.icon;
-        item.appendChild(icon);
-
-        var h4 = document.createElement('h4');
-        h4.textContent = ex.title;
-        item.appendChild(h4);
-
-        var p = document.createElement('p');
-        p.textContent = ex.desc;
-        item.appendChild(p);
-
-        grid.appendChild(item);
-      });
-
-      card.appendChild(grid);
-
-      var btn = document.createElement('button');
-      btn.className = 'flow-continue';
-      btn.textContent = step.continueLabel;
-      btn.addEventListener('click', function() {
-        btn.style.opacity = '0';
-        btn.style.pointerEvents = 'none';
-        advanceStep();
-      });
-      card.appendChild(btn);
-
-      return card;
-    }
-
-    function buildTiersCard(step) {
-      var card = document.createElement('div');
-      card.className = 'flow-card';
-
-      var title = document.createElement('h3');
-      title.className = 'flow-card-title';
-      title.textContent = step.title;
-      card.appendChild(title);
-
-      var grid = document.createElement('div');
-      grid.className = 'flow-tiers';
-
-      var tiers = [
-        { label: 'SIMPLE AUTOMATION', name: 'Simple Automation', price: '$1,500', saves: 'Saves 5\u201310 hrs/week', desc: 'Email filters. Appointment scheduling. Auto-filing. Social media posting.' },
-        { label: 'MULTI-STEP WORKFLOWS', name: 'Multi-Step Workflows', price: '$3,000', saves: 'Saves 10\u201320 hrs/week', desc: 'Lead pipelines. Customer onboarding. Invoice-to-payment. Inventory sync.' },
-        { label: 'AI EMPLOYEES', name: 'AI Employees', price: '$8,000', saves: 'Saves 20\u201340+ hrs/week', desc: 'Agents that run your social media, track inventory, handle support, coordinate teams.' }
-      ];
-
-      tiers.forEach(function(t) {
-        var item = document.createElement('div');
-        item.className = 'flow-tier';
-
-        var label = document.createElement('p');
-        label.className = 'flow-tier-label';
-        label.textContent = t.label;
-        item.appendChild(label);
-
-        var h4 = document.createElement('h4');
-        h4.textContent = t.name;
-        item.appendChild(h4);
-
-        var price = document.createElement('p');
-        price.className = 'flow-tier-price';
-        price.textContent = t.price;
-        item.appendChild(price);
-
-        var saves = document.createElement('p');
-        saves.className = 'flow-tier-saves';
-        saves.textContent = t.saves;
-        item.appendChild(saves);
-
-        var desc = document.createElement('p');
-        desc.textContent = t.desc;
-        item.appendChild(desc);
-
-        grid.appendChild(item);
-      });
-
-      card.appendChild(grid);
-      return card;
-    }
-
     function buildResultCard() {
       var rec = getRecommendation();
       currentRec = rec;
@@ -833,12 +705,6 @@ import ContactCard from '../components/ContactCard.astro';
       price.textContent = rec.price;
       result.appendChild(price);
 
-      var saves = document.createElement('p');
-      saves.className = 'flow-tier-saves';
-      saves.style.marginBottom = '1rem';
-      saves.textContent = rec.saves;
-      result.appendChild(saves);
-
       var desc = document.createElement('p');
       desc.textContent = rec.desc;
       result.appendChild(desc);
@@ -858,9 +724,6 @@ import ContactCard from '../components/ContactCard.astro';
 
       var card;
       if (step.type === 'question') card = buildQuestionCard(step);
-      else if (step.type === 'info') card = buildInfoCard(step);
-      else if (step.type === 'examples') card = buildExamplesCard(step);
-      else if (step.type === 'tiers') card = buildTiersCard(step);
       else if (step.type === 'result') card = buildResultCard();
 
       node.appendChild(card);
@@ -873,7 +736,6 @@ import ContactCard from '../components/ContactCard.astro';
           line.classList.add('extending');
           setTimeout(function() {
             card.classList.add('visible');
-            // Let the user scroll naturally
           }, 2000);
         });
       });
@@ -894,7 +756,7 @@ import ContactCard from '../components/ContactCard.astro';
           contactSection.classList.add('flow-contact-reveal');
           contactSection.getBoundingClientRect();
           contactSection.classList.add('flow-contact-visible');
-          // Pre-select AI Automation in the service dropdown
+          // Pre-select Digital Marketing & SEO in the service dropdown
           var serviceSelect = document.getElementById('contact-service');
           if (serviceSelect) serviceSelect.value = 'ai';
           // Set recommended package hidden field
@@ -941,17 +803,11 @@ import ContactCard from '../components/ContactCard.astro';
 
       if (currentStepIndex < steps.length) {
         renderStep(steps[currentStepIndex]);
-      } else if (currentPath === 'need') {
-        // Show result then contact
+      } else {
         renderStep({ type: 'result' });
         setTimeout(function() {
           revealContact();
         }, 2000);
-      } else {
-        // "what" path — go straight to contact after tiers
-        setTimeout(function() {
-          revealContact();
-        }, 1500);
       }
     }
 

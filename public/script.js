@@ -272,17 +272,40 @@ function initPixelTitle() {
 
     // Draw text matching the CSS title — scale font to fit viewport width
     const padding = w * 0.08; // 4% each side
+    const words = titleText.split(' ');
+    const multiLine = words.length > 1;
     let fontSize = Math.min(w * 0.18, 320);
-    ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
-    let measured = ctx.measureText(titleText).width;
-    if (measured > w - padding) {
-      fontSize *= (w - padding) / measured;
+
+    if (multiLine) {
+      // Size to the longest word so each line fits
+      const longest = words.reduce((a, b) => a.length > b.length ? a : b);
+      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
+      let measured = ctx.measureText(longest).width;
+      if (measured > w - padding) {
+        fontSize *= (w - padding) / measured;
+      }
+      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#fff';
+      const lineHeight = fontSize * 1.1;
+      const totalHeight = lineHeight * words.length;
+      const startY = (h - totalHeight) / 2 + lineHeight / 2;
+      words.forEach((word, i) => {
+        ctx.fillText(word, w / 2, startY + i * lineHeight);
+      });
+    } else {
+      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
+      let measured = ctx.measureText(titleText).width;
+      if (measured > w - padding) {
+        fontSize *= (w - padding) / measured;
+      }
+      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#fff';
+      ctx.fillText(titleText, w / 2, h / 2);
     }
-    ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#fff';
-    ctx.fillText(titleText, w / 2, h / 2);
 
     const imageData = ctx.getImageData(0, 0, w, h).data;
 

@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCard from '../components/ContactCard.astro';
 ---
-<BaseLayout title="Strategic Design | Ice Cap Labs | Wichita, KS" description="Strategic design services for Wichita, Kansas businesses — customer research, UX/UI design, prototyping, and design thinking.">
+<BaseLayout title="24/7 Call & Text Assistant | Ice Cap Labs | Wichita, KS" description="AI-powered call and text assistant for Wichita, Kansas businesses — after-hours answering, lead qualification, appointment booking, and emergency triage.">
 
   <!-- PIXEL HERO -->
   <section class="pixel-hero">
-    <h1 class="pixel-hero-title" aria-label="Design">DESIGN</h1>
+    <h1 class="pixel-hero-title" aria-label="Call Assistant">CALL ASSISTANT</h1>
     <div class="pixel-title-grid" id="pixel-title-grid"></div>
   </section>
 
@@ -21,7 +21,7 @@ import ContactCard from '../components/ContactCard.astro';
             <circle cx="12" cy="12" r="2"/>
           </svg>
         </span>
-        <span class="chooser-btn-label">I Know What I Need</span>
+        <span class="chooser-btn-label">I Need a Call Assistant</span>
       </button>
       <button class="chooser-btn" id="btn-what" data-choice="what">
         <span class="chooser-btn-icon">
@@ -31,7 +31,7 @@ import ContactCard from '../components/ContactCard.astro';
             <line x1="12" y1="17" x2="12.01" y2="17"/>
           </svg>
         </span>
-        <span class="chooser-btn-label">Help Me Figure It Out</span>
+        <span class="chooser-btn-label">What Is a Call Assistant?</span>
       </button>
     </div>
     <div class="chooser-line" id="chooser-line" aria-hidden="true"></div>
@@ -552,24 +552,24 @@ import ContactCard from '../components/ContactCard.astro';
       {
         id: 'need-1',
         type: 'question',
-        title: "What\u2019s the scope of your design project?",
+        title: 'What do you need your call assistant to handle?',
         key: 'scope',
         options: [
-          { value: 'research', label: 'Customer Research & Insights' },
-          { value: 'uxui', label: 'UX/UI Design & Prototyping' },
-          { value: 'endtoend', label: 'End-to-End Product Design' },
-          { value: 'unsure', label: 'Not Sure Yet' }
+          { value: 'afterhours', label: 'After-Hours Calls' },
+          { value: 'leads', label: 'Lead Qualification' },
+          { value: 'booking', label: 'Appointment Booking' },
+          { value: 'all', label: 'All of the Above' }
         ]
       },
       {
         id: 'need-2',
         type: 'question',
-        title: 'How soon do you need results?',
-        key: 'timeline',
+        title: 'How many calls does your business get per day?',
+        key: 'volume',
         options: [
-          { value: 'fast', label: '2\u20133 Weeks' },
-          { value: 'medium', label: '1\u20132 Months' },
-          { value: 'slow', label: 'No Rush' }
+          { value: 'low', label: 'Under 10' },
+          { value: 'medium', label: '10\u201350' },
+          { value: 'high', label: '50+' }
         ]
       },
       {
@@ -578,9 +578,9 @@ import ContactCard from '../components/ContactCard.astro';
         title: "What\u2019s your budget range?",
         key: 'budget',
         options: [
-          { value: 'low', label: 'Under $3k' },
-          { value: 'mid', label: '$3\u20137k' },
-          { value: 'high', label: '$7k+' }
+          { value: 'low', label: 'Under $2k' },
+          { value: 'mid', label: '$2\u20135k' },
+          { value: 'high', label: '$5k+' }
         ]
       }
     ];
@@ -589,28 +589,28 @@ import ContactCard from '../components/ContactCard.astro';
       {
         id: 'what-1',
         type: 'info',
-        text: "Design thinking isn\u2019t about making things pretty \u2014 it\u2019s about understanding your customers deeply, testing ideas fast, and building products people actually want. We use research, prototyping, and real user feedback to de-risk your biggest decisions.",
+        text: "An AI call assistant answers your phone 24/7 \u2014 after hours, weekends, holidays. It qualifies leads, books appointments, triages emergencies, and sends you a summary. Your customers never hit voicemail again.",
         continueLabel: 'Show Me Examples'
       },
       {
         id: 'what-2',
         type: 'examples',
-        title: "Here\u2019s what design thinking looks like in practice:",
+        title: "Here\u2019s what your call assistant handles:",
         examples: [
           {
-            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/><path d="M12 2v2"/><path d="M12 18v2"/></svg>',
-            title: 'Customer Journey Mapping',
-            desc: 'Visualize every touchpoint your customers experience to find friction and opportunity.'
-          },
-          {
-            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
-            title: 'Design Sprints',
-            desc: 'Go from problem to tested prototype in one week \u2014 no months of guesswork.'
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+            title: 'After-Hours Answering',
+            desc: 'Never miss a call again \u2014 AI picks up when you can\u2019t and handles it like your best employee.'
           },
           {
             icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-            title: 'Usability Testing',
-            desc: 'Watch real users interact with your product and fix problems before launch.'
+            title: 'Lead Qualification',
+            desc: 'Asks the right questions, scores the lead, and routes hot prospects straight to your phone.'
+          },
+          {
+            icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+            title: 'Appointment Booking',
+            desc: 'Books directly into your calendar \u2014 confirms with the customer and sends you a notification.'
           }
         ],
         continueLabel: 'What Does It Cost?'
@@ -618,7 +618,7 @@ import ContactCard from '../components/ContactCard.astro';
       {
         id: 'what-3',
         type: 'tiers',
-        title: 'Three levels of engagement:'
+        title: 'Three levels of coverage:'
       }
     ];
 
@@ -627,25 +627,25 @@ import ContactCard from '../components/ContactCard.astro';
     function getRecommendation() {
       if (answers.budget === 'high') {
         return {
-          label: 'FULL PRODUCT DESIGN',
-          name: 'Full Product Design',
-          price: 'Starts at $10,000',
-          desc: 'End-to-end research, strategy, design system, and validated prototypes.'
+          label: 'FULL AI RECEPTIONIST',
+          name: 'Full AI Receptionist',
+          price: 'Starts at $5,000',
+          desc: 'Complete 24/7 call handling with lead qualification, appointment booking, emergency triage, SMS follow-ups, and CRM integration.'
         };
       }
       if (answers.budget === 'mid') {
         return {
-          label: 'UX STRATEGY',
-          name: 'UX Strategy',
-          price: 'Starts at $5,000',
-          desc: 'Design sprint, wireframes, interactive prototyping, and usability testing.'
+          label: 'SMART CALL ROUTING',
+          name: 'Smart Call Routing',
+          price: 'Starts at $3,000',
+          desc: 'After-hours answering with lead qualification, appointment booking, and call summaries sent to your phone.'
         };
       }
       return {
-        label: 'DISCOVERY SPRINT',
-        name: 'Discovery Sprint',
-        price: 'Starts at $2,500',
-        desc: 'Customer journey mapping, user interviews, and a prioritized opportunity report.'
+        label: 'AFTER-HOURS ANSWERING',
+        name: 'After-Hours Answering',
+        price: 'Starts at $1,500',
+        desc: 'AI answers calls when you can\u2019t, takes messages, and sends you a summary. Never miss a lead again.'
       };
     }
 
@@ -766,9 +766,9 @@ import ContactCard from '../components/ContactCard.astro';
       grid.className = 'flow-tiers';
 
       var tiers = [
-        { label: 'DISCOVERY SPRINT', name: 'Discovery Sprint', price: '$2,500', desc: 'Customer journey mapping, user interviews, and a prioritized opportunity report.' },
-        { label: 'UX STRATEGY', name: 'UX Strategy', price: '$5,000', desc: 'Design sprint, wireframes, interactive prototyping, and usability testing.' },
-        { label: 'FULL PRODUCT DESIGN', name: 'Full Product Design', price: '$10,000', desc: 'End-to-end research, strategy, design system, and validated prototypes.' }
+        { label: 'AFTER-HOURS ANSWERING', name: 'After-Hours Answering', price: '$1,500', desc: 'AI answers calls, takes messages, and sends summaries. Never miss a lead.' },
+        { label: 'SMART CALL ROUTING', name: 'Smart Call Routing', price: '$3,000', desc: 'Lead qualification, appointment booking, and call summaries to your phone.' },
+        { label: 'FULL AI RECEPTIONIST', name: 'Full AI Receptionist', price: '$5,000', desc: '24/7 handling with CRM integration, SMS follow-ups, and emergency triage.' }
       ];
 
       tiers.forEach(function(t) {
@@ -881,7 +881,7 @@ import ContactCard from '../components/ContactCard.astro';
           contactSection.classList.add('flow-contact-visible');
           // Pre-select Design in the service dropdown
           var serviceSelect = document.getElementById('contact-service');
-          if (serviceSelect) serviceSelect.value = 'website';
+          if (serviceSelect) serviceSelect.value = 'ai';
           // Set recommended package hidden field
           var pkgField = document.getElementById('contact-recommended-package');
           if (pkgField && currentRec) pkgField.value = currentRec.name + ' (' + currentRec.price + ')';
