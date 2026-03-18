@@ -87,10 +87,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
-  
-  <!-- ElevenLabs Conversational AI Widget -->
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-  
   <slot name="head" />
 </head>
 <body>
@@ -100,7 +96,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <Footer dataSpeed={footerSpeed} />
   </main>
   
-  <!-- ElevenLabs AI Assistant Widget -->
+  <!-- ElevenLabs AI Assistant Widget - Load script first, then element -->
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
   <elevenlabs-convai agent-id="agent_0001kkyjx2ymeas8q0er3s56x0nn"></elevenlabs-convai>
   
   <script is:inline src="/script.js"></script>
