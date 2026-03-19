@@ -984,18 +984,30 @@ input:focus-visible {
 
 /* ── Founder profile ─────────────────────────────────────── */
 .founder-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   max-width: 960px;
   margin: 0 auto;
 }
 
 .founder-image {
-  width: 100%;
-  border-radius: 16px;
-  filter: grayscale(100%);
+  width: 100vw;
+  max-width: none;
+  border-radius: 0;
+  margin: 2rem 0 0;
+  position: relative;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  display: block;
+  position: relative;
+  margin-bottom: 46px;
+}
+
+.founder-text {
+  max-width: 720px;
+  text-align: left;
 }
 
 .founder-text p {
@@ -1013,13 +1025,8 @@ input:focus-visible {
 }
 
 @media (max-width: 768px) {
-  .founder-section {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
   .founder-image {
-    max-width: 300px;
-    margin: 0 auto;
+    max-width: 100%;
   }
 }
 
@@ -1361,7 +1368,8 @@ input:focus-visible {
 }
 
 /* ── Tile strip (about page) ─────────────────────────────── */
-#tile-strip {
+#tile-strip,
+#tile-strip-founder {
   position: relative;
   z-index: 10;
   height: 35vh;

@@ -158,86 +158,86 @@ function initContactForm() {
 
 /* ── Tile strip ──────────────────────────────────────────── */
 function initTileStrip() {
-  const grid = document.getElementById('tile-grid');
-  if (!grid) return;
+  const grids = document.querySelectorAll('.tile-grid');
+  if (!grids.length) return;
 
-  const symbols = ['×', '○', 'W', '>', '✳', '⊕'];
-  const cellSize = 40;
-  const gap = 4;
-  let cols = 0;
-  let rows = 0;
-  let tiles = [];
+  grids.forEach(function(grid) {
+    const symbols = ['×', '○', 'W', '>', '✳', '⊕'];
+    const cellSize = 40;
+    const gap = 4;
+    let cols = 0;
+    let rows = 0;
+    let tiles = [];
 
-  function build() {
-    grid.innerHTML = '';
-    const rect = grid.getBoundingClientRect();
-    cols = Math.floor((rect.width + gap) / (cellSize + gap));
-    rows = Math.floor((rect.height + gap) / (cellSize + gap));
-    tiles = [];
+    function build() {
+      grid.innerHTML = '';
+      const rect = grid.getBoundingClientRect();
+      cols = Math.floor((rect.width + gap) / (cellSize + gap));
+      rows = Math.floor((rect.height + gap) / (cellSize + gap));
+      tiles = [];
 
-    for (let i = 0; i < cols * rows; i++) {
-      const tile = document.createElement('div');
-      tile.className = 'tile';
-      const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-      tile.innerHTML =
-        '<div class="tile-inner">' +
-          '<div class="tile-front"></div>' +
-          '<div class="tile-back">' + symbol + '</div>' +
-        '</div>';
-      tile.dataset.index = i;
-      grid.appendChild(tile);
-      tiles.push(tile);
-    }
-  }
-
-  function flipTile(tile, delay) {
-    if (tile.classList.contains('flipped')) return;
-    setTimeout(() => {
-      tile.classList.add('flipped');
-      setTimeout(() => {
-        tile.classList.remove('flipped');
-      }, 800 + delay);
-    }, delay);
-  }
-
-  function getNeighbors(idx) {
-    const r = Math.floor(idx / cols);
-    const c = idx % cols;
-    const neighbors = [];
-    for (let dr = -1; dr <= 1; dr++) {
-      for (let dc = -1; dc <= 1; dc++) {
-        if (dr === 0 && dc === 0) continue;
-        const nr = r + dr;
-        const nc = c + dc;
-        if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
-          neighbors.push(nr * cols + nc);
-        }
+      for (let i = 0; i < cols * rows; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        tile.innerHTML =
+          '<div class="tile-inner">' +
+            '<div class="tile-front"></div>' +
+            '<div class="tile-back">' + symbol + '</div>' +
+          '</div>';
+        tile.dataset.index = i;
+        grid.appendChild(tile);
+        tiles.push(tile);
       }
     }
-    return neighbors;
-  }
 
-  grid.addEventListener('mouseover', (e) => {
-    const tile = e.target.closest('.tile');
-    if (!tile) return;
-    const idx = +tile.dataset.index;
+    function flipTile(tile, delay) {
+      if (tile.classList.contains('flipped')) return;
+      setTimeout(() => {
+        tile.classList.add('flipped');
+        setTimeout(() => {
+          tile.classList.remove('flipped');
+        }, 800 + delay);
+      }, delay);
+    }
 
-    // Flip the hovered tile immediately
-    flipTile(tile, 0);
+    function getNeighbors(idx) {
+      const r = Math.floor(idx / cols);
+      const c = idx % cols;
+      const neighbors = [];
+      for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+          if (dr === 0 && dc === 0) continue;
+          const nr = r + dr;
+          const nc = c + dc;
+          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+            neighbors.push(nr * cols + nc);
+          }
+        }
+      }
+      return neighbors;
+    }
 
-    // Flip neighbors with a slight stagger
-    const neighbors = getNeighbors(idx);
-    neighbors.forEach((ni) => {
-      flipTile(tiles[ni], 60 + Math.random() * 80);
+    grid.addEventListener('mouseover', (e) => {
+      const tile = e.target.closest('.tile');
+      if (!tile) return;
+      const idx = +tile.dataset.index;
+
+      flipTile(tile, 0);
+
+      const neighbors = getNeighbors(idx);
+      neighbors.forEach((ni) => {
+        flipTile(tiles[ni], 60 + Math.random() * 80);
+      });
     });
-  });
 
-  build();
+    build();
 
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(build, 200);
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(build, 200);
+    });
   });
 }
 
