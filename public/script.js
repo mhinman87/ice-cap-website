@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBlogCarousel();
   initYetiReveal();
   initServiceColumns();
+  initServiceCards();
 });
 
 
@@ -656,4 +657,53 @@ function initServiceColumns() {
 function initFooterYear() {
   const el = document.getElementById('footer-year');
   if (el) el.textContent = new Date().getFullYear();
+}
+
+/* ── Service cards mobile flip ────────────────────────────── */
+function initServiceCards() {
+  const cards = document.querySelectorAll('.service-card');
+  if (!cards.length) return;
+
+  // Only apply mobile behavior on touch devices or small screens
+  const isMobileDevice = ('ontouchstart' in window) || window.innerWidth <= 768;
+  if (!isMobileDevice) return;
+
+  cards.forEach((card) => {
+    const url = card.dataset.cardUrl;
+    const learnMoreBtn = card.querySelector('.card-learn-more');
+
+    // Prevent default navigation on card click
+    card.addEventListener('click', (e) => {
+      // If clicking the "Learn More" button, allow navigation
+      if (e.target.classList.contains('card-learn-more')) {
+        return; // Let the link navigate
+      }
+
+      // Otherwise, prevent navigation and flip the card
+      e.preventDefault();
+      
+      // Close other flipped cards
+      cards.forEach(c => {
+        if (c !== card) c.classList.remove('flipped');
+      });
+
+      // Toggle this card
+      card.classList.toggle('flipped');
+    });
+
+    // Make Learn More button navigate
+    if (learnMoreBtn) {
+      learnMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Don't trigger card flip
+        window.location.href = url;
+      });
+    }
+  });
+
+  // Close flipped cards when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.service-card')) {
+      cards.forEach(c => c.classList.remove('flipped'));
+    }
+  });
 }
