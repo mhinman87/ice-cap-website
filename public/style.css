@@ -427,8 +427,8 @@ footer {
   inset: 0;
   backface-visibility: hidden;
   border-radius: 16px;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-card);
+  border: none;
+  background: #26a6eb;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -439,30 +439,35 @@ footer {
 
 .service-card-back {
   transform: rotateY(180deg);
-  border-color: var(--border-hover);
-  background: var(--bg-card);
+  background: #26a6eb;
 }
 .service-card-back p {
-  font-size: 0.875rem;
-  color: #fff;
+  font-size: 0.95rem;
+  color: #000;
   line-height: 1.7;
 }
 
 .service-icon-wrap {
-  width: 56px;
-  height: 56px;
-  background: var(--accent-dim);
-  border-radius: 14px;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   flex-shrink: 0;
+}
+.service-icon-wrap svg {
+  width: 48px;
+  height: 48px;
+  stroke: #000;
 }
 
 .service-card h3 {
-  font-size: 1.05rem;
-  color: var(--text-primary);
+  font-size: 1.35rem;
+  color: #000;
+  font-weight: 700;
   margin-bottom: 0;
   line-height: 1.35;
 }
@@ -477,7 +482,7 @@ footer {
   display: none;
   margin-top: 1rem;
   padding: 0.625rem 1.5rem;
-  background: var(--accent);
+  background: #000;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -485,12 +490,10 @@ footer {
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: opacity 0.2s, box-shadow 0.2s;
-  box-shadow: 0 0 18px rgba(14,165,233,0.3);
+  transition: opacity 0.2s;
 }
 .card-learn-more:hover {
-  opacity: 0.9;
-  box-shadow: 0 0 28px rgba(14,165,233,0.45);
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {
