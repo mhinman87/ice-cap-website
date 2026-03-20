@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initYetiReveal();
   initServiceColumns();
   initServiceCards();
+  initValuesTabs();
 });
 
 
@@ -705,5 +706,30 @@ function initServiceCards() {
     if (!e.target.closest('.service-card')) {
       cards.forEach(c => c.classList.remove('flipped'));
     }
+  });
+}
+
+/* ── Values tabs (about page) ────────────────────────────── */
+function initValuesTabs() {
+  const container = document.getElementById('values-tabs');
+  if (!container) return;
+
+  const tabs = container.querySelectorAll('.values-tab');
+  const panels = document.querySelectorAll('.values-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const value = tab.dataset.value;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      panels.forEach(p => {
+        p.classList.remove('active');
+        if (p.dataset.panel === value) {
+          p.classList.add('active');
+        }
+      });
+    });
   });
 }

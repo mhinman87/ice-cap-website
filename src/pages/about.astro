@@ -13,15 +13,11 @@ import ContactCard from '../components/ContactCard.astro';
   <section id="about-hero" style="background: var(--bg-void);">
     <div class="container">
       <div class="section-header reveal">
-        <p class="section-eyebrow">Who We Are</p>
-        <h2 class="section-title word-reveal" data-delay="0.05" style="font-size: clamp(2rem, 5vw, 3.25rem);">Here to Help Service Businesses</h2>
+        <h2 class="section-title word-reveal" data-delay="0.05" style="font-size: clamp(2.5rem, 6vw, 4rem); color: var(--accent);">Ice Cap Labs</h2>
       </div>
       <div style="max-width: 720px; margin: 0 auto; text-align: center;">
-        <p class="reveal" style="font-size: 1rem; color: var(--text-primary); line-height: 1.85; margin-bottom: 1.5rem;">
-          Ice Cap Labs builds AI systems that help service businesses stay on top of calls, leads, scheduling, and customer follow-up. The kind of support that makes your day a little easier and helps you catch opportunities you might otherwise miss.
-        </p>
-        <p class="reveal" style="font-size: 1rem; color: var(--text-primary); line-height: 1.85;">
-          I work with HVAC, plumbing, and electrical companies in Wichita because I understand the challenges you face. I ran a service business myself, and I know what it's like to feel like you're doing everything alone.
+        <p class="reveal" style="font-size: 1.25rem; color: var(--text-primary); line-height: 1.85;">
+          A service dedicated to delivering unique automation solutions. Powered by a hard-working local expert programmer, Ice Cap Labs is a flexible and agile service ready to accept challenges of all scales while leveraging the capabilities of contemporary automation.
         </p>
       </div>
     </div>
@@ -35,18 +31,8 @@ import ContactCard from '../components/ContactCard.astro';
   <!-- FOUNDER -->
   <section id="founder-top" style="background: #000; padding-bottom: 0;">
     <div class="container">
-      <div class="section-header reveal">
-        <p class="section-eyebrow">The Founder</p>
-      </div>
       <div class="founder-section">
-        <h2 class="founder-name reveal">Maxwell Hinman</h2>
-
-        <div style="margin: 0 auto 2rem; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center;">
-          <h3 class="reveal" style="color: var(--text-primary); font-size: 1.25rem; margin-bottom: 1rem; font-weight: 600;">Masters in Innovation Design</h3>
-          <h3 class="reveal" style="color: var(--text-primary); font-size: 1.25rem; margin-bottom: 1rem; font-weight: 600;">Application Programmer</h3>
-          <h3 class="reveal" style="color: var(--text-primary); font-size: 1.25rem; margin-bottom: 1rem; font-weight: 600;">Multiple Certifications in AI Agent Architecture</h3>
-          <h3 class="reveal" style="color: var(--text-primary); font-size: 1.25rem; margin-bottom: 0; font-weight: 600;">Owned a Franchise Service Business Doing $2M in Revenue</h3>
-        </div>
+        <h2 class="founder-name reveal" style="font-size: clamp(2.5rem, 6vw, 4rem); color: var(--accent);">Maxwell Hinman</h2>
 
         <img src="/max-phone-wide.png" alt="Maxwell Hinman — Founder of Ice Cap Labs" class="founder-image reveal" />
       </div>
@@ -54,141 +40,75 @@ import ContactCard from '../components/ContactCard.astro';
   </section>
   <section id="founder-bottom" style="background: #26a6eb; padding-top: 10rem; margin-top: -8rem;">
     <div class="container">
-      <div class="founder-section">
-        <div class="founder-text">
-          <p class="reveal" style="color: #000;">
-            Before I started building AI systems for service businesses, I ran one. I know what it's like to be on a job site when a potential customer calls. I know the stress of trying to keep up with leads while managing crews and staying on schedule. I know what it feels like to work long days and wonder if you're missing opportunities.
-          </p>
-          <p class="reveal" style="color: #000;">
-            Running a service business can feel isolating. You're making decisions alone, juggling more than anyone realizes, and trying to grow while keeping everything running smoothly. That's why I started Ice Cap Labs. I want service business owners in Wichita to know they don't have to figure this out alone.
-          </p>
-          <p class="reveal" style="color: #000;">
-            I'll come visit you. We'll talk about what's working and what's not. Whether your budget is tight or you're ready to invest in growth, I'll help you find solutions that make sense for where you are right now. I've spent the last two years earning certifications in AI agent architecture and building these systems because I genuinely believe they can help businesses like yours.
-          </p>
-          <p class="reveal" style="color: #000;">
-            My approach is simple: listen first, understand your specific situation, and build automation that actually helps. No pressure, no complicated proposals. Just honest conversations about how technology can support the business you've worked so hard to build.
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); max-width: 960px; margin: 0 auto; text-align: center;">
+
+        <!-- Mission -->
+        <div class="reveal">
+          <ion-icon name="rocket-outline" style="font-size: 64px; color: #000; margin-bottom: 1.5rem;"></ion-icon>
+          <h3 style="color: #000; font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">Mission</h3>
+          <p style="color: #000; font-size: 1.05rem; line-height: 1.75;">
+            To be the go-to automation partner for businesses that need reliable, custom-built solutions. Think automation, think Ice Cap Labs.
           </p>
         </div>
+
+        <!-- Vision -->
+        <div class="reveal">
+          <ion-icon name="eye-outline" style="font-size: 64px; color: #000; margin-bottom: 1.5rem;"></ion-icon>
+          <h3 style="color: #000; font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">Vision</h3>
+          <p style="color: #000; font-size: 1.05rem; line-height: 1.75;">
+            Sustainable, strategic growth that creates real value for every client. Building partnerships, not just projects.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- APPROACH -->
-  <section id="approach" style="background: var(--bg-void);">
+  <!-- VALUES -->
+  <section id="values" style="background: var(--bg-void); padding: clamp(4rem, 8vw, 6rem) 0;">
     <div class="container">
-      <div class="section-header reveal">
-        <p class="section-eyebrow">Our Approach</p>
-        <h2 class="section-title word-reveal" data-delay="0.05">We Know Your Pain Points</h2>
-      </div>
-      <div style="max-width: 720px; margin: 0 auto; text-align: center;">
-        <p class="reveal" style="font-size: 1rem; color: var(--text-primary); line-height: 1.85; margin-bottom: 1.5rem;">
-          Running a service business means wearing every hat. You're scheduling jobs, managing crews, handling customer calls, following up with leads, and still trying to grow. It's a lot to manage, and sometimes things slip through the cracks even when you're doing everything right.
-        </p>
-        <p class="reveal" style="font-size: 1rem; color: var(--text-primary); line-height: 1.85; margin-bottom: 1.5rem;">
-          I understand because I've been there. When I ran my service business, I felt the same pressure. That experience taught me what really matters: making sure every customer gets a response, staying organized when things get busy, and having systems that support you instead of adding more complexity.
-        </p>
-        <p class="reveal" style="font-size: 1rem; color: var(--text-primary); line-height: 1.85;">
-          At Ice Cap Labs, I start every project the same way: by listening. We'll talk about your specific challenges, your budget, and what success looks like for you. Then we'll build something practical that fits your business, not a one-size-fits-all solution that ignores what you actually need.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT WE BELIEVE -->
-  <section id="what-we-believe" style="background: var(--bg-surface);">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-eyebrow">Our Principles</p>
-        <h2 class="section-title word-reveal" data-delay="0.05">How I Work</h2>
-        <p class="section-subtitle">
-          These aren't marketing slogans. This is how I actually approach every project and every conversation.
-        </p>
+      <div class="section-header reveal" style="margin-bottom: 3rem;">
+        <h2 class="section-title word-reveal" data-delay="0.05" style="font-size: clamp(2rem, 5vw, 3.25rem);">What We Believe In</h2>
       </div>
 
-      <div class="why-grid">
-        <div class="why-item reveal" data-delay="0.0">
-          <div class="why-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
-          </div>
-          <div>
-            <h3>I Understand Your World</h3>
-            <p>I ran a service business for years. When you talk about the challenges of managing crews, handling customer calls, and trying to grow, I know exactly what you mean because I've been there.</p>
-          </div>
-        </div>
+      <div class="values-tabs" id="values-tabs">
+        <button class="values-tab active" data-value="collaboration">Collaboration</button>
+        <button class="values-tab" data-value="trust">Trust</button>
+        <button class="values-tab" data-value="quality">Top Quality</button>
+        <button class="values-tab" data-value="transparency">Transparency</button>
+        <button class="values-tab" data-value="adaptability">Adaptability</button>
+        <button class="values-tab" data-value="results">Results</button>
+      </div>
 
-        <div class="why-item reveal" data-delay="0.05">
-          <div class="why-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-              <line x1="8" y1="21" x2="16" y2="21"/>
-              <line x1="12" y1="17" x2="12" y2="21"/>
-            </svg>
-          </div>
-          <div>
-            <h3>You Work Directly With Me</h3>
-            <p>No account managers or sales teams. When you call or email, you get me. I think that matters when you're trusting someone to build systems that affect your business every day.</p>
-          </div>
+      <div class="values-content" id="values-content">
+        <div class="values-panel active" data-panel="collaboration">
+          <ion-icon name="people-outline" style="font-size: 64px; color: var(--text-primary); margin-bottom: 1.5rem;"></ion-icon>
+          <p>Great solutions come from working together. We stay closely involved with our clients throughout every project, because the best automation is built through partnership, not handed off.</p>
         </div>
-
-        <div class="why-item reveal" data-delay="0.1">
-          <div class="why-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <div>
-            <h3>Priced for Real Businesses</h3>
-            <p>I build systems for service businesses in Wichita, not Fortune 500 companies. That means pricing and solutions that make sense for where you are, whether you have five employees or fifty.</p>
-          </div>
+        <div class="values-panel" data-panel="trust">
+          <ion-icon name="shield-checkmark-outline" style="font-size: 64px; color: var(--text-primary); margin-bottom: 1.5rem;"></ion-icon>
+          <p>We do what we say we'll do. No surprises, no runaround. When you work with us, you get honest timelines, honest pricing, and someone who picks up the phone.</p>
         </div>
-
-        <div class="why-item reveal" data-delay="0.15">
-          <div class="why-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-            </svg>
-          </div>
-          <div>
-            <h3>Built to Actually Help</h3>
-            <p>I focus on building systems that genuinely make your day easier and save you real time. If something isn't working the way it should, we'll adjust it until it does.</p>
-          </div>
+        <div class="values-panel" data-panel="quality">
+          <ion-icon name="diamond-outline" style="font-size: 64px; color: var(--text-primary); margin-bottom: 1.5rem;"></ion-icon>
+          <p>Every system we build is crafted with care. We don't cut corners or ship half-finished work. Your business deserves automation that's reliable, polished, and built to last.</p>
         </div>
-
-        <div class="why-item reveal" data-delay="0.2">
-          <div class="why-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="8" x2="12" y2="12"/>
-              <line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-          </div>
-          <div>
-            <h3>Thinking About Your Future</h3>
-            <p>We'll talk about where you want your business to go, not just what's urgent today. I want to build systems that support your growth, not just solve immediate problems.</p>
-          </div>
+        <div class="values-panel" data-panel="transparency">
+          <ion-icon name="eye-outline" style="font-size: 64px; color: var(--text-primary); margin-bottom: 1.5rem;"></ion-icon>
+          <p>You'll always know what things cost, how long they'll take, and exactly what you're getting. Clear communication from start to finish — no fine print, no hidden fees.</p>
         </div>
-
-        <div class="why-item reveal" data-delay="0.25">
-          <div class="why-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-          </div>
-          <div>
-            <h3>Straightforward and Honest</h3>
-            <p>I'll tell you what things cost, how long they'll take, and what you're getting. No confusing proposals or surprise charges. Just clear, honest communication about what we're building together.</p>
-          </div>
+        <div class="values-panel" data-panel="adaptability">
+          <ion-icon name="sync-outline" style="font-size: 64px; color: var(--text-primary); margin-bottom: 1.5rem;"></ion-icon>
+          <p>Every business is different. We stay flexible and agile, ready to pivot and adjust as your needs evolve. One-size-fits-all isn't in our vocabulary.</p>
+        </div>
+        <div class="values-panel" data-panel="results">
+          <ion-icon name="trending-up-outline" style="font-size: 64px; color: var(--text-primary); margin-bottom: 1.5rem;"></ion-icon>
+          <p>At the end of the day, automation should save you time and make you money. We measure success by the real impact our systems have on your business.</p>
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- TILE STRIP -->
   <section id="tile-strip">
