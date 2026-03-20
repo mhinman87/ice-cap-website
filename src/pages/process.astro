@@ -230,6 +230,47 @@ import Footer from '../components/Footer.astro';
       margin-bottom: 0.5rem;
     }
 
+    .trail-step-layout {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .trail-step-left {
+      flex-shrink: 0;
+    }
+    .trail-step-left .trail-step-number {
+      margin-bottom: 0.25rem;
+    }
+    .trail-step-left .trail-step-title {
+      margin-bottom: 0;
+    }
+    .trail-step-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-left: auto;
+    }
+    .trail-headline-icon {
+      color: var(--accent-bright);
+      flex-shrink: 0;
+    }
+    .trail-headline {
+      color: var(--accent-bright);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    @media (max-width: 640px) {
+      .trail-step-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .trail-step-right {
+        margin-left: 0;
+      }
+    }
+
     /* ── Base camp banner (bottom) ────────────────────────── */
     .base-camp {
       text-align: center;
@@ -304,56 +345,69 @@ import Footer from '../components/Footer.astro';
         <!-- STEP 04 -->
         <div class="trail-step" data-altitude="Summit Ridge — 12,033 FT">
           <p class="trail-altitude">Summit Ridge — 12,033 FT</p>
-          <div class="trail-step-number">04</div>
-          <h2 class="trail-step-title">Optimize (Optional)</h2>
-          <div class="trail-callout">
-            <strong>Keep growing — or don't.</strong> Your call. You own the system either way.
+          <div class="trail-step-layout">
+            <div class="trail-step-left">
+              <div class="trail-step-number">04</div>
+              <h2 class="trail-step-title">Optimize</h2>
+            </div>
+            <div class="trail-step-right">
+              <svg class="trail-headline-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+              </svg>
+              <div class="trail-headline">Grow On Your Terms</div>
+            </div>
           </div>
-          <p class="trail-step-desc">
-            Want us to stick around? We'll train your AI to get better at converting leads, add new automations as you grow, and cover your API costs. Monthly subscription. Cancel anytime.
-          </p>
-          <p class="trail-step-desc">
-            <strong>Or skip this step.</strong> You own the system. Do whatever you want with it.
-          </p>
         </div>
 
         <!-- STEP 03 -->
         <div class="trail-step" data-altitude="High Camp — 9,464 FT">
           <p class="trail-altitude">High Camp — 9,464 FT</p>
-          <div class="trail-step-number">03</div>
-          <h2 class="trail-step-title">Build &amp; Deliver</h2>
-          <div class="trail-callout">
-            <strong>You own what we build.</strong> No strings attached — run it yourself or hand it off.
+          <div class="trail-step-layout">
+            <div class="trail-step-left">
+              <div class="trail-step-number">03</div>
+              <h2 class="trail-step-title">Build &amp; Deliver</h2>
+            </div>
+            <div class="trail-step-right">
+              <svg class="trail-headline-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+              </svg>
+              <div class="trail-headline">You Own What We Build</div>
+            </div>
           </div>
-          <p class="trail-step-desc">
-            We build your AI system, test it with real calls, and hand you the keys. It's yours. Run it yourself, hand it to your team, or hire someone else to manage it. We don't lock you in.
-          </p>
         </div>
 
         <!-- STEP 02 -->
         <div class="trail-step" data-altitude="Timberline — 6,883 FT">
           <p class="trail-altitude">Timberline — 6,883 FT</p>
-          <div class="trail-step-number">02</div>
-          <h2 class="trail-step-title">Design</h2>
-          <div class="trail-callout">
-            <strong>Know the plan &amp; price before we start.</strong> No surprises, no lengthy proposals.
+          <div class="trail-step-layout">
+            <div class="trail-step-left">
+              <div class="trail-step-number">02</div>
+              <h2 class="trail-step-title">Design</h2>
+            </div>
+            <div class="trail-step-right">
+              <svg class="trail-headline-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>
+              </svg>
+              <div class="trail-headline">Clear Plan &amp; Price Upfront</div>
+            </div>
           </div>
-          <p class="trail-step-desc">
-            By the end of our discovery call, you'll know exactly what we'll build, how much it costs, and when it's ready. If we both agree on the strategy and price, we move forward. If not, no hard feelings.
-          </p>
         </div>
 
         <!-- STEP 01 -->
         <div class="trail-step" data-altitude="Base Camp — 4,325 FT">
           <p class="trail-altitude">Base Camp — 4,325 FT</p>
-          <div class="trail-step-number">01</div>
-          <h2 class="trail-step-title">Discover</h2>
-          <div class="trail-callout">
-            <strong>Free discovery call.</strong> Your office or ours — no charge, no obligation.
+          <div class="trail-step-layout">
+            <div class="trail-step-left">
+              <div class="trail-step-number">01</div>
+              <h2 class="trail-step-title">Discover</h2>
+            </div>
+            <div class="trail-step-right">
+              <svg class="trail-headline-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <div class="trail-headline">Free 30-Min Discovery Call</div>
+            </div>
           </div>
-          <p class="trail-step-desc">
-            30-minute conversation to understand where you're losing time and money. We'll map out what automation can fix and whether we're a good fit.
-          </p>
         </div>
 
       </div>
