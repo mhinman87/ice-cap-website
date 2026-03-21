@@ -1,10 +1,38 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AI Call Assistants vs Traditional Answering Services: What Actually Works for Wichita Service Businesses",
+  "description": "Comparing AI call assistants to traditional answering services for service businesses in Wichita. Cost, capabilities, and which solution actually works for HVAC, plumbing, and electrical companies.",
+  "image": "https://icecaplabs.com/yeti-transparent.png",
+  "author": {
+    "@type": "Person",
+    "name": "Maxwell Hinman",
+    "url": "https://icecaplabs.com/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ice Cap Labs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://icecaplabs.com/yeti-transparent.png"
+    }
+  },
+  "datePublished": "2026-03-21",
+  "dateModified": "2026-03-21",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://icecaplabs.com/blog/ai-call-assistants-vs-answering-services"
+  }
+};
 ---
 <BaseLayout 
   title="AI Call Assistants vs Traditional Answering Services for Wichita Businesses | Ice Cap Labs"
   description="Comparing AI call assistants to traditional answering services for service businesses in Wichita. Cost, capabilities, and which solution actually works for HVAC, plumbing, and electrical companies."
 >
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
 <article class="blog-post">
   <header class="blog-header">
@@ -239,7 +267,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     <p>I switched my own business from a traditional answering service to AI and never looked back. Now I help other Wichita service business owners do the same.</p>
 
-    <p>If you want to see how this actually works for your specific business, call <a href="tel:3166694468">(316) 669-4468</a> or visit <a href="https://icecaplabs.com">icecaplabs.com</a>. I'll come visit you in person and we'll talk about what makes sense.</p>
+    <p>Read more about <a href="/blog/missed-calls-cost-service-businesses">how missed calls cost service businesses thousands in lost revenue</a> or learn about our <a href="/call-assistant">24/7 AI Call Assistant solution</a>.</p>
+
+    <p>If you want to see how this actually works for your specific business, call <a href="tel:3166694468">(316) 669-4468</a> or <a href="/contact">contact us</a>. I'll come visit you in person and we'll talk about what makes sense.</p>
 
     <p>No sales pitch. No pressure. Just an honest conversation about what's actually working for service businesses in 2026.</p>
 

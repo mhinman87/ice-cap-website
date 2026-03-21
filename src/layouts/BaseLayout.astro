@@ -55,7 +55,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     "@type": "ProfessionalService",
     "name": "Ice Cap Labs",
     "url": "https://icecaplabs.com",
-    "description": "Full-stack technology partner providing web development, digital marketing, AI automation, and strategic design services to small businesses in Wichita, Kansas.",
+    "logo": "https://icecaplabs.com/yeti-transparent.png",
+    "description": "AI automation for service businesses in Wichita, Kansas. 24/7 AI call assistants, lead management automation, and business process automation for HVAC, plumbing, and electrical companies.",
+    "telephone": "+1-316-669-4468",
+    "email": "hello@icecaplabs.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Wichita",
@@ -67,19 +70,89 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "latitude": 37.6872,
       "longitude": -97.3301
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Wichita",
-      "containedIn": {
-        "@type": "State",
-        "name": "Kansas"
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Wichita"
+      },
+      {
+        "@type": "City",
+        "name": "Derby"
+      },
+      {
+        "@type": "City",
+        "name": "Andover"
+      },
+      {
+        "@type": "City",
+        "name": "Maize"
+      },
+      {
+        "@type": "City",
+        "name": "Park City"
+      },
+      {
+        "@type": "City",
+        "name": "Bel Aire"
+      },
+      {
+        "@type": "City",
+        "name": "Haysville"
+      },
+      {
+        "@type": "City",
+        "name": "Valley Center"
       }
-    },
+    ],
     "priceRange": "$$",
-    "serviceType": ["Web Development", "Digital Marketing", "AI Automation", "SEO", "Strategic Design"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "AI Automation Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "24/7 AI Call Assistant",
+            "description": "AI-powered phone assistant that answers calls, qualifies leads, and books appointments automatically"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Lead Management Automation",
+            "description": "Automated lead follow-up and qualification for service businesses"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Customer Service Automation",
+            "description": "Automated appointment reminders, follow-ups, and review requests"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Operations Automation",
+            "description": "Job scheduling, dispatch, and workflow automation for service companies"
+          }
+        }
+      ]
+    },
+    "knowsAbout": ["AI Automation", "Call Assistants", "Business Process Automation", "Lead Management", "Service Business Operations"],
+    "sameAs": [
+      "https://www.linkedin.com/company/ice-cap-labs"
+    ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "contactType": "customer service"
+      "contactType": "customer service",
+      "telephone": "+1-316-669-4468",
+      "email": "hello@icecaplabs.com",
+      "availableLanguage": "English"
     }
   })} />
   

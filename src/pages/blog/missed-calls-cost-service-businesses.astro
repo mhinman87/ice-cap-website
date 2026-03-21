@@ -1,10 +1,38 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How Missed Calls Cost Wichita Service Businesses Thousands in Lost Revenue",
+  "description": "Service businesses in Wichita lose $50,000+ yearly from missed calls. Learn how AI call assistants help HVAC, plumbing, and electrical companies capture every lead 24/7.",
+  "image": "https://icecaplabs.com/yeti-transparent.png",
+  "author": {
+    "@type": "Person",
+    "name": "Maxwell Hinman",
+    "url": "https://icecaplabs.com/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ice Cap Labs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://icecaplabs.com/yeti-transparent.png"
+    }
+  },
+  "datePublished": "2026-03-21",
+  "dateModified": "2026-03-21",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://icecaplabs.com/blog/missed-calls-cost-service-businesses"
+  }
+};
 ---
 <BaseLayout 
   title="How Missed Calls Cost Wichita Service Businesses Thousands in Lost Revenue | Ice Cap Labs"
   description="Service businesses in Wichita lose $50,000+ yearly from missed calls. Learn how AI call assistants help HVAC, plumbing, and electrical companies capture every lead 24/7."
 >
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
 <article class="blog-post">
   <header class="blog-header">
@@ -173,7 +201,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     <p>If you want to see how this works for your specific business, I'll come visit you. We'll talk about your call volume, your current miss rate, and what it's actually costing you. No sales pitch, no pressure—just honest numbers.</p>
 
-    <p>Call <a href="tel:3166694468">(316) 669-4468</a> or visit <a href="https://icecaplabs.com">icecaplabs.com</a> to schedule a free consultation.</p>
+    <p>Learn more about our <a href="/call-assistant">24/7 AI Call Assistant service</a> or explore our other <a href="/services">automation solutions for service businesses</a>.</p>
+
+    <p>Call <a href="tel:3166694468">(316) 669-4468</a> or visit <a href="/contact">our contact page</a> to schedule a free consultation.</p>
 
     <p><em>— Maxwell Hinman, Founder, Ice Cap Labs</em></p>
 
