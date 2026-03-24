@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/BlogLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = "How Wichita Service Businesses Lose $50K+ Annually to Missed Calls (And How to Fix It)";
 const description = "Local HVAC, plumbing, and electrical companies in Wichita are losing thousands in revenue to missed calls. Here's the math—and the solution.";
@@ -8,7 +8,7 @@ const author = "Max Brody";
 const slug = "wichita-service-businesses-losing-money-missed-calls";
 ---
 
-<Layout title={title} description={description}>
+<BaseLayout title={title} description={description}>
   <article class="blog-post" itemscope itemtype="https://schema.org/Article">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -438,4 +438,4 @@ const slug = "wichita-service-businesses-losing-money-missed-calls";
       </div>
     </div>
   </article>
-</Layout>
+</BaseLayout>
