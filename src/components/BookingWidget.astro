@@ -1,0 +1,661 @@
+---
+// BookingWidget.astro - Custom calendar booking widget for Ice Cap Labs
+const { eventTypeId = "5078351", title = "Book a Call" } = Astro.props;
+---
+
+<div class="booking-widget">
+  <div class="booking-header">
+    <h3>{title}</h3>
+    <p>Pick a time that works for you</p>
+  </div>
+
+  <!-- Calendar View -->
+  <div class="booking-calendar" id="booking-calendar">
+    <div class="calendar-header" id="calendar-header">
+      <button class="calendar-nav" id="prev-week" aria-label="Previous week">&larr;</button>
+      <span id="week-range">Loading...</span>
+      <button class="calendar-nav" id="next-week" aria-label="Next week">&rarr;</button>
+    </div>
+    <div class="calendar-grid" id="calendar-grid">
+      <!-- Slots will be inserted here -->
+    </div>
+    <div class="calendar-loading" id="calendar-loading">
+      <div class="spinner"></div>
+      <p>Loading available times...</p>
+    </div>
+  </div>
+
+  <!-- Booking Form (hidden until slot selected) -->
+  <div class="booking-form-container hidden" id="booking-form-container">
+    <div class="booking-form-header">
+      <button class="back-btn" id="back-to-calendar">&larr; Back to calendar</button>
+      <div class="selected-time" id="selected-time-display"></div>
+    </div>
+    <form id="booking-form" class="booking-form">
+      <div class="form-group">
+        <label for="booking-name">Name</label>
+        <input type="text" id="booking-name" name="name" required placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label for="booking-email">Email</label>
+        <input type="email" id="booking-email" name="email" required placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label for="booking-phone">Phone</label>
+        <input type="tel" id="booking-phone" name="phone" required placeholder="(316) 555-1234" />
+      </div>
+      <div class="form-group">
+        <label for="booking-business">Business Type (Optional)</label>
+        <input type="text" id="booking-business" name="business" placeholder="HVAC, Plumbing, Electrical, etc." />
+      </div>
+      <button type="submit" class="btn-primary booking-submit" id="booking-submit">
+        <span class="submit-text">Book Now</span>
+        <span class="submit-loading hidden">Booking...</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Confirmation Screen -->
+  <div class="booking-confirmation hidden" id="booking-confirmation">
+    <div class="confirmation-icon">✓</div>
+    <h3>You're all set!</h3>
+    <p>Check your email for confirmation and calendar invite.</p>
+    <p class="confirmation-details" id="confirmation-details"></p>
+    <button class="btn-primary" id="book-another">Book Another Call</button>
+  </div>
+</div>
+
+<style>
+.booking-widget {
+  background: var(--bg-deep);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.booking-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.booking-header h3 {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.booking-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Calendar */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.calendar-nav {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.calendar-nav:hover {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: var(--accent);
+}
+
+.calendar-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+#week-range {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  min-height: 300px;
+}
+
+.day-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.day-header {
+  text-align: center;
+  padding: 0.75rem;
+  background: rgba(14, 165, 233, 0.08);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.day-name {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.day-date {
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.time-slot {
+  background: rgba(14, 165, 233, 0.05);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.time-slot:hover {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+}
+
+.no-slots {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+}
+
+.calendar-loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(14, 165, 233, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.calendar-loading p {
+  color: var(--text-secondary);
+}
+
+/* Booking Form */
+.booking-form-container {
+  animation: slideIn 0.3s ease;
+}
+
+.booking-form-header {
+  margin-bottom: 1.5rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  transition: opacity 0.3s;
+}
+
+.back-btn:hover {
+  opacity: 0.7;
+}
+
+.selected-time {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  background: rgba(14, 165, 233, 0.05);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(14, 165, 233, 0.08);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.booking-submit {
+  width: 100%;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.booking-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Confirmation */
+.booking-confirmation {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.confirmation-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(14, 165, 233, 0.15);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin: 0 auto 1.5rem;
+}
+
+.booking-confirmation h3 {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.booking-confirmation p {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.confirmation-details {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+#book-another {
+  margin-top: 1.5rem;
+}
+
+/* Utilities */
+.hidden {
+  display: none !important;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .booking-widget {
+    padding: 1.5rem 1rem;
+  }
+
+  .calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .day-column {
+    gap: 0.5rem;
+  }
+
+  .time-slot {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .booking-header h3 {
+    font-size: 1.5rem;
+  }
+}
+</style>
+
+<script define:vars={{ eventTypeId }}>
+  // Configuration
+  const CALCOM_API_KEY = import.meta.env.PUBLIC_CALCOM_API_KEY || 'cal_live_80cfed6b1b7da85df1cf34d7ae933e40';
+  const EVENT_TYPE_ID = eventTypeId;
+  const TIMEZONE = 'America/Chicago';
+
+  // State
+  let currentWeekStart = new Date();
+  let selectedSlot = null;
+  let availableSlots = [];
+
+  // DOM Elements
+  const calendarGrid = document.getElementById('calendar-grid');
+  const calendarLoading = document.getElementById('calendar-loading');
+  const weekRange = document.getElementById('week-range');
+  const prevWeekBtn = document.getElementById('prev-week');
+  const nextWeekBtn = document.getElementById('next-week');
+  const bookingForm = document.getElementById('booking-form');
+  const bookingFormContainer = document.getElementById('booking-form-container');
+  const bookingCalendar = document.getElementById('booking-calendar');
+  const bookingConfirmation = document.getElementById('booking-confirmation');
+  const selectedTimeDisplay = document.getElementById('selected-time-display');
+  const confirmationDetails = document.getElementById('confirmation-details');
+  const backToCalendarBtn = document.getElementById('back-to-calendar');
+  const bookAnotherBtn = document.getElementById('book-another');
+  const submitBtn = document.getElementById('booking-submit');
+  const submitText = submitBtn.querySelector('.submit-text');
+  const submitLoading = submitBtn.querySelector('.submit-loading');
+
+  // Initialize
+  function init() {
+    // Set current week to start of week (Sunday)
+    const today = new Date();
+    currentWeekStart = new Date(today);
+    currentWeekStart.setDate(today.getDate() - today.getDay());
+    currentWeekStart.setHours(0, 0, 0, 0);
+
+    loadWeek();
+
+    // Event listeners
+    prevWeekBtn.addEventListener('click', () => {
+      currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+      loadWeek();
+    });
+
+    nextWeekBtn.addEventListener('click', () => {
+      currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+      loadWeek();
+    });
+
+    backToCalendarBtn.addEventListener('click', () => {
+      showCalendar();
+    });
+
+    bookAnotherBtn.addEventListener('click', () => {
+      showCalendar();
+      loadWeek();
+    });
+
+    bookingForm.addEventListener('submit', handleBooking);
+  }
+
+  async function loadWeek() {
+    calendarLoading.classList.remove('hidden');
+    calendarGrid.innerHTML = '';
+
+    // Update week range display
+    const weekEnd = new Date(currentWeekStart);
+    weekEnd.setDate(currentWeekStart.getDate() + 6);
+    weekRange.textContent = `${formatDateShort(currentWeekStart)} - ${formatDateShort(weekEnd)}`;
+
+    // Disable previous week button if current week
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    prevWeekBtn.disabled = currentWeekStart <= today;
+
+    // Fetch available slots for the week
+    const startTime = new Date(currentWeekStart);
+    startTime.setHours(9, 0, 0, 0); // 9am CT
+    const endTime = new Date(currentWeekStart);
+    endTime.setDate(endTime.getDate() + 6);
+    endTime.setHours(17, 0, 0, 0); // 5pm CT
+
+    try {
+      const slots = await fetchAvailableSlots(startTime.toISOString(), endTime.toISOString());
+      availableSlots = slots;
+      renderCalendar(slots);
+    } catch (error) {
+      console.error('Error loading slots:', error);
+      calendarGrid.innerHTML = '<div class="no-slots">Error loading available times. Please try again.</div>';
+    } finally {
+      calendarLoading.classList.add('hidden');
+    }
+  }
+
+  async function fetchAvailableSlots(startTime, endTime) {
+    const url = `https://api.cal.com/v2/slots/available?eventTypeId=${EVENT_TYPE_ID}&startTime=${startTime}&endTime=${endTime}`;
+    
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${CALCOM_API_KEY}`,
+        'cal-api-version': '2026-02-25'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch slots');
+    }
+
+    const data = await response.json();
+    return data.data?.slots || [];
+  }
+
+  function renderCalendar(slots) {
+    if (!slots || slots.length === 0) {
+      calendarGrid.innerHTML = '<div class="no-slots">No available times this week. Try next week.</div>';
+      return;
+    }
+
+    // Group slots by day
+    const slotsByDay = {};
+    slots.forEach(slot => {
+      const date = new Date(slot.time);
+      const dayKey = date.toISOString().split('T')[0];
+      if (!slotsByDay[dayKey]) {
+        slotsByDay[dayKey] = [];
+      }
+      slotsByDay[dayKey].push(slot);
+    });
+
+    // Render each day
+    for (let i = 0; i < 7; i++) {
+      const dayDate = new Date(currentWeekStart);
+      dayDate.setDate(currentWeekStart.getDate() + i);
+      const dayKey = dayDate.toISOString().split('T')[0];
+      const daySlots = slotsByDay[dayKey] || [];
+
+      const dayColumn = document.createElement('div');
+      dayColumn.className = 'day-column';
+
+      // Day header
+      const dayHeader = document.createElement('div');
+      dayHeader.className = 'day-header';
+      dayHeader.innerHTML = `
+        <div class="day-name">${formatDayName(dayDate)}</div>
+        <div class="day-date">${formatDay(dayDate)}</div>
+      `;
+      dayColumn.appendChild(dayHeader);
+
+      // Time slots
+      if (daySlots.length > 0) {
+        daySlots.forEach(slot => {
+          const timeSlot = document.createElement('button');
+          timeSlot.className = 'time-slot';
+          timeSlot.textContent = formatTime(new Date(slot.time));
+          timeSlot.addEventListener('click', () => selectSlot(slot));
+          dayColumn.appendChild(timeSlot);
+        });
+      }
+
+      calendarGrid.appendChild(dayColumn);
+    }
+  }
+
+  function selectSlot(slot) {
+    selectedSlot = slot;
+    const slotTime = new Date(slot.time);
+    selectedTimeDisplay.textContent = `${formatDateLong(slotTime)} at ${formatTime(slotTime)}`;
+    showForm();
+  }
+
+  async function handleBooking(e) {
+    e.preventDefault();
+
+    const formData = new FormData(bookingForm);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const phone = formData.get('phone');
+    const business = formData.get('business');
+
+    submitBtn.disabled = true;
+    submitText.classList.add('hidden');
+    submitLoading.classList.remove('hidden');
+
+    try {
+      const response = await fetch('https://api.cal.com/v2/bookings', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${CALCOM_API_KEY}`,
+          'Content-Type': 'application/json',
+          'cal-api-version': '2026-02-25'
+        },
+        body: JSON.stringify({
+          eventTypeId: parseInt(EVENT_TYPE_ID),
+          start: selectedSlot.time,
+          attendee: {
+            name: name,
+            email: email,
+            timeZone: TIMEZONE,
+            phone: phone
+          },
+          meetingUrl: selectedSlot.meetingUrl || undefined
+        })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Booking failed');
+      }
+
+      const booking = await response.json();
+      
+      // Show confirmation
+      const slotTime = new Date(selectedSlot.time);
+      confirmationDetails.textContent = `${formatDateLong(slotTime)} at ${formatTime(slotTime)}`;
+      showConfirmation();
+
+      // Reset form
+      bookingForm.reset();
+    } catch (error) {
+      console.error('Booking error:', error);
+      alert('Failed to book appointment. Please try again or call (316) 669-4468.');
+    } finally {
+      submitBtn.disabled = false;
+      submitText.classList.remove('hidden');
+      submitLoading.classList.add('hidden');
+    }
+  }
+
+  function showCalendar() {
+    bookingCalendar.classList.remove('hidden');
+    bookingFormContainer.classList.add('hidden');
+    bookingConfirmation.classList.add('hidden');
+  }
+
+  function showForm() {
+    bookingCalendar.classList.add('hidden');
+    bookingFormContainer.classList.remove('hidden');
+    bookingConfirmation.classList.add('hidden');
+  }
+
+  function showConfirmation() {
+    bookingCalendar.classList.add('hidden');
+    bookingFormContainer.classList.add('hidden');
+    bookingConfirmation.classList.remove('hidden');
+  }
+
+  // Date formatting helpers
+  function formatDateShort(date) {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function formatDateLong(date) {
+    return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function formatDayName(date) {
+    return date.toLocaleDateString('en-US', { weekday: 'short' });
+  }
+
+  function formatDay(date) {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function formatTime(date) {
+    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+  }
+
+  // Start
+  init();
+</script>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCard from '../components/ContactCard.astro';
+import BookingWidget from '../components/BookingWidget.astro';
 ---
 <BaseLayout title="Workflow Automation for Wichita Service Businesses | Ice Cap Labs" description="Workflow automation for Wichita service businesses. Schedule employees, capture leads, automate your CRM. Works with monday.com, Hubspot, Pipedrive, and 50+ tools. $497/month." footerSpeed="0.75">
 
@@ -218,6 +219,22 @@ import ContactCard from '../components/ContactCard.astro';
   <section id="contact" data-speed="0.75">
     <div class="container">
       <ContactCard />
+    </div>
+  </section>
+
+  <!-- BOOKING WIDGET -->
+  <section id="booking" data-speed="0.75" style="background: var(--bg-void); padding: 6rem 0;">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Live Demo</p>
+        <h2 class="section-title word-reveal" data-delay="0.05">Book a Call</h2>
+        <p class="section-subtitle">
+          See our booking automation in action. This widget integrates with Google Calendar, captures your info, and sends you a confirmation — automatically.
+        </p>
+      </div>
+      <div class="reveal" data-delay="0.2">
+        <BookingWidget eventTypeId="5078351" title="Schedule Your Discovery Call" />
+      </div>
     </div>
   </section>
 
