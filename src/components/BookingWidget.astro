@@ -3,32 +3,121 @@
 const { calLink = "ice-cap-labs-lnw3hf/30min", title = "Book a Call" } = Astro.props;
 ---
 
-<div class="booking-widget-container">
-  <div class="booking-header">
-    <h3>{title}</h3>
-    <p>Pick a time that works for you</p>
+<div class="booking-widget-wrap">
+  <div class="booking-mascot">
+    <img src="/yeti-transparent.png" alt="Ice Cap Labs Yeti" class="booking-yeti" />
   </div>
+  <span class="booking-yeti-hand booking-yeti-hand-left" aria-hidden="true"></span>
+  <span class="booking-yeti-hand booking-yeti-hand-right" aria-hidden="true"></span>
   
-  <div class="booking-embed-wrapper">
-    <iframe 
-      src={`https://cal.com/${calLink}`}
-      width="100%" 
-      height="700" 
-      frameborder="0"
-      style="border-radius: 12px; background: rgba(7, 8, 15, 0.5);"
-      allow="camera; microphone; display-capture"
-    ></iframe>
+  <div class="booking-widget-container">
+    <div class="booking-glow" aria-hidden="true"></div>
+    <div class="booking-header">
+      <h3>{title}</h3>
+      <p>Pick a time that works for you</p>
+    </div>
+    
+    <div class="booking-embed-wrapper">
+      <iframe 
+        src={`https://cal.com/${calLink}`}
+        width="100%" 
+        height="700" 
+        frameborder="0"
+        style="border-radius: 12px; background: rgba(7, 8, 15, 0.5);"
+        allow="camera; microphone; display-capture"
+      ></iframe>
+    </div>
   </div>
 </div>
 
 <style>
+.booking-widget-wrap {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+.booking-mascot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  z-index: 10;
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease;
+}
+
+.booking-yeti-entered .booking-mascot {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.booking-yeti {
+  width: 168px;
+  height: auto;
+}
+
+.booking-yeti-hand {
+  position: absolute;
+  top: 69px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #c3dfe8;
+  z-index: 12;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+}
+
+.booking-yeti-hand-left {
+  left: 50%;
+  margin-left: -58px;
+  transition-delay: 0s;
+}
+
+.booking-yeti-entered .booking-yeti-hand-left {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.55s;
+}
+
+.booking-yeti-hand-right {
+  left: 50%;
+  margin-left: 36px;
+  transition-delay: 0s;
+}
+
+.booking-yeti-entered .booking-yeti-hand-right {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.7s;
+}
+
+.booking-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(ellipse at center,
+    rgba(14,165,233,0.25) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .booking-widget-container {
   background: var(--bg-deep);
   border: 1px solid rgba(14, 165, 233, 0.2);
   border-radius: 16px;
   padding: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
+  position: relative;
+  z-index: 5;
 }
 
 .booking-header {
@@ -55,6 +144,32 @@ const { calLink = "ice-cap-labs-lnw3hf/30min", title = "Book a Call" } = Astro.p
 }
 
 @media (max-width: 768px) {
+  .booking-widget-wrap {
+    padding-top: 60px;
+  }
+
+  .booking-mascot {
+    transform: translateX(-50%) translateY(60px);
+  }
+
+  .booking-yeti {
+    width: 120px;
+  }
+
+  .booking-yeti-hand {
+    width: 18px;
+    height: 18px;
+    top: 50px;
+  }
+
+  .booking-yeti-hand-left {
+    margin-left: -42px;
+  }
+
+  .booking-yeti-hand-right {
+    margin-left: 24px;
+  }
+
   .booking-widget-container {
     padding: 1.5rem 1rem;
   }
@@ -68,3 +183,35 @@ const { calLink = "ice-cap-labs-lnw3hf/30min", title = "Book a Call" } = Astro.p
   }
 }
 </style>
+
+<script>
+  // Yeti reveal animation for booking widget
+  function initBookingYeti() {
+    const wraps = document.querySelectorAll('.booking-widget-wrap');
+    if (!wraps.length) return;
+
+    wraps.forEach(wrap => {
+      const container = wrap.querySelector('.booking-widget-container');
+      if (!container) return;
+
+      // Show the yeti once the card scrolls into view, with a delay
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            wrap.classList.add('booking-yeti-entered');
+          }, 750);
+          observer.unobserve(container);
+        }
+      }, { threshold: 0.3 });
+
+      observer.observe(container);
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBookingYeti);
+  } else {
+    initBookingYeti();
+  }
+</script>
