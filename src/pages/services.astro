@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactCard from '../components/ContactCard.astro';
+import BookingWidget from '../components/BookingWidget.astro';
 ---
 <BaseLayout title="Workflow Automation Services | CRM, Scheduling, Lead Capture | Ice Cap Labs" description="Workflow automation for Wichita service businesses. Employee scheduling, CRM automation, lead capture, customer communication. Works with monday.com, Hubspot, Pipedrive, and 50+ tools.">
 
@@ -68,10 +68,14 @@ import ContactCard from '../components/ContactCard.astro';
     </div>
   </section>
 
-  <!-- CONTACT / CTA -->
-  <section id="contact">
+  <!-- BOOKING WIDGET -->
+  <section id="contact" style="background: var(--bg-void); padding: 6rem 0;">
     <div class="container">
-      <ContactCard eyebrow="Ready to Start?" />
+      <div class="section-header reveal" style="margin-bottom: 3rem;">
+        <p class="section-eyebrow">Ready to Start?</p>
+        <h2 class="section-title word-reveal">Book a Call</h2>
+      </div>
+      <BookingWidget title="Schedule Your Discovery Call" />
     </div>
   </section>
 

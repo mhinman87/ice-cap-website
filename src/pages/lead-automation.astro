@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactCard from '../components/ContactCard.astro';
+import BookingWidget from '../components/BookingWidget.astro';
 ---
 <BaseLayout title="Social Media Automation | Ice Cap Labs | Wichita, KS" description="AI-powered social media automation for Wichita, Kansas businesses — content creation, automated scheduling, multi-platform management, and engagement automation.">
 
@@ -38,9 +38,9 @@ import ContactCard from '../components/ContactCard.astro';
   </section>
 
   <!-- CONTACT CARD -->
-  <section id="contact" class="flow-contact-hidden" style="background: var(--bg-deep); padding: 6rem 0;">
+  <section id="contact" class="flow-contact-hidden" style="background: var(--bg-void); padding: 6rem 0;">
     <div class="container">
-      <ContactCard />
+      <BookingWidget title="Book a Call" />
     </div>
   </section>
 

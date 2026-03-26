@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactCard from '../components/ContactCard.astro';
+import BookingWidget from '../components/BookingWidget.astro';
 ---
 <BaseLayout title="About Ice Cap Labs | AI Automation for Service Businesses | Wichita, KS" description="Founded by a former service business owner, Ice Cap Labs builds AI automation systems for HVAC, plumbing, and electrical companies in Wichita, Kansas. Real experience solving real problems.">
 
@@ -116,16 +116,16 @@ import ContactCard from '../components/ContactCard.astro';
   </section>
 
   <!-- CTA -->
-  <section id="about-cta" style="background: var(--bg-void);">
+  <section id="about-cta" style="background: var(--bg-void); padding: 6rem 0;">
     <div class="container">
-      <ContactCard
-        eyebrow="Let's Talk"
-        title="I'd Like to Hear About Your Business"
-        subtitle="No sales pitch or pressure. Just a genuine conversation about what you're dealing with and whether I can help. I'll come visit you, and we'll figure it out together."
-        variant="button"
-        buttonText="Get in Touch"
-        buttonHref="/contact"
-      />
+      <div class="section-header reveal" style="margin-bottom: 3rem;">
+        <p class="section-eyebrow">Let's Talk</p>
+        <h2 class="section-title word-reveal">I'd Like to Hear About Your Business</h2>
+        <p class="section-subtitle">
+          No sales pitch or pressure. Just a genuine conversation about what you're dealing with and whether I can help. I'll come visit you, and we'll figure it out together.
+        </p>
+      </div>
+      <BookingWidget title="Schedule a Call" />
     </div>
   </section>
 

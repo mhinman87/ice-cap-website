@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactCard from '../components/ContactCard.astro';
+import BookingWidget from '../components/BookingWidget.astro';
 ---
 <BaseLayout title="Customer Scheduling Automation | 24/7 Call Assistant | Ice Cap Labs" description="Automated customer scheduling and lead capture for Wichita service businesses. 24/7 call answering, appointment booking, CRM integration. Works with Google Calendar, Cal.com, monday.com, Hubspot, Pipedrive.">
 
@@ -38,10 +38,10 @@ import ContactCard from '../components/ContactCard.astro';
     <div id="flow-container" class="flow-container" aria-live="polite"></div>
   </section>
 
-  <!-- CONTACT CARD -->
-  <section id="contact" class="flow-contact-hidden" style="background: var(--bg-deep); padding: 6rem 0;">
+  <!-- BOOKING WIDGET -->
+  <section id="contact" class="flow-contact-hidden" style="background: var(--bg-void); padding: 6rem 0;">
     <div class="container">
-      <ContactCard />
+      <BookingWidget title="Book a Call" />
     </div>
   </section>
 

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactCard from '../components/ContactCard.astro';
+import BookingWidget from '../components/BookingWidget.astro';
 ---
 <BaseLayout title="Contact Ice Cap Labs | Wichita, KS" description="Get in touch with Ice Cap Labs in Wichita, Kansas. Let's build something together — web development, AI automation, and digital marketing for small businesses.">
 
@@ -18,17 +18,20 @@ import ContactCard from '../components/ContactCard.astro';
     </div>
   </section>
 
-  <!-- CONTACT CARD -->
-  <section id="contact" style="background: var(--bg-void); padding-top: 0;">
+  <!-- BOOKING WIDGET -->
+  <section id="contact" style="background: var(--bg-void); padding: 6rem 0;">
     <div class="container">
-      <ContactCard eyebrow="Ready to Modernize?" title="Get In Touch">
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+      <div class="section-header reveal" style="margin-bottom: 3rem;">
+        <p class="section-eyebrow">Ready to Modernize?</p>
+        <h2 class="section-title word-reveal">Get In Touch</h2>
+        <p class="section-subtitle">
           Or reach us directly at
           <a href="tel:+13166694468" style="color: var(--accent-bright); text-decoration: none;">(316) 669-4468</a>
           or
           <a href="mailto:hello@icecaplabs.com" style="color: var(--accent-bright); text-decoration: none;">hello@icecaplabs.com</a>
         </p>
-      </ContactCard>
+      </div>
+      <BookingWidget title="Schedule a Call" />
     </div>
   </section>
 
