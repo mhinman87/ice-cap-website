@@ -1,0 +1,160 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const topoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" fill="none">
+  <g stroke="rgba(14,165,233,0.12)" stroke-width="1" fill="none">
+    <path d="M78,165 C118,118 176,93 238,103 C300,113 352,149 362,208 C372,267 323,299 251,294 C179,289 115,255 88,208 C74,184 70,176 78,165Z"/>
+    <path d="M106,174 C139,136 184,118 234,124 C284,130 323,160 331,208 C339,256 301,280 245,277 C189,274 136,245 114,208 C101,190 100,183 106,174Z"/>
+    <path d="M132,181 C157,151 192,138 230,143 C268,148 297,171 304,208 C310,245 282,264 241,261 C200,258 159,236 142,208 C132,193 130,187 132,181Z"/>
+  </g>
+  <g stroke="rgba(14,165,233,0.15)" stroke-width="1.2" fill="none">
+    <path d="M58,92 C108,70 171,67 227,80 C283,93 336,122 380,170"/>
+    <path d="M44,224 C94,205 149,196 209,202 C269,208 330,226 376,255"/>
+  </g>
+  <g font-family="Outfit, sans-serif" font-size="7" fill="rgba(14,165,233,0.2)">
+    <text x="108" y="110">agents</text>
+    <text x="245" y="146">workflows</text>
+    <text x="192" y="235">systems</text>
+  </g>
+</svg>`;
+---
+<ArticleLayout
+  title="AI Agents Need Owners Inside the Business"
+  description="The hard part of AI agents is not chatting with them. The hard part is owning the workflow, systems, context, evaluation, and change management that make them useful."
+  date="2026-04-27"
+  dateFormatted="April 27, 2026"
+  topoSvg={topoSvg}
+>
+  <h2>TL;DR — 3-Minute Summary</h2>
+
+  <ul>
+    <li><strong>The jump from chatbot to useful agent is much bigger than people think.</strong> A demo is easy. Automating a real process is not.</li>
+    <li><strong>Most companies will need real owners for automation.</strong> This work cannot just be “something everyone figures out on the side.”</li>
+    <li><strong>The real job is operational, not just technical.</strong> Someone has to map the workflow, wire the systems, manage context, test the agent, and keep it working as the business changes.</li>
+    <li><strong>This is going to create new jobs inside normal companies.</strong> Not just at AI labs, but inside logistics companies, service businesses, manufacturers, and every other kind of operating business.</li>
+    <li><strong>The future of software work is spreading into non-tech companies.</strong> AI agents are one of the clearest examples of that.</li>
+  </ul>
+
+  <p><strong>By Maxwell Hinman</strong></p>
+
+  <figure>
+    <img src="/blog/ai-agents-owners-hero.jpg" alt="AI agents connected to real business workflows like CRM, scheduling, and human review" style="width: 100%; border-radius: 16px; margin: 0 0 1rem;" />
+  </figure>
+
+  <h2>The Hard Part Is Not the Chatbot</h2>
+
+  <p>I think a lot of people still underestimate how big the jump is between “I can talk to a chatbot” and “I have an AI agent that actually helps run part of the business.”</p>
+
+  <p>Those are not the same thing.</p>
+
+  <p>Getting a chatbot to answer questions or generate text is the easy part. Getting an agent to actually help automate a process inside a business is where the real work starts.</p>
+
+  <p>That is the part people gloss over when they see demos online. A demo makes it look like the intelligence is the whole product. It is not. The intelligence is only one layer. The much harder part is everything around it.</p>
+
+  <p><mark>Most businesses are not going to get real value from agents because one employee played with ChatGPT for a few hours.</mark></p>
+
+  <p>They are going to get value when somebody actually owns the implementation.</p>
+
+  <h2>Most Companies Need an Automation Owner</h2>
+
+  <p>I think this becomes obvious the second you move from theory to reality.</p>
+
+  <p>If a company wants an agent to do something useful, like help qualify leads, route support issues, update a CRM, generate estimates, or manage internal workflows, someone has to be responsible for that system. Not in a vague sense. In a real sense.</p>
+
+  <p>Someone has to decide:</p>
+
+  <ul>
+    <li>what process is being automated</li>
+    <li>where the agent starts and stops</li>
+    <li>what systems it needs access to</li>
+    <li>what context it needs to work correctly</li>
+    <li>where a human still needs to be involved</li>
+    <li>how success gets measured</li>
+  </ul>
+
+  <p>That is already a job, even before you get into the technical details.</p>
+
+  <figure>
+    <img src="/blog/ai-agents-owners-workflow.jpg" alt="A person designing AI workflow systems with human review, calendars, APIs, and internal business tools" style="width: 100%; border-radius: 16px; margin: 0 0 1rem;" />
+  </figure>
+
+  <p>And that is why I think a lot of companies are going to need dedicated people responsible for automation instead of assuming every team member will somehow absorb it into their existing workload.</p>
+
+  <p><mark>This is too important, too technical, and too operationally messy to stay a side project forever.</mark></p>
+
+  <h2>What the Job Actually Looks Like</h2>
+
+  <p>If you take AI agents seriously inside a business, the job spec gets pretty clear pretty fast.</p>
+
+  <p>Someone has to:</p>
+
+  <ul>
+    <li>map out the workflow the agent is supposed to improve</li>
+    <li>implement the systems needed to deploy the agent</li>
+    <li>make sure the agent has the right and up-to-date context</li>
+    <li>wire internal systems together so the agent can actually do useful work</li>
+    <li>create evals to check whether the agent is performing well</li>
+    <li>decide where the human is in the loop</li>
+    <li>manage upgrades, drift, and process changes over time</li>
+    <li>help the business adapt to a new way of working</li>
+  </ul>
+
+  <p>That is not a toy task. That is real systems work.</p>
+
+  <p>It touches operations, software, process design, QA, training, change management, and leadership. In some companies, this will live under IT. In others, it will sit with engineering. In others, it will live directly inside sales, operations, support, or service delivery.</p>
+
+  <p>The title will vary, but the function will be the same: someone has to own the bridge between model capability and business reality.</p>
+
+  <h2>This Is the Future of Software Work in Non-Tech Companies</h2>
+
+  <p>I think this is one of the most important parts of the whole AI conversation.</p>
+
+  <p>People keep talking as if AI jobs are only going to be created at AI companies, software startups, or deep technical labs. I do not think that is how this plays out.</p>
+
+  <p>I think you are going to see more and more non-tech companies hiring for some version of this work.</p>
+
+  <p>Why? Because non-tech companies still have the same operational problems:</p>
+
+  <ul>
+    <li>too much manual admin</li>
+    <li>disconnected systems</li>
+    <li>slow handoffs</li>
+    <li>bad internal visibility</li>
+    <li>follow-up gaps</li>
+    <li>knowledge trapped in people’s heads</li>
+  </ul>
+
+  <p>Agents are one of the first tools that make it realistic to attack those problems at scale. But the business still needs someone to turn the possibility into a working system.</p>
+
+  <p><mark>That means the future of software engineering is not staying inside software companies.</mark></p>
+
+  <p>It is leaking into the physical economy, the service economy, the logistics economy, the operations side of normal businesses. That is where a lot of the demand is going to come from.</p>
+
+  <h2>Why This Matters Right Now</h2>
+
+  <p>I do not think most companies are fully ready for this yet, but I do think they should already be thinking about it.</p>
+
+  <p>The businesses that move early are not necessarily the ones building frontier AI. They are the ones deciding who is responsible for adopting it well.</p>
+
+  <p>That is a huge difference.</p>
+
+  <p>Because without an owner, AI inside a business turns into a pile of experiments. One person tries a prompt. Another tries a tool. A third person starts a half-finished pilot. Nothing gets integrated. Nothing gets measured. Nothing really sticks.</p>
+
+  <p>With an owner, it becomes a system.</p>
+
+  <p>That system might start small. Maybe it begins with one workflow, one team, or one painful process. But over time, that is how the business builds actual automation capability. Not through hype. Through ownership.</p>
+
+  <h2>Final Thought</h2>
+
+  <p>I think one of the big mistakes people make when they think about AI is assuming that better models automatically create better businesses.</p>
+
+  <p>They do not.</p>
+
+  <p>Better models create more potential. Businesses only benefit when someone does the hard work of turning that potential into a reliable workflow that fits the business.</p>
+
+  <p>That is why I think the next wave of AI work is going to create more operational builders inside normal companies. People whose job is not just to understand the models, but to understand the process, the data, the systems, the handoffs, and the people involved.</p>
+
+  <p>That work is real. It is technical. It is operational. And I think a lot of companies are going to be hiring for it sooner than they realize.</p>
+
+  <p>— Maxwell Hinman</p>
+</ArticleLayout>
