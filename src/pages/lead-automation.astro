@@ -1,865 +1,109 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BookingWidget from '../components/BookingWidget.astro';
 ---
-<BaseLayout title="Social Media Automation | Ice Cap Labs | Wichita, KS" description="AI-powered social media automation for Wichita, Kansas businesses — content creation, automated scheduling, multi-platform management, and engagement automation.">
+<BaseLayout title="Lead Capture | Ice Cap Labs" description="A branded landing page that turns website visitors into leads automatically. Every submission saved, every lead followed up — 24/7.">
 
   <!-- PIXEL HERO -->
   <section class="pixel-hero">
-    <h1 class="pixel-hero-title" aria-label="Social Media">SOCIAL MEDIA</h1>
+    <h1 class="pixel-hero-title" aria-label="Lead Capture">LEAD CAPTURE</h1>
     <div class="pixel-title-grid" id="pixel-title-grid"></div>
   </section>
 
-  <!-- CHOOSE YOUR PATH -->
-  <section class="chooser" id="chooser">
-    <div class="chooser-buttons" id="chooser-buttons">
-      <button class="chooser-btn" id="btn-need" data-choice="need">
-        <span class="chooser-btn-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="12" y1="18" x2="12" y2="12"/>
-            <line x1="9" y1="15" x2="15" y2="15"/>
-          </svg>
-        </span>
-        <span class="chooser-btn-label">I Need Social Media Help</span>
-      </button>
-      <button class="chooser-btn" id="btn-what" data-choice="what">
-        <span class="chooser-btn-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-          </svg>
-        </span>
-        <span class="chooser-btn-label">What Can You Automate?</span>
-      </button>
-    </div>
-    <div class="chooser-line" id="chooser-line" aria-hidden="true"></div>
-    <div id="flow-container" class="flow-container" aria-live="polite"></div>
-  </section>
-
-  <!-- CONTACT CARD -->
-  <section id="contact" class="flow-contact-hidden" style="background: var(--bg-void); padding: 6rem 0;">
+  <!-- OUTCOME STATEMENT -->
+  <section>
     <div class="container">
-      <BookingWidget title="Book a Call" />
+      <div class="section-header reveal" style="max-width: 760px; margin-left: auto; margin-right: auto; text-align: center;">
+        <p class="section-eyebrow">Lead Capture</p>
+        <h2 class="section-title word-reveal" data-delay="0.05">
+          Turn your website traffic into a list of real leads — automatically.
+        </h2>
+        <p class="section-subtitle">
+          Built for local service businesses that depend on new customers. Every visitor who fills out your form gets an immediate welcome email. Every lead lands in your dashboard, ready to follow up.
+        </p>
+      </div>
     </div>
   </section>
 
-  <style is:global>
-    /* ── Chooser ──────────────────────────────────────────── */
-    .chooser {
-      background: var(--bg-void);
-      padding: 6rem 0 4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow: visible;
-    }
-
-    .chooser-buttons {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      width: 100%;
-      max-width: 900px;
-      padding: 0 clamp(1rem, 4vw, 2rem);
-    }
-
-    .chooser-btn {
-      flex: 1;
-      max-width: 400px;
-      padding: 2.5rem 2rem;
-      background: var(--accent);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      border-radius: 10px;
-      cursor: pointer;
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      transition:
-        transform 2s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-      box-shadow: 0 4px 20px rgba(14,165,233,0.3);
-    }
-
-    .chooser-btn:hover {
-      border-color: var(--accent-bright);
-      box-shadow:
-        0 0 40px rgba(14,165,233,0.4),
-        inset 0 0 30px rgba(255,255,255,0.05);
-      transform: translateY(-4px);
-    }
-
-    .chooser-btn:active {
-      transform: translateY(-1px);
-    }
-
-    .chooser-btn-icon {
-      color: #fff;
-    }
-
-    .chooser-btn.dismissed {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .chooser-btn.chosen {
-      pointer-events: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 40px rgba(14,165,233,0.3);
-    }
-
-    .chooser-line {
-      width: 2px;
-      height: 0;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(14,165,233,0.6), 0 0 4px rgba(14,165,233,0.8);
-      transition: height 3s linear;
-      position: relative;
-      align-self: center;
-    }
-
-    .chooser-line::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-bright);
-      box-shadow: 0 0 16px var(--accent), 0 0 6px var(--accent-bright);
-      opacity: 0;
-      transition: opacity 0.5s ease 1.8s;
-    }
-
-    .chooser-line.extending {
-      height: 200px;
-    }
-
-    .chooser-line.extending::after {
-      opacity: 1;
-    }
-
-    .chooser-line.hide-line {
-      display: none;
-    }
-
-    @media (max-width: 640px) {
-      .chooser-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-      }
-
-      .chooser-btn {
-        max-width: 100%;
-        width: 100%;
-        padding: 2rem 1.5rem;
-        font-size: 1.15rem;
-      }
-
-      .chooser-btn.dismissed {
-        transform: scale(0.9) !important;
-      }
-    }
-
-    /* ── Flow Container ──────────────────────────────────── */
-    .flow-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 clamp(1rem, 4vw, 2rem);
-    }
-
-    .flow-node {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* ── Flow Line Segments ──────────────────────────────── */
-    .flow-line {
-      width: 2px;
-      height: 0;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(14,165,233,0.6), 0 0 4px rgba(14,165,233,0.8);
-      transition: height 2s linear;
-      position: relative;
-    }
-
-    .flow-line::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-bright);
-      box-shadow: 0 0 16px var(--accent), 0 0 6px var(--accent-bright);
-      opacity: 0;
-      transition: opacity 0.4s ease 1.6s;
-    }
-
-    .flow-line.extending {
-      height: 120px;
-    }
-
-    .flow-line.extending::after {
-      opacity: 1;
-    }
-
-    .flow-line.arrow::after {
-      width: 0;
-      height: 0;
-      background: none;
-      border-radius: 0;
-      box-shadow: none;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 12px solid var(--accent-bright);
-      bottom: -12px;
-      filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 4px var(--accent-bright));
-    }
-
-    /* ── Flow Cards ──────────────────────────────────────── */
-    .flow-card {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      text-align: center;
-      width: 100%;
-      max-width: 700px;
-      padding: 1rem 0 0;
-    }
-
-    .flow-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .flow-card-title {
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-    }
-
-    .flow-card-text {
-      font-size: 1.1rem;
-      color: white;
-      line-height: 1.75;
-      margin-bottom: 1.5rem;
-      max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ── Flow Options (answer buttons) ───────────────────── */
-    .flow-card-options {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 0.5rem;
-      justify-content: center;
-    }
-
-    .flow-option {
-      -webkit-appearance: none;
-      appearance: none;
-      padding: 0.75rem 1rem;
-      background: var(--accent) !important;
-      white-space: nowrap;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.3s ease,
-                  box-shadow 0.3s ease;
-    }
-
-    .flow-option:hover {
-      border-color: var(--accent-bright);
-      box-shadow: 0 0 20px rgba(14,165,233,0.3);
-      transform: translateY(-2px);
-    }
-
-    .flow-option.chosen {
-      border-color: var(--accent);
-      background: var(--accent);
-      box-shadow: 0 0 30px rgba(14,165,233,0.3);
-      pointer-events: none;
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .flow-option.dismissed {
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                  opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .flow-option.dismissed-left {
-      transform: translateX(-200vw);
-    }
-
-    .flow-option.dismissed-right {
-      transform: translateX(200vw);
-    }
-
-    /* ── Continue Button ─────────────────────────────────── */
-    .flow-continue {
-      display: inline-block;
-      padding: 0.875rem 2rem;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(14,165,233,0.4);
-      transition: transform 0.2s, box-shadow 0.2s;
-      margin-top: 1rem;
-    }
-
-    .flow-continue:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 30px rgba(14,165,233,0.55);
-    }
-
-    /* ── Examples Grid ───────────────────────────────────── */
-    .flow-examples {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      width: 100%;
-    }
-
-    .flow-example {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 1.5rem 1rem;
-      text-align: center;
-    }
-
-    .flow-example-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(14, 165, 233, 0.15);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 0.75rem;
-      color: var(--accent-bright);
-    }
-
-    .flow-example h4 {
-      font-size: 0.95rem;
-      color: var(--text-primary);
-      margin-bottom: 0.4rem;
-      font-weight: 600;
-    }
-
-    .flow-example p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ── Tiers Grid ──────────────────────────────────────── */
-    .flow-tiers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      width: 100%;
-    }
-
-    .flow-tier {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 2rem 1.25rem;
-      text-align: center;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .flow-tier.recommended {
-      border-color: var(--accent);
-      box-shadow: 0 0 30px rgba(14,165,233,0.2);
-    }
-
-    .flow-tier-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-bright);
-      margin-bottom: 0.75rem;
-    }
-
-    .flow-tier h4 {
-      font-size: 1.05rem;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .flow-tier-price {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent-bright);
-      margin-bottom: 0.75rem;
-    }
-
-    .flow-tier-saves {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .flow-tier p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ── Result Card ─────────────────────────────────────── */
-    .flow-result {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--accent);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(14,165,233,0.2);
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .flow-result-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent-bright);
-      margin-bottom: 0.75rem;
-    }
-
-    .flow-result h3 {
-      font-size: 1.4rem;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-
-    .flow-result-price {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent-bright);
-      margin-bottom: 1rem;
-    }
-
-    .flow-result p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-
-    /* ── Contact Reveal ──────────────────────────────────── */
-    .flow-contact-hidden {
-      display: none;
-    }
-
-    .flow-contact-reveal {
-      display: block;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .flow-contact-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Responsive ──────────────────────────────────────── */
-    @media (max-width: 640px) {
-      .flow-examples {
-        grid-template-columns: 1fr;
-      }
-
-      .flow-tiers {
-        grid-template-columns: 1fr;
-      }
-
-      .flow-option.dismissed {
-        transform: scale(0.85) !important;
-      }
-
-      .flow-card-options {
-        flex-wrap: wrap;
-      }
-    }
-  </style>
-
-  <script is:inline>
-  (function() {
-    var container = document.getElementById('chooser-buttons');
-    var chooserLine = document.getElementById('chooser-line');
-    var flowContainer = document.getElementById('flow-container');
-    var contactSection = document.getElementById('contact');
-    if (!container || !chooserLine || !flowContainer) return;
-
-    var btnNeed = document.getElementById('btn-need');
-    var btnWhat = document.getElementById('btn-what');
-    var chosen = false;
-    var answers = {};
-    var currentPath = null;
-    var currentStepIndex = 0;
-    var currentRec = null;
-
-    /* ── Step Definitions ───────────────────────────────── */
-
-    var NEED_STEPS = [
-      {
-        id: 'need-1',
-        type: 'question',
-        key: 'platforms',
-        title: 'Which platforms do you need help with?',
-        options: [
-          { value: 'instagram', label: 'Instagram' },
-          { value: 'facebook', label: 'Facebook' },
-          { value: 'linkedin', label: 'LinkedIn' },
-          { value: 'tiktok', label: 'TikTok' },
-          { value: 'multiple', label: 'Multiple Platforms' }
-        ]
-      },
-      {
-        id: 'need-2',
-        type: 'question',
-        key: 'challenge',
-        title: 'What\u2019s your biggest challenge with social media?',
-        options: [
-          { value: 'consistency', label: 'Posting Consistently' },
-          { value: 'content', label: 'Creating Content' },
-          { value: 'engagement', label: 'Getting Engagement' },
-          { value: 'time', label: 'It Takes Too Much Time' }
-        ]
-      },
-      {
-        id: 'need-3',
-        type: 'question',
-        key: 'budget',
-        title: 'What\u2019s your budget range?',
-        options: [
-          { value: 'low', label: 'Under $2k' },
-          { value: 'mid', label: '$2\u20135k' },
-          { value: 'high', label: '$5k+' }
-        ]
-      }
-    ];
-
-    var WHAT_STEPS = [
-      {
-        id: 'what-1',
-        type: 'question',
-        key: 'frequency',
-        title: 'How often are you posting right now?',
-        options: [
-          { value: 'rarely', label: 'Rarely or Never' },
-          { value: 'weekly', label: 'A Few Times a Week' },
-          { value: 'daily', label: 'Daily' },
-          { value: 'unsure', label: 'Not Sure' }
-        ]
-      },
-      {
-        id: 'what-2',
-        type: 'question',
-        key: 'goal',
-        title: 'What matters most to you?',
-        options: [
-          { value: 'growth', label: 'Growing Followers' },
-          { value: 'engagement', label: 'More Engagement' },
-          { value: 'brand', label: 'Brand Awareness' },
-          { value: 'leads', label: 'Generating Leads' }
-        ]
-      },
-      {
-        id: 'what-3',
-        type: 'question',
-        key: 'budget',
-        title: 'What\u2019s your budget range?',
-        options: [
-          { value: 'low', label: 'Under $2k' },
-          { value: 'mid', label: '$2\u20135k' },
-          { value: 'high', label: '$5k+' }
-        ]
-      }
-    ];
-
-    /* ── Recommendation Logic ───────────────────────────── */
-
-    function getRecommendation() {
-      if (answers.budget === 'high') {
-        return {
-          label: 'FULL SOCIAL MEDIA AUTOMATION',
-          name: 'Full Social Media Automation',
-          price: 'Starts at $5,000',
-          desc: 'End-to-end social media management \u2014 AI content creation, multi-platform scheduling, engagement automation, analytics, and brand monitoring.'
-        };
-      }
-      if (answers.budget === 'mid') {
-        return {
-          label: 'SMART SOCIAL MANAGEMENT',
-          name: 'Smart Social Management',
-          price: 'Starts at $3,000',
-          desc: 'AI-generated content, automated scheduling, and engagement tracking across your key platforms.'
-        };
-      }
-      return {
-        label: 'CONTENT SCHEDULING',
-        name: 'Content Scheduling',
-        price: 'Starts at $1,500',
-        desc: 'Automated post scheduling and content calendar management to keep your social media consistent.'
-      };
-    }
-
-    /* ── Render Helpers ─────────────────────────────────── */
-
-    function createLine() {
-      var line = document.createElement('div');
-      line.className = 'flow-line';
-      return line;
-    }
-
-    function buildQuestionCard(step) {
-      var card = document.createElement('div');
-      card.className = 'flow-card';
-
-      var title = document.createElement('h3');
-      title.className = 'flow-card-title';
-      title.textContent = step.title;
-      card.appendChild(title);
-
-      var opts = document.createElement('div');
-      opts.className = 'flow-card-options';
-
-      step.options.forEach(function(opt) {
-        var btn = document.createElement('button');
-        btn.className = 'flow-option';
-        btn.textContent = opt.label;
-        btn.dataset.value = opt.value;
-        btn.addEventListener('click', function() {
-          handleOptionClick(btn, opts, step.key, opt.value);
-        });
-        opts.appendChild(btn);
-      });
-
-      card.appendChild(opts);
-      return card;
-    }
-
-    function buildResultCard() {
-      var rec = getRecommendation();
-      currentRec = rec;
-
-      var card = document.createElement('div');
-      card.className = 'flow-card';
-
-      var result = document.createElement('div');
-      result.className = 'flow-result';
-
-      var eyebrow = document.createElement('p');
-      eyebrow.className = 'flow-result-eyebrow';
-      eyebrow.textContent = 'WE THINK WE SHOULD START THE CONVERSATION WITH...';
-      result.appendChild(eyebrow);
-
-      var h3 = document.createElement('h3');
-      h3.textContent = rec.name;
-      result.appendChild(h3);
-
-      var price = document.createElement('p');
-      price.className = 'flow-result-price';
-      price.textContent = rec.price;
-      result.appendChild(price);
-
-      var desc = document.createElement('p');
-      desc.textContent = rec.desc;
-      result.appendChild(desc);
-
-      card.appendChild(result);
-      return card;
-    }
-
-    /* ── Flow Engine ────────────────────────────────────── */
-
-    function renderStep(step) {
-      var node = document.createElement('div');
-      node.className = 'flow-node';
-
-      var line = createLine();
-      node.appendChild(line);
-
-      var card;
-      if (step.type === 'question') card = buildQuestionCard(step);
-      else if (step.type === 'result') card = buildResultCard();
-
-      node.appendChild(card);
-      flowContainer.appendChild(node);
-
-      // Force browser to paint the element at height:0 first
-      line.getBoundingClientRect();
-      requestAnimationFrame(function() {
-        requestAnimationFrame(function() {
-          line.classList.add('extending');
-          setTimeout(function() {
-            card.classList.add('visible');
-            if (step.type === 'tiers') {
-              setTimeout(function() { advanceStep(); }, 2000);
-            }
-          }, 2000);
-        });
-      });
-    }
-
-    function revealContact() {
-      var node = document.createElement('div');
-      node.className = 'flow-node';
-      var line = createLine();
-      line.classList.add('arrow');
-      node.appendChild(line);
-      flowContainer.appendChild(node);
-
-      requestAnimationFrame(function() {
-        line.classList.add('extending');
-        setTimeout(function() {
-          contactSection.classList.remove('flow-contact-hidden');
-          contactSection.classList.add('flow-contact-reveal');
-          contactSection.getBoundingClientRect();
-          contactSection.classList.add('flow-contact-visible');
-          // Pre-select Website in the service dropdown
-          var serviceSelect = document.getElementById('contact-service');
-          if (serviceSelect) serviceSelect.value = 'ai';
-          // Set recommended package hidden field
-          var pkgField = document.getElementById('contact-recommended-package');
-          if (pkgField && currentRec) pkgField.value = currentRec.name + ' (' + currentRec.price + ')';
-          setTimeout(function() {
-            // Let the user scroll naturally
-          }, 200);
-        }, 1000);
-      });
-    }
-
-    function handleOptionClick(chosenBtn, optionsContainer, key, value) {
-      answers[key] = value;
-
-      var buttons = Array.from(optionsContainer.querySelectorAll('.flow-option'));
-      var chosenIndex = buttons.indexOf(chosenBtn);
-
-      // Calculate center offset for the chosen button
-      var containerRect = optionsContainer.getBoundingClientRect();
-      var chosenRect = chosenBtn.getBoundingClientRect();
-      var containerCenterX = containerRect.left + containerRect.width / 2;
-      var chosenCenterX = chosenRect.left + chosenRect.width / 2;
-      var offsetX = containerCenterX - chosenCenterX;
-
-      buttons.forEach(function(btn, i) {
-        if (btn === chosenBtn) {
-          btn.classList.add('chosen');
-          btn.style.transform = 'translateX(' + offsetX + 'px)';
-        } else {
-          btn.classList.add('dismissed');
-          btn.classList.add(i < chosenIndex ? 'dismissed-left' : 'dismissed-right');
-        }
-      });
-
-      setTimeout(function() {
-        advanceStep();
-      }, 1000);
-    }
-
-    function advanceStep() {
-      currentStepIndex++;
-      var steps = currentPath === 'need' ? NEED_STEPS : WHAT_STEPS;
-
-      if (currentStepIndex < steps.length) {
-        renderStep(steps[currentStepIndex]);
-      } else {
-        renderStep({ type: 'result' });
-        setTimeout(function() {
-          revealContact();
-        }, 2000);
-      }
-    }
-
-    function startFlow(path) {
-      currentPath = path;
-      currentStepIndex = 0;
-      answers = {};
-      var steps = path === 'need' ? NEED_STEPS : WHAT_STEPS;
-      setTimeout(function() {
-        renderStep(steps[0]);
-      }, 600);
-    }
-
-    /* ── Chooser Button Handlers ────────────────────────── */
-
-    function handleChoice(chosenBtn, dismissedBtn, path) {
-      if (chosen) return;
-      chosen = true;
-
-      var containerRect = container.getBoundingClientRect();
-      var chosenRect = chosenBtn.getBoundingClientRect();
-      var dismissedRect = dismissedBtn.getBoundingClientRect();
-
-      var containerCenterX = containerRect.left + containerRect.width / 2;
-      var chosenCenterX = chosenRect.left + chosenRect.width / 2;
-      var offsetX = containerCenterX - chosenCenterX;
-
-      var dismissDirection = dismissedRect.left < chosenRect.left ? -1 : 1;
-      var dismissX = dismissDirection * containerRect.width;
-
-      dismissedBtn.style.transform = 'translateX(' + dismissX + 'px)';
-      dismissedBtn.classList.add('dismissed');
-
-      chosenBtn.style.transform = 'translateX(' + offsetX + 'px)';
-      chosenBtn.classList.add('chosen');
-
-      chooserLine.classList.add('hide-line');
-
-      startFlow(path);
-    }
-
-    btnNeed.addEventListener('click', function() { handleChoice(btnNeed, btnWhat, 'need'); });
-    btnWhat.addEventListener('click', function() { handleChoice(btnWhat, btnNeed, 'what'); });
-  })();
-  </script>
+  <!-- WHAT YOU GET -->
+  <section style="background: var(--bg-void); padding: 5rem 0;">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom: 2.5rem; text-align: center;">
+        <p class="section-eyebrow">What You Get</p>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="ai-columns">
+          <div class="ai-card">
+            <div class="ai-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8"/>
+                <path d="M12 17v4"/>
+                <path d="M2 7h20"/>
+              </svg>
+            </div>
+            <h3 class="ai-heading">Branded Landing Page</h3>
+            <p class="ai-copy">A conversion-optimized page built for your business. Your colors, your offer, your brand.</p>
+          </div>
+          <div class="ai-card">
+            <div class="ai-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <h3 class="ai-heading">Automatic Welcome Email</h3>
+            <p class="ai-copy">The moment someone submits, they get a personalized email from you. No manual follow-up needed.</p>
+          </div>
+          <div class="ai-card">
+            <div class="ai-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </div>
+            <h3 class="ai-heading">Admin Dashboard</h3>
+            <p class="ai-copy">Every lead saved, searchable, and exportable. Password-protected. You're in control.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section style="padding: 5rem 0;">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom: 2.5rem; text-align: center;">
+        <p class="section-eyebrow">Pricing</p>
+      </div>
+      <div class="reveal" data-delay="0.1" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 560px; margin: 0 auto;">
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; text-align: center;">
+          <p style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 0.75rem;">Setup</p>
+          <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem;">$1,500 – $2,500</p>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">One-time</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; text-align: center;">
+          <p style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 0.75rem;">Monthly</p>
+          <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem;">$199 – $499</p>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">Hosting, support, updates</p>
+        </div>
+      </div>
+      <p class="reveal" data-delay="0.15" style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1.5rem; max-width: 400px; margin-left: auto; margin-right: auto;">Every build is custom. Final pricing reflects your scope.</p>
+    </div>
+  </section>
+
+  <!-- DEMO CTA -->
+  <section style="background: var(--bg-void); padding: 6rem 0; text-align: center;">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-eyebrow">Live Demo</p>
+        <h2 class="section-title word-reveal" data-delay="0.05">See It Live</h2>
+        <p class="section-subtitle">Try the real product. No signup required.</p>
+      </div>
+      <div class="reveal" data-delay="0.2">
+        <a href="#" class="btn-primary" data-coming-soon="true">Open Demo →</a>
+      </div>
+    </div>
+  </section>
 
 </BaseLayout>

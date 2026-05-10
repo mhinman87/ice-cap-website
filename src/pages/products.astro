@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+---
+<BaseLayout title="Products | Ice Cap Labs" description="Custom-built tools for local businesses. Each one is a real working product — not a template.">
+
+  <!-- HERO -->
+  <header class="page-header">
+    <h1 class="page-title word-reveal">Products</h1>
+    <p class="page-subtitle reveal" data-delay="0.2">
+      Custom-built tools for local businesses. Each one is a real working product — not a template.
+    </p>
+  </header>
+
+  <!-- PRODUCT COLUMNS -->
+  <section class="svc-columns-section">
+    <div class="svc-columns" id="svc-columns">
+
+      <div class="svc-col" style="--col-bg:#0a1628">
+        <span class="svc-col-status svc-col-status--active">Active</span>
+        <a href="/lead-automation" class="svc-col-title">Lead Capture</a>
+        <p class="svc-col-oneliner">Turn visitors into leads, automatically</p>
+      </div>
+
+      <div class="svc-col" style="--col-bg:#0c2d4a">
+        <span class="svc-col-status svc-col-status--active">Active</span>
+        <a href="/customer-automation" class="svc-col-title">AI Chatbot</a>
+        <p class="svc-col-oneliner">24/7 AI receptionist for your website</p>
+      </div>
+
+      <div class="svc-col" style="--col-bg:#0e4d6e">
+        <span class="svc-col-status svc-col-status--active">Active</span>
+        <a href="/call-assistant" class="svc-col-title">Booking System</a>
+        <p class="svc-col-oneliner">Custom scheduling without the SaaS fees</p>
+      </div>
+
+      <div class="svc-col" style="--col-bg:#0d3566">
+        <span class="svc-col-status svc-col-status--active">Active</span>
+        <a href="/operations-automation" class="svc-col-title">Operations</a>
+        <p class="svc-col-oneliner">All your data visible on a single dashboard</p>
+      </div>
+
+      <div class="svc-col" style="--col-bg:#1a1a4e">
+        <span class="svc-col-status svc-col-status--active">Active</span>
+        <span class="svc-col-title" style="color: #fff; cursor: pointer;">Document Chat</span>
+        <p class="svc-col-oneliner">Proposals, contracts, and invoices in seconds</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOOKING WIDGET -->
+  <section id="contact" style="background: var(--bg-void); padding: 6rem 0;">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom: 3rem;">
+        <p class="section-eyebrow">Ready to Start?</p>
+        <h2 class="section-title word-reveal">Book a Call</h2>
+      </div>
+      <BookingWidget title="Schedule Your Discovery Call" />
+    </div>
+  </section>
+
+  <style is:global>
+    .svc-col-oneliner {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+
+    .svc-col-status {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+
+    .svc-col-status--active {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-bright);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .svc-col-status--soon {
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+  </style>
+
+</BaseLayout>
