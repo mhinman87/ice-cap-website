@@ -120,7 +120,7 @@
 
 .booking-embed-wrapper iframe {
   width: 100%;
-  height: 800px;
+  height: 600px; /* initial; auto-resized via postMessage */
 }
 
 @media (max-width: 768px) {
@@ -157,21 +157,18 @@
   .booking-embed-wrapper {
     margin: -1.5rem -1rem;
   }
-
-  .booking-embed-wrapper iframe {
-    height: 800px;
-  }
 }
 </style>
 
 <script>
-  // Yeti reveal animation for booking widget
+  // Yeti reveal animation + auto-height for booking widget
   function initBookingYeti() {
     const wraps = document.querySelectorAll('.booking-widget-wrap');
     if (!wraps.length) return;
 
     wraps.forEach(wrap => {
       const container = wrap.querySelector('.booking-widget-container');
+      const iframe = wrap.querySelector('iframe');
       if (!container) return;
 
       // Show the yeti once the card scrolls into view, with a delay
@@ -185,6 +182,15 @@
       }, { threshold: 0.3 });
 
       observer.observe(container);
+
+      // Auto-resize iframe to match booking app content height
+      if (iframe) {
+        window.addEventListener('message', (e) => {
+          if (e.data?.type === 'icl-booking-height') {
+            iframe.style.height = e.data.height + 'px';
+          }
+        });
+      }
     });
   }
 
