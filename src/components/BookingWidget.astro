@@ -20,9 +20,9 @@ const { title = "Book a Call" } = Astro.props;
       <iframe
         src="https://ice-cap-booking.icecaplabs.com?embed=1"
         width="100%"
-        height="720"
         frameborder="0"
-        style="border-radius: 12px; background: #000000;"
+        scrolling="no"
+        style="display: block; background: #000000;"
       ></iframe>
     </div>
   </div>
@@ -116,6 +116,7 @@ const { title = "Book a Call" } = Astro.props;
   padding: 2rem;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 .booking-header {
@@ -136,9 +137,13 @@ const { title = "Book a Call" } = Astro.props;
 }
 
 .booking-embed-wrapper {
-  border-radius: 12px;
+  margin: 0 -2rem -2rem;
   overflow: hidden;
-  background: #0f0f0f;
+}
+
+.booking-embed-wrapper iframe {
+  width: 100%;
+  height: 680px;
 }
 
 @media (max-width: 768px) {
@@ -177,7 +182,7 @@ const { title = "Book a Call" } = Astro.props;
   }
 
   .booking-embed-wrapper iframe {
-    height: 720px;
+    height: 680px;
   }
 }
 </style>
