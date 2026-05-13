@@ -1,6 +1,5 @@
 ---
-// BookingWidget.astro - Simple Cal.com embed
-const { calLink = "ice-cap-labs-lnw3hf/30min", title = "Book a Call" } = Astro.props;
+const { title = "Book a Call" } = Astro.props;
 ---
 
 <div class="booking-widget-wrap">
@@ -18,13 +17,12 @@ const { calLink = "ice-cap-labs-lnw3hf/30min", title = "Book a Call" } = Astro.p
     </div>
     
     <div class="booking-embed-wrapper">
-      <iframe 
-        src={`https://cal.com/${calLink}`}
-        width="100%" 
-        height="700" 
+      <iframe
+        src="https://ice-cap-booking.icecaplabs.com?embed=1"
+        width="100%"
+        height="720"
         frameborder="0"
-        style="border-radius: 12px; background: #0f0f0f;"
-        allow="camera; microphone; display-capture"
+        style="border-radius: 12px; background: #000000;"
       ></iframe>
     </div>
   </div>
@@ -179,7 +177,7 @@ const { calLink = "ice-cap-labs-lnw3hf/30min", title = "Book a Call" } = Astro.p
   }
 
   .booking-embed-wrapper iframe {
-    height: 600px;
+    height: 720px;
   }
 }
 </style>
