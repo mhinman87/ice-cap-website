@@ -246,145 +246,143 @@ function initTileStrip() {
 /* ── Pixel title (service pages) ──────────────────────────── */
 function initPixelTitle() {
   const hero = document.querySelector('.pixel-hero');
-  const grid = document.getElementById('pixel-title-grid');
-  if (!hero || !grid) return;
+  const gridEl = document.getElementById('pixel-title-grid');
+  if (!hero || !gridEl) return;
 
   const titleEl = hero.querySelector('.pixel-hero-title');
-  const titleText = titleEl ? titleEl.textContent.trim() : 'DESIGN';
+  const titleText = titleEl ? titleEl.textContent.trim() : 'TITLE';
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#38bdf8';
 
-  const cellSize = 8;
-  const gap = 2;
-  const step = cellSize + gap;
-  let cols = 0;
-  let rows = 0;
-  let tileMap = {};  // key: "col,row" → tile element
-  function build() {
-    grid.innerHTML = '';
-    tileMap = {};
+  const CELL = 8, STEP = 10;
 
-    const w = hero.offsetWidth;
-    const h = hero.offsetHeight;
-    cols = Math.floor(w / step);
-    rows = Math.floor(h / step);
+  // Animation phases (ms): squish white → gap → expand accent → hold → squish accent → gap → expand white
+  function getTileRender(e) {
+    if (e < 150)  return { c: '#fff', sx: 1 - e / 150 };
+    if (e < 250)  return { c: accent, sx: (e - 150) / 100 };
+    if (e < 750)  return { c: accent, sx: 1 };
+    if (e < 850)  return { c: accent, sx: 1 - (e - 750) / 100 };
+    if (e < 1000) return { c: '#fff', sx: (e - 850) / 150 };
+    return null;
+  }
 
-    // Offscreen canvas to sample text shape
-    const canvas = document.createElement('canvas');
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext('2d');
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+  gridEl.innerHTML = '';
+  gridEl.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
 
-    // Draw text matching the CSS title — scale font to fit viewport width
-    const padding = w * 0.08; // 4% each side
-    const words = titleText.split(' ');
-    const multiLine = words.length > 1;
-    let fontSize = Math.min(w * 0.18, 320);
+  let dpr = 1, W = 0, H = 0;
+  let tileList = [], tileMap = {}, anims = {}, rafId = null;
 
-    if (multiLine) {
-      // Size to the longest word so each line fits
-      const longest = words.reduce((a, b) => a.length > b.length ? a : b);
-      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
-      let measured = ctx.measureText(longest).width;
-      if (measured > w - padding) {
-        fontSize *= (w - padding) / measured;
-      }
-      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = '#fff';
-      const lineHeight = fontSize * 1.1;
-      const totalHeight = lineHeight * words.length;
-      const startY = (h - totalHeight) / 2 + lineHeight / 2;
-      words.forEach((word, i) => {
-        ctx.fillText(word, w / 2, startY + i * lineHeight);
-      });
-    } else {
-      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
-      let measured = ctx.measureText(titleText).width;
-      if (measured > w - padding) {
-        fontSize *= (w - padding) / measured;
-      }
-      ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = '#fff';
-      ctx.fillText(titleText, w / 2, h / 2);
+  function draw(ts) {
+    rafId = null;
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.fillStyle = '#fff';
+    for (var i = 0; i < tileList.length; i++) {
+      var t = tileList[i];
+      if (!(t.key in anims)) ctx.fillRect(t.x, t.y, CELL, CELL);
     }
 
-    const imageData = ctx.getImageData(0, 0, w, h).data;
+    var expired = [];
+    for (var key in anims) {
+      var elapsed = ts - anims[key];
+      var r = getTileRender(elapsed);
+      var t = tileMap[key];
+      if (!r) {
+        expired.push(key);
+        if (t) { ctx.fillStyle = '#fff'; ctx.fillRect(t.x, t.y, CELL, CELL); }
+        continue;
+      }
+      if (r.sx > 0.01) {
+        var off = (CELL * (1 - r.sx)) / 2;
+        ctx.fillStyle = r.c;
+        ctx.fillRect(t.x + off, t.y, CELL * r.sx, CELL);
+      }
+    }
+    for (var i = 0; i < expired.length; i++) delete anims[expired[i]];
 
-    grid.style.setProperty('--cell', cellSize + 'px');
+    if (Object.keys(anims).length) rafId = requestAnimationFrame(draw);
+  }
 
-    // Create tiles only where text pixels exist
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const px = c * step + Math.floor(step / 2);
-        const py = r * step + Math.floor(step / 2);
-        const idx = (py * w + px) * 4;
-        const alpha = imageData[idx + 3];
+  function flipAt(col, row, delay) {
+    var key = col + ',' + row;
+    if (!tileMap[key] || (key in anims)) return;
+    function start() {
+      anims[key] = performance.now();
+      if (!rafId) rafId = requestAnimationFrame(draw);
+    }
+    delay ? setTimeout(start, delay) : start();
+  }
 
-        if (alpha > 128) {
-          const tile = document.createElement('div');
-          tile.className = 'ptile';
-          tile.style.left = (c * step) + 'px';
-          tile.style.top = (r * step) + 'px';
-          tile.innerHTML =
-            '<div class="ptile-inner">' +
-              '<div class="ptile-front"></div>' +
-              '<div class="ptile-back"></div>' +
-            '</div>';
-          tile.dataset.col = c;
-          tile.dataset.row = r;
-          grid.appendChild(tile);
-          tileMap[c + ',' + r] = tile;
+  function build() {
+    W = hero.offsetWidth; H = hero.offsetHeight;
+    dpr = window.devicePixelRatio || 1;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var cols = Math.floor(W / STEP), rows = Math.floor(H / STEP);
+
+    var off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    var octx = off.getContext('2d');
+    var words = titleText.split(' ');
+    var pad = W * 0.08;
+    var fs = Math.min(W * 0.18, 320);
+    var longest = words.reduce(function(a, b) { return a.length > b.length ? a : b; });
+    octx.font = '700 ' + fs + 'px Outfit, sans-serif';
+    var mw = octx.measureText(words.length > 1 ? longest : titleText).width;
+    if (mw > W - pad) fs *= (W - pad) / mw;
+    octx.font = '700 ' + fs + 'px Outfit, sans-serif';
+    octx.textAlign = 'center';
+    octx.textBaseline = 'middle';
+    octx.fillStyle = '#fff';
+    if (words.length > 1) {
+      var lh = fs * 1.1;
+      var startY = (H - lh * words.length) / 2 + lh / 2;
+      words.forEach(function(word, i) { octx.fillText(word, W / 2, startY + i * lh); });
+    } else {
+      octx.fillText(titleText, W / 2, H / 2);
+    }
+
+    var px = octx.getImageData(0, 0, W, H).data;
+    tileList = []; tileMap = {}; anims = {};
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+
+    for (var row = 0; row < rows; row++) {
+      for (var col = 0; col < cols; col++) {
+        var sx = col * STEP + Math.floor(STEP / 2);
+        var sy = row * STEP + Math.floor(STEP / 2);
+        if (px[(sy * W + sx) * 4 + 3] > 128) {
+          var key = col + ',' + row;
+          var tile = { key: key, x: col * STEP, y: row * STEP };
+          tileMap[key] = tile;
+          tileList.push(tile);
         }
       }
     }
 
-    // Sync CSS title font size so the fallback text matches before grid appears
-    if (titleEl) titleEl.style.fontSize = fontSize + 'px';
-
+    if (titleEl) titleEl.style.fontSize = fs + 'px';
     hero.classList.add('pixels-active');
+    requestAnimationFrame(draw);
   }
 
-  function flipTile(tile, delay) {
-    if (!tile || tile.classList.contains('flipped')) return;
-    setTimeout(() => {
-      tile.classList.add('flipped');
-      setTimeout(() => {
-        tile.classList.remove('flipped');
-      }, 900 + delay);
-    }, delay);
-  }
-
-  function flipAt(c, r, delay) {
-    const tile = tileMap[c + ',' + r];
-    if (tile) flipTile(tile, delay);
-  }
-
-  // Track mouse position and flip tiles under cursor + neighbors
-  grid.addEventListener('mousemove', (e) => {
-    const rect = grid.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const c = Math.floor(mx / step);
-    const r = Math.floor(my / step);
-
-    // Flip hovered tile
+  canvas.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var c = Math.floor((e.clientX - rect.left) / STEP);
+    var r = Math.floor((e.clientY - rect.top) / STEP);
     flipAt(c, r, 0);
-
-    // Flip neighbors
-    for (let dr = -1; dr <= 1; dr++) {
-      for (let dc = -1; dc <= 1; dc++) {
-        if (dr === 0 && dc === 0) continue;
-        flipAt(c + dc, r + dr, 40 + Math.random() * 60);
-      }
-    }
+    for (var dr = -1; dr <= 1; dr++)
+      for (var dc = -1; dc <= 1; dc++)
+        if (dr || dc) flipAt(c + dc, r + dr, 40 + Math.random() * 60);
   });
 
   build();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
+  var resizeTimer;
+  window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(build, 200);
   });

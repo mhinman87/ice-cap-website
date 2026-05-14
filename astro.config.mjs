@@ -7,4 +7,10 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://icecaplabs.com',
   integrations: [sitemap()],
+  redirects: {
+    '/lead-automation': '/lead-capture',
+    '/customer-automation': '/chatbot',
+    '/call-assistant': '/booking',
+    '/operations-automation': '/operations',
+  },
 });
