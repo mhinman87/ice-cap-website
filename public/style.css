@@ -1723,6 +1723,8 @@ input:focus-visible {
   inset: 0;
   z-index: 2;
   pointer-events: auto;
+  will-change: transform;
+  contain: layout style paint;
 }
 
 .pixel-title-grid .ptile {

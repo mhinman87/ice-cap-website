@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── Parallax ─────────────────────────────────────────────── */
 function initParallax() {
+  if (!document.getElementById('parallax-container')) return;
   const layers = document.querySelectorAll('[data-speed]');
   if (!layers.length) return;
 
