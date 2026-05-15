@@ -704,7 +704,7 @@ footer {
 @media (min-width: 640px) {
   .process-steps {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 0;
   }
 }
@@ -761,6 +761,7 @@ footer {
   transition: opacity 0.5s ease, transform 0.5s ease;
   display: flex;
   flex-direction: column;
+  align-self: stretch;
 }
 .process-step.reached {
   opacity: 1;
@@ -837,6 +838,12 @@ footer {
   top: 66px;
   bottom: 0;
   z-index: 0;
+}
+
+@media (min-width: 640px) {
+  .process-step::after {
+    min-height: 175px;
+  }
 }
 
 .process-step .step-title,
