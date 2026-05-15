@@ -2,18 +2,63 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingWidget from '../components/BookingWidget.astro';
 ---
-<BaseLayout title="Contact Ice Cap Labs | Wichita, KS" description="Get in touch with Ice Cap Labs in Wichita, Kansas. Let's build something together — web development, AI automation, and digital marketing for small businesses.">
+<BaseLayout title="Contact Ice Cap Labs | Wichita, KS" description="Contact Ice Cap Labs in Wichita, Kansas to talk about custom software for your small business, including lead capture tools, booking systems, AI chatbots, and internal dashboards.">
 
-  <!-- PAGE HEADER -->
-  <section id="page-header" style="background: var(--bg-void); padding-top: calc(64px + clamp(4rem, 8vw, 7rem));">
+  <section id="contact-hero" style="background: var(--bg-void); padding-top: calc(64px + clamp(4rem, 8vw, 7rem)); padding-bottom: clamp(4rem, 8vw, 7rem);">
     <div class="container">
-      <div class="section-header reveal">
-        <p class="section-eyebrow">Contact Us</p>
-        <h1 class="section-title word-reveal" data-delay="0.05">Let's Build Something Together</h1>
-        <p class="section-subtitle">
-          Whether you have a project in mind or just want to explore what's possible,
-          we'd love to hear from you.
-        </p>
+      <div class="contact-card-layout reveal" style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2rem, 5vw, 5rem); align-items: stretch;">
+        <div class="contact-card-panel" style="background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); border-radius: 28px; padding: clamp(2rem, 4vw, 3rem); display: flex; flex-direction: column; justify-content: space-between; min-height: 520px;">
+          <div>
+            <p class="section-eyebrow" style="margin-bottom: 1rem;">Direct Contact</p>
+            <h1 class="section-title word-reveal" data-delay="0.05" style="margin-bottom: 0.75rem;">Ice Cap Labs</h1>
+            <p style="font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--text-bright); margin-bottom: 0.5rem;">Max Hinman</p>
+            <p style="font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--accent-bright); margin-bottom: 2.5rem;">Custom Software for Small Businesses</p>
+
+            <div style="display: grid; gap: 1.5rem; margin-bottom: 2.5rem;">
+              <div>
+                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem;">Phone</p>
+                <a href="tel:+13166694468" style="font-size: clamp(1.5rem, 3vw, 2.4rem); color: var(--text-bright); text-decoration: none; font-weight: 600;">(316) 669-4468</a>
+              </div>
+              <div>
+                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem;">Email</p>
+                <a href="mailto:hello@icecaplabs.com" style="font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: var(--text-bright); text-decoration: none; font-weight: 500; word-break: break-word;">hello@icecaplabs.com</a>
+              </div>
+              <div>
+                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem;">Location</p>
+                <p style="font-size: 1.05rem; color: var(--text-main); margin: 0;">Wichita, Kansas</p>
+              </div>
+            </div>
+          </div>
+
+          <p style="max-width: 38rem; color: var(--text-main); margin: 0; line-height: 1.75;">
+            I build custom software for small businesses that are tired of losing leads, chasing manual work, or forcing their process into software that was never designed for them. You work directly with me from the first conversation through delivery.
+          </p>
+        </div>
+
+        <div class="contact-side-panel" style="display: flex; flex-direction: column; justify-content: center; gap: 1.5rem; padding: clamp(0.5rem, 1vw, 1rem) 0;">
+          <div>
+            <p class="section-eyebrow" style="margin-bottom: 1rem;">Start Here</p>
+            <h2 class="section-title word-reveal" data-delay="0.08" style="margin-bottom: 1rem;">Tell Me What You Need Built</h2>
+            <p class="section-subtitle" style="text-align: left; max-width: 34rem; margin: 0;">
+              If you already know what you need, great. If you just know something in the business feels clunky, slow, or manual, that works too. We can figure out the right tool together.
+            </p>
+          </div>
+
+          <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+            <div style="padding: 1.25rem 1.35rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; background: rgba(255,255,255,0.02);">
+              <strong style="display: block; color: var(--text-bright); margin-bottom: 0.35rem;">Good fit if you need</strong>
+              <p style="margin: 0; color: var(--text-main);">a better way to capture leads, schedule customers, or stop important work from slipping through the cracks.</p>
+            </div>
+            <div style="padding: 1.25rem 1.35rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; background: rgba(255,255,255,0.02);">
+              <strong style="display: block; color: var(--text-bright); margin-bottom: 0.35rem;">Products I build</strong>
+              <p style="margin: 0; color: var(--text-main);">Lead capture tools, booking systems, AI chatbots, and internal dashboards built around how your business actually runs.</p>
+            </div>
+            <div style="padding: 1.25rem 1.35rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; background: rgba(255,255,255,0.02);">
+              <strong style="display: block; color: var(--text-bright); margin-bottom: 0.35rem;">How I work</strong>
+              <p style="margin: 0; color: var(--text-main);">Directly, locally, and without handoffs. You are talking to the programmer who will actually build the thing.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -22,45 +67,26 @@ import BookingWidget from '../components/BookingWidget.astro';
   <section id="contact" style="background: var(--bg-void); padding: 6rem 0;">
     <div class="container">
       <div class="section-header reveal" style="margin-bottom: 3rem;">
-        <p class="section-eyebrow">Ready to Modernize?</p>
-        <h2 class="section-title word-reveal">Get In Touch</h2>
+        <p class="section-eyebrow">Book a Time</p>
+        <h2 class="section-title word-reveal">Schedule a Call</h2>
         <p class="section-subtitle">
-          Or reach us directly at
-          <a href="tel:+13166694468" style="color: var(--accent-bright); text-decoration: none;">(316) 669-4468</a>
-          or
-          <a href="mailto:hello@icecaplabs.com" style="color: var(--accent-bright); text-decoration: none;">hello@icecaplabs.com</a>
+          Pick a time that works for you. The booking flow below is already connected and ready to go.
         </p>
       </div>
       <BookingWidget title="Schedule a Call" />
     </div>
   </section>
 
-  <!-- WHAT HAPPENS NEXT -->
-  <section id="next-steps" style="background: var(--bg-deep);">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="section-eyebrow">What to Expect</p>
-        <h2 class="section-title word-reveal" data-delay="0.05">What Happens Next?</h2>
-      </div>
+  <style>
+    @media (max-width: 900px) {
+      .contact-card-layout {
+        grid-template-columns: 1fr !important;
+      }
 
-      <div class="process-steps">
-        <div class="process-step reveal" data-delay="0.0">
-          <div class="step-number-wrap">01</div>
-          <h3 class="step-title">We Reply Within 24 Hours</h3>
-          <p class="step-desc">You'll hear back from a real person — not a bot, not an auto-responder. We review every inquiry personally.</p>
-        </div>
-        <div class="process-step reveal" data-delay="0.1">
-          <div class="step-number-wrap">02</div>
-          <h3 class="step-title">Quick Discovery Call</h3>
-          <p class="step-desc">A short, no-pressure conversation to understand your business, goals, and challenges. We listen first.</p>
-        </div>
-        <div class="process-step reveal" data-delay="0.2">
-          <div class="step-number-wrap">03</div>
-          <h3 class="step-title">Clear Proposal</h3>
-          <p class="step-desc">You receive a straightforward proposal with timeline and pricing. No surprises, no hidden fees — just a clear path forward.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      .contact-card-panel {
+        min-height: unset !important;
+      }
+    }
+  </style>
 
 </BaseLayout>
