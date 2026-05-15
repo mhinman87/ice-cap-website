@@ -275,6 +275,8 @@ section {
   margin: 0 auto;
   margin-top: -30vh; /* pull content up so treeline frames it below */
   color: #000;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .eyebrow-pill {

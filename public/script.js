@@ -55,7 +55,7 @@ function initParallax() {
     requestAnimationFrame(() => {
       for (let i = 0; i < layers.length; i++) {
         const speed = +layers[i].dataset.speed;
-        if (speed) layers[i].style.transform = `translate3d(0, ${-(lastY * speed)}px, 0)`;
+        layers[i].style.transform = `translate3d(0, ${-(lastY * speed)}px, 0)`;
       }
       rafPending = false;
     });
