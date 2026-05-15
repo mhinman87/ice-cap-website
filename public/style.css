@@ -808,8 +808,8 @@ footer {
 }
 
 .step-title {
-  font-size: 1rem;
-  color: #ffffff;
+  font-size: 1.08rem;
+  color: var(--accent-bright);
   margin: 0 0 0.5rem;
 }
 
