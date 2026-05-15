@@ -755,10 +755,12 @@ footer {
   flex: 1;
   position: relative;
   text-align: center;
-  padding: 0 1rem;
+  padding: 0 1rem 1rem;
   opacity: 0.25;
   transform: translateY(10px);
   transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  flex-direction: column;
 }
 .process-step.reached {
   opacity: 1;
@@ -772,7 +774,7 @@ footer {
     display: flex;
     gap: 1.25rem;
     align-items: flex-start;
-    padding: 0;
+    padding: 0 0 1rem;
     opacity: 1;
     transform: none;
   }
@@ -807,13 +809,14 @@ footer {
 .step-title {
   font-size: 1rem;
   color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem;
 }
 
 .step-desc {
   font-size: 0.875rem;
   color: #ffffff;
   line-height: 1.7;
+  margin: 0;
 }
 
 .process-step .step-title,
@@ -821,23 +824,44 @@ footer {
   display: block;
 }
 
-.process-step .step-title {
-  padding: 1rem 1rem 0.35rem;
+.process-step::after {
+  content: '';
+  display: block;
+  flex: 1;
   border: 1px solid var(--accent-bright);
-  border-bottom: 0;
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px;
   background: rgba(14,165,233,0.06);
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 66px;
+  bottom: 0;
+  z-index: 0;
+}
+
+.process-step .step-title,
+.process-step .step-desc {
+  position: relative;
+  z-index: 1;
+}
+
+.process-step .step-title {
+  padding: 1.25rem 1rem 0.35rem;
 }
 
 .process-step .step-desc {
-  padding: 0 1rem 1rem;
-  border: 1px solid var(--accent-bright);
-  border-top: 0;
-  border-radius: 0 0 16px 16px;
-  background: rgba(14,165,233,0.06);
+  padding: 0 1rem 1.25rem;
+  flex: 1;
 }
 
 @media (max-width: 639px) {
+  .process-step::after {
+    left: 69px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
   .process-step .step-title {
     padding-top: 0.9rem;
   }
