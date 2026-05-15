@@ -16,16 +16,16 @@ import BookingWidget from '../components/BookingWidget.astro';
 
             <div style="display: grid; gap: 1.5rem; margin-bottom: 2.5rem;">
               <div>
-                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem;">Phone</p>
+                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 0.45rem;">Phone</p>
                 <a href="tel:+13166694468" style="font-size: clamp(1.5rem, 3vw, 2.4rem); color: var(--text-bright); text-decoration: none; font-weight: 600;">(316) 669-4468</a>
               </div>
               <div>
-                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem;">Email</p>
+                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 0.45rem;">Email</p>
                 <a href="mailto:hello@icecaplabs.com" style="font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: var(--text-bright); text-decoration: none; font-weight: 500; word-break: break-word;">hello@icecaplabs.com</a>
               </div>
               <div>
-                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem;">Location</p>
-                <p style="font-size: 1.05rem; color: var(--text-main); margin: 0;">Wichita, Kansas</p>
+                <p style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 0.45rem;">Location</p>
+                <p style="font-size: 1.05rem; color: var(--text-bright); margin: 0;">Wichita, Kansas</p>
               </div>
             </div>
           </div>
@@ -37,27 +37,44 @@ import BookingWidget from '../components/BookingWidget.astro';
 
         <div class="contact-side-panel" style="display: flex; flex-direction: column; justify-content: center; gap: 1.5rem; padding: clamp(0.5rem, 1vw, 1rem) 0;">
           <div>
-            <p class="section-eyebrow" style="margin-bottom: 1rem;">Start Here</p>
-            <h2 class="section-title word-reveal" data-delay="0.08" style="margin-bottom: 1rem;">Tell Me What You Need Built</h2>
-            <p class="section-subtitle" style="text-align: left; max-width: 34rem; margin: 0;">
-              If you already know what you need, great. If you just know something in the business feels clunky, slow, or manual, that works too. We can figure out the right tool together.
-            </p>
+            <p class="section-eyebrow" style="margin-bottom: 1rem;">Capabilities</p>
+            <h2 class="section-title word-reveal" data-delay="0.08" style="margin-bottom: 1rem;">What I Build</h2>
           </div>
 
-          <div style="display: grid; gap: 1rem; margin-top: 1rem;">
-            <div style="padding: 1.25rem 1.35rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; background: rgba(255,255,255,0.02);">
-              <strong style="display: block; color: var(--text-bright); margin-bottom: 0.35rem;">Good fit if you need</strong>
-              <p style="margin: 0; color: var(--text-main);">a better way to capture leads, schedule customers, or stop important work from slipping through the cracks.</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="padding: 1.5rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(255,255,255,0.02)); min-height: 150px; display: flex; flex-direction: column; justify-content: space-between;">
+              <p style="font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright); margin: 0;">01</p>
+              <div>
+                <h3 style="margin: 0 0 0.45rem 0; color: var(--text-bright); font-size: 1.15rem;">Lead Capture</h3>
+                <p style="margin: 0; color: var(--text-main); line-height: 1.6;">Landing pages and intake tools that turn interest into organized leads.</p>
+              </div>
             </div>
-            <div style="padding: 1.25rem 1.35rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; background: rgba(255,255,255,0.02);">
-              <strong style="display: block; color: var(--text-bright); margin-bottom: 0.35rem;">Products I build</strong>
-              <p style="margin: 0; color: var(--text-main);">Lead capture tools, booking systems, AI chatbots, and internal dashboards built around how your business actually runs.</p>
+            <div style="padding: 1.5rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(255,255,255,0.02)); min-height: 150px; display: flex; flex-direction: column; justify-content: space-between;">
+              <p style="font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright); margin: 0;">02</p>
+              <div>
+                <h3 style="margin: 0 0 0.45rem 0; color: var(--text-bright); font-size: 1.15rem;">Booking Systems</h3>
+                <p style="margin: 0; color: var(--text-main); line-height: 1.6;">Custom scheduling flows that fit the way your business actually books work.</p>
+              </div>
             </div>
-            <div style="padding: 1.25rem 1.35rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; background: rgba(255,255,255,0.02);">
-              <strong style="display: block; color: var(--text-bright); margin-bottom: 0.35rem;">How I work</strong>
-              <p style="margin: 0; color: var(--text-main);">Directly, locally, and without handoffs. You are talking to the programmer who will actually build the thing.</p>
+            <div style="padding: 1.5rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(255,255,255,0.02)); min-height: 150px; display: flex; flex-direction: column; justify-content: space-between;">
+              <p style="font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright); margin: 0;">03</p>
+              <div>
+                <h3 style="margin: 0 0 0.45rem 0; color: var(--text-bright); font-size: 1.15rem;">AI Chatbots</h3>
+                <p style="margin: 0; color: var(--text-main); line-height: 1.6;">Trained on your business, with lead capture and human handoff built in.</p>
+              </div>
+            </div>
+            <div style="padding: 1.5rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(255,255,255,0.02)); min-height: 150px; display: flex; flex-direction: column; justify-content: space-between;">
+              <p style="font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-bright); margin: 0;">04</p>
+              <div>
+                <h3 style="margin: 0 0 0.45rem 0; color: var(--text-bright); font-size: 1.15rem;">Internal Tools</h3>
+                <p style="margin: 0; color: var(--text-main); line-height: 1.6;">Dashboards and software that clean up the messy work behind the scenes.</p>
+              </div>
             </div>
           </div>
+
+          <p style="margin: 0.5rem 0 0 0; color: var(--text-main); line-height: 1.7; max-width: 32rem;">
+            Built directly with the owner. No handoffs. No bloated process.
+          </p>
         </div>
       </div>
     </div>
