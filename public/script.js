@@ -25,19 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ── Parallax ─────────────────────────────────────────────── */
 function initParallax() {
   if (!document.getElementById('parallax-container')) return;
+  const layers = document.querySelectorAll('[data-speed]');
+  if (!layers.length) return;
 
-  const container   = document.getElementById('parallax-container');
-  const hero        = document.getElementById('hero');
-  const main        = document.querySelector('main');
-  // Layers inside the fixed parallax container (background imagery)
-  const bgLayers    = document.querySelectorAll('#parallax-container .parallax-layer');
-  // Section elements below the hero that use scroll compression
-  const scrollElems = document.querySelectorAll('[data-speed]:not(.parallax-layer)');
-
-  if (!bgLayers.length && !scrollElems.length) return;
+  // Trim main height to account for parallax compression.
+  const main = document.querySelector('main');
+  const hero = document.getElementById('hero');
 
   function trimMain() {
     if (!main || !hero) return;
+    // Temporarily remove fixed height so we can measure true scrollHeight
     main.style.height = '';
     const contentBelow = main.scrollHeight - hero.offsetHeight;
     const trimmed = hero.offsetHeight + contentBelow * 0.55;
@@ -51,39 +48,15 @@ function initParallax() {
   let rafPending = false;
   let lastY = window.scrollY;
 
-  function applyParallax() {
-    const heroH = hero ? hero.offsetHeight : window.innerHeight;
-
-    // Fade the fixed background out in the bottom quarter of the hero so
-    // it doesn't flash as the sections scroll into view.
-    const fadeStart = heroH * 0.75;
-    const opacity   = lastY <= fadeStart
-      ? 1
-      : Math.max(0, 1 - (lastY - fadeStart) / (heroH * 0.25));
-    container.style.opacity = opacity.toFixed(3);
-
-    // Fixed parallax layers: position:fixed base + (1+speed) to match the
-    // same net viewport velocity as the old position:absolute approach.
-    for (let i = 0; i < bgLayers.length; i++) {
-      const speed = +bgLayers[i].dataset.speed;
-      bgLayers[i].style.transform = `translate3d(0, ${-(lastY * (1 + speed))}px, 0)`;
-    }
-
-    // Scroll-compressed content sections (unchanged formula).
-    for (let i = 0; i < scrollElems.length; i++) {
-      const speed = +scrollElems[i].dataset.speed;
-      scrollElems[i].style.transform = `translate3d(0, ${-(lastY * speed)}px, 0)`;
-    }
-  }
-
-  applyParallax(); // initialise on load
-
   window.addEventListener('scroll', () => {
     lastY = window.scrollY;
     if (rafPending) return;
     rafPending = true;
     requestAnimationFrame(() => {
-      applyParallax();
+      for (let i = 0; i < layers.length; i++) {
+        const speed = +layers[i].dataset.speed;
+        layers[i].style.transform = `translate3d(0, ${-(lastY * speed)}px, 0)`;
+      }
       rafPending = false;
     });
   }, { passive: true });
