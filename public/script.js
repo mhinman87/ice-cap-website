@@ -45,12 +45,20 @@ function initParallax() {
   trimMain();
   window.addEventListener('hashchange', trimMain);
 
+  let rafPending = false;
+  let lastY = window.scrollY;
+
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    for (let i = 0; i < layers.length; i++) {
-      const speed = +layers[i].dataset.speed;
-      if (speed) layers[i].style.transform = `translate3d(0, ${-(y * speed) | 0}px, 0)`;
-    }
+    lastY = window.scrollY;
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      for (let i = 0; i < layers.length; i++) {
+        const speed = +layers[i].dataset.speed;
+        if (speed) layers[i].style.transform = `translate3d(0, ${-(lastY * speed)}px, 0)`;
+      }
+      rafPending = false;
+    });
   }, { passive: true });
 }
 
