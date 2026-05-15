@@ -806,14 +806,41 @@ footer {
 
 .step-title {
   font-size: 1rem;
-  color: var(--text-primary);
+  color: #ffffff;
   margin-bottom: 0.5rem;
 }
 
 .step-desc {
   font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: #ffffff;
   line-height: 1.7;
+}
+
+.process-step .step-title,
+.process-step .step-desc {
+  display: block;
+}
+
+.process-step .step-title {
+  padding: 1rem 1rem 0.35rem;
+  border: 1px solid var(--accent-bright);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  background: rgba(14,165,233,0.06);
+}
+
+.process-step .step-desc {
+  padding: 0 1rem 1rem;
+  border: 1px solid var(--accent-bright);
+  border-top: 0;
+  border-radius: 0 0 16px 16px;
+  background: rgba(14,165,233,0.06);
+}
+
+@media (max-width: 639px) {
+  .process-step .step-title {
+    padding-top: 0.9rem;
+  }
 }
 
 /* CTA below timeline */

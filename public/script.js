@@ -407,7 +407,7 @@ function initProcessTimeline() {
   const steps = stepsWrap.querySelectorAll('.process-step');
   const thresholds = [0.05, 0.3, 0.55, 0.8];
   const duration = 4000; // ms to fill the line
-  const pauseAtEnd = 7500; // ms to hold at 100% before resetting, so step 4 stays readable much longer
+  const pauseAtEnd = 15000; // ms to hold at 100% before resetting, so step 4 stays readable much longer
   let animId = null;
   let startTime = null;
 
