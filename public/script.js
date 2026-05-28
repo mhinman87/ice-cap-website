@@ -111,7 +111,7 @@ function initWordReveal() {
 <span class="word-inner" style="\
 display:inline-block;\
 transform:translateY(115%);\
-transition:transform 0.65s cubic-bezier(0.16,1,0.3,1) ${(baseDelay + i * 0.07).toFixed(3)}s">\
+transition:transform 0.65s cubic-bezier(0.22,1,0.36,1) ${(baseDelay + i * 0.08).toFixed(3)}s">\
 ${word}\
 </span>\
 </span>`).join('');
